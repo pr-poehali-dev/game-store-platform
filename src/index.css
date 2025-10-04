@@ -100,7 +100,7 @@
   body {
     @apply bg-background text-foreground;
     font-family: "Rubik", sans-serif;
-    background-image: url("/img/589ca618-1e78-425e-a2f2-ee223ffe0ea4.jpg");
+    background-image: url("/img/07b31484-fafc-4615-a8a0-3f3514bc568a.jpg");
     background-size: cover;
     background-attachment: fixed;
     background-position: center;
@@ -113,7 +113,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(12, 15, 23, 0.92);
+    background: rgba(12, 15, 23, 0.94);
     z-index: -1;
   }
 

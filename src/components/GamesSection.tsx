@@ -4,8 +4,13 @@ import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Slider } from '@/components/ui/slider';
+import { Label } from '@/components/ui/label';
+import { Checkbox } from '@/components/ui/checkbox';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import Icon from '@/components/ui/icon';
 import { motion } from 'framer-motion';
+import { useState } from 'react';
 
 interface Game {
   id: number;
@@ -54,6 +59,12 @@ export default function GamesSection({
   priceRange,
   setPriceRange,
 }: GamesSectionProps) {
+  const [showFilters, setShowFilters] = useState(false);
+  const [tempPriceRange, setTempPriceRange] = useState<[number, number]>(priceRange);
+  const [onlyDiscounts, setOnlyDiscounts] = useState(false);
+  const [onlyNew, setOnlyNew] = useState(false);
+  const [onlyHot, setOnlyHot] = useState(false);
+
   return (
     <section id="games" className="py-16 bg-background">
       <div className="container mx-auto px-4">
@@ -87,12 +98,81 @@ export default function GamesSection({
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="default">По умолчанию</SelectItem>
-                <SelectItem value="price-asc">Цена: по возрастанию</SelectItem>
-                <SelectItem value="price-desc">Цена: по убыванию</SelectItem>
-                <SelectItem value="rating">По рейтингу</SelectItem>
-                <SelectItem value="year">По году</SelectItem>
+                <SelectItem value="price-asc">Цена ↑</SelectItem>
+                <SelectItem value="price-desc">Цена ↓</SelectItem>
+                <SelectItem value="rating">Рейтинг ↓</SelectItem>
+                <SelectItem value="year">Новые ↓</SelectItem>
+                <SelectItem value="discount">Скидки ↓</SelectItem>
+                <SelectItem value="name">По названию</SelectItem>
               </SelectContent>
             </Select>
+            <Popover>
+              <PopoverTrigger asChild>
+                <Button variant="outline" className="border-neon-purple/30">
+                  <Icon name="Filter" size={16} className="mr-2" />
+                  Фильтры
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent className="w-80 bg-card border-border">
+                <div className="space-y-4">
+                  <div>
+                    <Label className="text-sm font-semibold mb-3 flex items-center justify-between">
+                      Диапазон цен: {priceRange[0]}-{priceRange[1]}₽
+                      <Button 
+                        variant="ghost" 
+                        size="sm" 
+                        className="h-6 text-xs"
+                        onClick={() => setPriceRange([0, 10000])}
+                      >
+                        Сбросить
+                      </Button>
+                    </Label>
+                    <Slider
+                      min={0}
+                      max={5000}
+                      step={100}
+                      value={tempPriceRange}
+                      onValueChange={(value) => setTempPriceRange(value as [number, number])}
+                      onValueCommit={(value) => setPriceRange(value as [number, number])}
+                      className="mt-2"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label className="text-sm font-semibold">Дополнительно</Label>
+                    <div className="flex items-center space-x-2">
+                      <Checkbox 
+                        id="only-discounts" 
+                        checked={onlyDiscounts}
+                        onCheckedChange={(checked) => setOnlyDiscounts(checked as boolean)}
+                      />
+                      <label htmlFor="only-discounts" className="text-sm cursor-pointer">
+                        Только со скидками
+                      </label>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <Checkbox 
+                        id="only-new" 
+                        checked={onlyNew}
+                        onCheckedChange={(checked) => setOnlyNew(checked as boolean)}
+                      />
+                      <label htmlFor="only-new" className="text-sm cursor-pointer">
+                        Только новинки
+                      </label>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <Checkbox 
+                        id="only-hot" 
+                        checked={onlyHot}
+                        onCheckedChange={(checked) => setOnlyHot(checked as boolean)}
+                      />
+                      <label htmlFor="only-hot" className="text-sm cursor-pointer">
+                        Только хиты
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </PopoverContent>
+            </Popover>
           </div>
         </div>
 

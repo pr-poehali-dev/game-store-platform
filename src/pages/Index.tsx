@@ -78,6 +78,10 @@ export default function Index() {
         return filtered.sort((a, b) => b.rating - a.rating);
       case 'year':
         return filtered.sort((a, b) => b.release_year - a.release_year);
+      case 'discount':
+        return filtered.sort((a, b) => (b.discount || 0) - (a.discount || 0));
+      case 'name':
+        return filtered.sort((a, b) => a.title.localeCompare(b.title));
       default:
         return filtered;
     }
@@ -146,7 +150,8 @@ export default function Index() {
   };
 
   const handleAdminLogin = () => {
-    if (adminPassword === 'godstore2024') {
+    const correctPassword = import.meta.env.VITE_ADMIN_PASSWORD || 'godstore2024';
+    if (adminPassword === correctPassword) {
       setIsAdminAuth(true);
       toast({ title: 'Вход выполнен', description: 'Добро пожаловать в админ-панель GodStoreGame' });
     } else {
