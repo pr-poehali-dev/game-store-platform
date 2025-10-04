@@ -25,6 +25,7 @@ import PriceTracker from '@/components/PriceTracker';
 import TournamentReminder from '@/components/TournamentReminder';
 import GameComparison from '@/components/GameComparison';
 import FortuneWheel from '@/components/FortuneWheel';
+import VoiceSearch from '@/components/VoiceSearch';
 import Footer from '@/components/Footer';
 import { useIndexState } from '@/hooks/useIndexState';
 import { useState } from 'react';
@@ -217,6 +218,7 @@ export default function Index() {
 
       <Footer />
 
+      <VoiceSearch />
       <DiscordAuth />
 
       <GameComparison 
