@@ -11,6 +11,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import Icon from '@/components/ui/icon';
 import AdminPanel from '@/components/AdminPanel';
 import PromoCodeInput from '@/components/PromoCodeInput';
+import ThemeToggle from '@/components/ThemeToggle';
 
 interface CartItem {
   id: string;
@@ -115,6 +116,8 @@ export default function Header({
             <a href="/tournaments" className="text-sm md:text-base text-foreground hover:text-accent transition-colors hidden md:block">
               🏆 Турниры
             </a>
+            
+            <ThemeToggle />
             
             <a href="/wishlist">
               <Button variant="ghost" size="sm" className="text-neon-pink hover:text-neon-pink/80">

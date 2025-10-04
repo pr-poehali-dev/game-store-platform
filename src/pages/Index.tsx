@@ -7,6 +7,9 @@ import LiveChat from '@/components/LiveChat';
 import TournamentsSection from '@/components/TournamentsSection';
 import LootboxSection from '@/components/LootboxSection';
 import RecommendedGames from '@/components/RecommendedGames';
+import AIRecommendations from '@/components/AIRecommendations';
+import GamingNews from '@/components/GamingNews';
+import BonusClickerGame from '@/components/BonusClickerGame';
 import SteamTopup from '@/components/SteamTopup';
 import AccountsSection from '@/components/AccountsSection';
 import PSNCards from '@/components/PSNCards';
@@ -177,6 +180,8 @@ export default function Index() {
 
       <ChatWidget />
 
+      <AIRecommendations games={games} />
+
       <RecommendedGames
         games={games}
         favorites={favorites}
@@ -185,6 +190,10 @@ export default function Index() {
         onToggleFavorite={toggleFavorite}
         onViewGame={handleViewGame}
       />
+
+      <GamingNews />
+
+      <BonusClickerGame />
 
       <SteamTopup onTopup={handleSteamTopup} />
 
