@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { useToast } from '@/hooks/use-toast';
 import Header from '@/components/Header';
 import Hero from '@/components/Hero';
@@ -9,7 +9,12 @@ import InfoSection from '@/components/InfoSection';
 import FeaturesSection from '@/components/FeaturesSection';
 import Footer from '@/components/Footer';
 import GameForm from '@/components/GameForm';
+import ChatWidget from '@/components/ChatWidget';
 import { initialGames, type Game } from '@/data/games';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import Icon from '@/components/ui/icon';
 
 interface Subscription {
   id: number;
@@ -52,7 +57,44 @@ export default function Index() {
   const [editingSubscription, setEditingSubscription] = useState<Subscription | null>(null);
   const [isCartOpen, setIsCartOpen] = useState<boolean>(false);
   const [isCheckoutOpen, setIsCheckoutOpen] = useState<boolean>(false);
+  const [favorites, setFavorites] = useState<number[]>([]);
+  const [viewHistory, setViewHistory] = useState<number[]>([]);
+  const [selectedGame, setSelectedGame] = useState<Game | null>(null);
   const { toast } = useToast();
+
+  useEffect(() => {
+    const savedFavorites = localStorage.getItem('godstore-favorites');
+    const savedHistory = localStorage.getItem('godstore-history');
+    if (savedFavorites) setFavorites(JSON.parse(savedFavorites));
+    if (savedHistory) setViewHistory(JSON.parse(savedHistory));
+  }, []);
+
+  const toggleFavorite = (gameId: number) => {
+    setFavorites(prev => {
+      const newFavorites = prev.includes(gameId)
+        ? prev.filter(id => id !== gameId)
+        : [...prev, gameId];
+      localStorage.setItem('godstore-favorites', JSON.stringify(newFavorites));
+      toast({
+        title: prev.includes(gameId) ? 'Удалено из избранного' : 'Добавлено в избранное',
+        description: prev.includes(gameId) ? '❌ Игра удалена' : '⭐ Игра сохранена в избранном',
+      });
+      return newFavorites;
+    });
+  };
+
+  const addToViewHistory = (gameId: number) => {
+    setViewHistory(prev => {
+      const newHistory = [gameId, ...prev.filter(id => id !== gameId)].slice(0, 20);
+      localStorage.setItem('godstore-history', JSON.stringify(newHistory));
+      return newHistory;
+    });
+  };
+
+  const handleViewGame = (game: Game) => {
+    setSelectedGame(game);
+    addToViewHistory(game.id);
+  };
 
   const categories = useMemo(() => {
     const cats = new Set(games.map(g => g.category));
@@ -261,7 +303,84 @@ export default function Index() {
         priceRange={priceRange}
         setPriceRange={setPriceRange}
         addToCart={addToCart}
+        favorites={favorites}
+        onToggleFavorite={toggleFavorite}
+        onViewGame={handleViewGame}
       />
+
+      <Dialog open={!!selectedGame} onOpenChange={(open) => !open && setSelectedGame(null)}>
+        <DialogContent className="max-w-4xl bg-card border-border">
+          {selectedGame && (
+            <>
+              <DialogHeader>
+                <div className="flex items-start justify-between">
+                  <div className="flex-1">
+                    <DialogTitle className="text-2xl mb-2">{selectedGame.title}</DialogTitle>
+                    <DialogDescription className="flex items-center gap-2 flex-wrap">
+                      <Badge variant="outline">{selectedGame.platform}</Badge>
+                      <Badge variant="outline">{selectedGame.category}</Badge>
+                      <Badge variant="outline">
+                        <Icon name="Star" size={12} className="mr-1 text-yellow-500" />
+                        {selectedGame.rating}/10
+                      </Badge>
+                      <Badge variant="outline">{selectedGame.release_year}</Badge>
+                    </DialogDescription>
+                  </div>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    onClick={() => toggleFavorite(selectedGame.id)}
+                  >
+                    <Icon 
+                      name="Heart" 
+                      size={24} 
+                      className={favorites.includes(selectedGame.id) ? 'fill-red-500 text-red-500' : ''} 
+                    />
+                  </Button>
+                </div>
+              </DialogHeader>
+              <div className="space-y-4">
+                <img 
+                  src={selectedGame.image_url} 
+                  alt={selectedGame.title}
+                  className="w-full h-64 object-cover rounded-lg"
+                />
+                <p className="text-muted-foreground">{selectedGame.description}</p>
+                <div className="flex items-center justify-between pt-4 border-t">
+                  <div>
+                    {selectedGame.discount && selectedGame.discount > 0 ? (
+                      <div className="flex items-center gap-3">
+                        <span className="text-3xl font-bold text-neon-green">
+                          {Math.round(selectedGame.price * (1 - selectedGame.discount / 100))}₽
+                        </span>
+                        <span className="text-xl text-muted-foreground line-through">
+                          {selectedGame.price}₽
+                        </span>
+                        <Badge className="bg-red-600 text-white">-{selectedGame.discount}%</Badge>
+                      </div>
+                    ) : (
+                      <span className="text-3xl font-bold text-neon-green">{selectedGame.price}₽</span>
+                    )}
+                  </div>
+                  <Button 
+                    size="lg"
+                    className="bg-gradient-to-r from-neon-purple to-neon-pink"
+                    onClick={() => {
+                      addToCart(selectedGame, 'game');
+                      setSelectedGame(null);
+                    }}
+                  >
+                    <Icon name="ShoppingCart" size={20} className="mr-2" />
+                    Купить сейчас
+                  </Button>
+                </div>
+              </div>
+            </>
+          )}
+        </DialogContent>
+      </Dialog>
+
+      <ChatWidget />
 
       <SubscriptionsSection
         filteredSubs={filteredSubs}

@@ -5,11 +5,11 @@ import { motion } from 'framer-motion';
 
 export default function Hero() {
   return (
-    <section className="relative overflow-hidden py-24 bg-gradient-to-br from-background via-neon-purple/5 to-neon-pink/5">
+    <section className="relative overflow-hidden py-32 bg-gradient-to-br from-background via-neon-purple/5 to-neon-pink/5">
       <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAxMCAwIEwgMCAwIDAgMTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiYSgyNTUsMjU1LDI1NSwwLjAzKSIgc3Ryb2tlLXdpZHRoPSIxIi8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyaWQpIi8+PC9zdmc+')] opacity-20"></div>
-      <div className="absolute top-20 left-10 w-72 h-72 bg-neon-purple/10 rounded-full blur-3xl animate-pulse"></div>
-      <div className="absolute bottom-20 right-10 w-96 h-96 bg-neon-pink/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-neon-green/5 rounded-full blur-3xl animate-pulse delay-2000"></div>
+      <div className="absolute top-20 left-10 w-80 h-80 bg-neon-purple/20 rounded-full blur-3xl animate-pulse"></div>
+      <div className="absolute bottom-20 right-10 w-96 h-96 bg-neon-pink/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-neon-green/10 rounded-full blur-3xl animate-pulse delay-2000"></div>
       <div className="container mx-auto px-4 relative z-10">
         <motion.div 
           className="text-center max-w-4xl mx-auto space-y-6"
@@ -27,12 +27,12 @@ export default function Hero() {
             </Badge>
           </motion.div>
           <motion.h2 
-            className="text-5xl md:text-7xl font-bold leading-tight"
+            className="text-6xl md:text-8xl font-bold leading-tight tracking-tight"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
           >
-            <span className="bg-gradient-to-r from-neon-green via-neon-pink to-neon-purple bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-neon-green via-neon-pink to-neon-purple bg-clip-text text-transparent animate-shimmer">
               GodStoreGame
             </span>
           </motion.h2>

@@ -1,6 +1,4 @@
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
@@ -11,22 +9,8 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover
 import Icon from '@/components/ui/icon';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
-
-interface Game {
-  id: number;
-  title: string;
-  platform: string;
-  price: number;
-  description: string;
-  image_url: string;
-  category: string;
-  rating: number;
-  release_year: number;
-  discount?: number;
-  isHot?: boolean;
-  isNew?: boolean;
-  region?: string;
-}
+import GameCard from './GameCard';
+import { Game } from '@/types';
 
 interface GamesSectionProps {
   filteredGames: Game[];
@@ -42,6 +26,9 @@ interface GamesSectionProps {
   setSortBy: (sort: string) => void;
   priceRange: [number, number];
   setPriceRange: (range: [number, number]) => void;
+  favorites: number[];
+  onToggleFavorite: (gameId: number) => void;
+  onViewGame: (game: Game) => void;
 }
 
 export default function GamesSection({
@@ -58,6 +45,9 @@ export default function GamesSection({
   setSortBy,
   priceRange,
   setPriceRange,
+  favorites,
+  onToggleFavorite,
+  onViewGame,
 }: GamesSectionProps) {
   const [showFilters, setShowFilters] = useState(false);
   const [tempPriceRange, setTempPriceRange] = useState<[number, number]>(priceRange);
@@ -199,89 +189,13 @@ export default function GamesSection({
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.5, delay: idx * 0.05 }}
             >
-              <Card className="group overflow-hidden border-border bg-card hover:border-neon-green/50 transition-all duration-300 hover:glow-green h-full"
-            >
-              <div className="relative overflow-hidden aspect-video">
-                <img 
-                  src={game.image_url} 
-                  alt={game.title}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                />
-                {game.discount && (
-                  <div className="absolute top-2 left-2">
-                    <Badge className="bg-red-600 text-white font-bold text-sm px-3 py-1 animate-pulse">
-                      -{game.discount}%
-                    </Badge>
-                  </div>
-                )}
-                <div className="absolute top-2 right-2 flex flex-col gap-1">
-                  {game.isNew && (
-                    <Badge className="bg-neon-pink text-white font-semibold">
-                      NEW
-                    </Badge>
-                  )}
-                  {game.isHot && (
-                    <Badge className="bg-orange-500 text-white font-semibold">
-                      🔥 ХИТ
-                    </Badge>
-                  )}
-                  <Badge 
-                    className={
-                      game.platform === 'Xbox' 
-                        ? 'bg-xbox text-white' 
-                        : game.platform === 'PlayStation'
-                        ? 'bg-playstation text-white'
-                        : 'bg-neon-purple text-white'
-                    }
-                  >
-                    {game.platform}
-                  </Badge>
-                </div>
-                {game.rating > 0 && (
-                  <div className="absolute bottom-2 left-2">
-                    <Badge className="bg-background/90 text-neon-green border-neon-green">
-                      <Icon name="Star" size={12} className="mr-1" />
-                      {game.rating}
-                    </Badge>
-                  </div>
-                )}
-                {game.region && (
-                  <div className="absolute bottom-2 right-2">
-                    <Badge className="bg-blue-600 text-white text-xs">
-                      {game.region}
-                    </Badge>
-                  </div>
-                )}
-              </div>
-              <CardHeader className="pb-3">
-                <CardTitle className="text-lg line-clamp-1">{game.title}</CardTitle>
-                <CardDescription className="line-clamp-2 text-xs">{game.description}</CardDescription>
-              </CardHeader>
-              <CardFooter className="flex items-center justify-between pt-0">
-                <div className="flex flex-col">
-                  {game.discount ? (
-                    <>
-                      <div className="text-sm text-muted-foreground line-through">{game.price}₽</div>
-                      <div className="text-xl font-bold text-neon-green">
-                        {Math.round(game.price * (1 - game.discount / 100))}₽
-                      </div>
-                    </>
-                  ) : (
-                    <div className="text-xl font-bold text-neon-green">
-                      {game.price === 0 ? 'FREE' : `${game.price}₽`}
-                    </div>
-                  )}
-                </div>
-                <Button 
-                  size="sm"
-                  className="bg-neon-pink text-white hover:bg-neon-pink/90"
-                  onClick={() => addToCart(game, 'game')}
-                >
-                  <Icon name="ShoppingCart" size={14} className="mr-1" />
-                  Купить
-                </Button>
-              </CardFooter>
-            </Card>
+              <GameCard 
+                game={game}
+                onBuy={(g) => addToCart(g, 'game')}
+                isFavorite={favorites.includes(game.id)}
+                onToggleFavorite={onToggleFavorite}
+                onView={onViewGame}
+              />
             </motion.div>
           ))}
         </div>
