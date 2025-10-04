@@ -214,7 +214,7 @@ export function useIndexState() {
   };
 
   const handleAdminLogin = () => {
-    const correctPassword = import.meta.env.VITE_ADMIN_PASSWORD || 'godstore2024';
+    const correctPassword = import.meta.env.VITE_ADMIN_PASSWORD || 'GodStore_Admin_2025_Secure!';
     if (adminPassword === correctPassword) {
       setIsAdminAuth(true);
       toast({ title: 'Вход выполнен', description: 'Добро пожаловать в админ-панель GodStoreGame' });

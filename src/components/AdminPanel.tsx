@@ -90,7 +90,7 @@ export default function AdminPanel({
                   type="password" 
                   value={adminPassword}
                   onChange={(e) => setAdminPassword(e.target.value)}
-                  placeholder="godstore2024"
+                  placeholder="Введите пароль администратора"
                   onKeyDown={(e) => e.key === 'Enter' && handleAdminLogin()}
                 />
               </div>
