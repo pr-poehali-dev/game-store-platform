@@ -106,11 +106,14 @@ export default function Header({
           </div>
           
           <nav className="flex items-center gap-3 md:gap-6">
-            <a href="/#games" className="text-sm md:text-base text-foreground hover:text-neon-green transition-colors hidden md:block">
+            <a href="/#games" className="text-sm md:text-base text-foreground hover:text-primary transition-colors hidden md:block">
               Игры
             </a>
-            <a href="/#subscriptions" className="text-sm md:text-base text-foreground hover:text-neon-pink transition-colors hidden md:block">
+            <a href="/#subscriptions" className="text-sm md:text-base text-foreground hover:text-secondary transition-colors hidden md:block">
               Подписки
+            </a>
+            <a href="/tournaments" className="text-sm md:text-base text-foreground hover:text-accent transition-colors hidden md:block">
+              🏆 Турниры
             </a>
             
             <a href="/wishlist">

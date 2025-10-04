@@ -59,11 +59,11 @@ export default function GameCard({ game, onBuy, isFavorite, onToggleFavorite, on
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      whileHover={{ y: -8, transition: { duration: 0.2 } }}
+      whileHover={{ y: -8, scale: 1.02, transition: { duration: 0.3 } }}
       onClick={handleCardClick}
       className="cursor-pointer"
     >
-      <Card className="h-full bg-gradient-to-br from-card/60 via-card/50 to-card/40 backdrop-blur-md border-border hover:border-neon-purple/60 hover:shadow-lg hover:shadow-neon-purple/20 transition-all duration-300 overflow-hidden group">
+      <Card className="h-full bg-gradient-to-br from-card/80 via-card/60 to-card/40 backdrop-blur-xl border-2 border-border/50 hover:border-primary/80 hover:shadow-2xl hover:shadow-primary/30 transition-all duration-500 overflow-hidden group relative">
         <div className="relative overflow-hidden">
           <img 
             src={coverUrl} 

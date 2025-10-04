@@ -13,6 +13,7 @@ import NotFound from "./pages/NotFound";
 import GameDetail from "./pages/GameDetail";
 import WishlistPage from "./pages/WishlistPage";
 import AdminEnrichment from "./pages/AdminEnrichment";
+import Tournaments from "./pages/Tournaments";
 
 const queryClient = new QueryClient();
 
@@ -28,6 +29,7 @@ const App = () => (
           <Route path="/profile" element={<Profile />} />
           <Route path="/game/:gameId" element={<GameDetail />} />
           <Route path="/wishlist" element={<WishlistPage />} />
+          <Route path="/tournaments" element={<Tournaments />} />
           <Route path="/admin/enrich" element={<AdminEnrichment />} />
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/terms" element={<Terms />} />
