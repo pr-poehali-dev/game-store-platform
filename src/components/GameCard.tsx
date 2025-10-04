@@ -28,6 +28,7 @@ export default function GameCard({ game, onBuy, isFavorite, onToggleFavorite, on
 
   const regionalPrice = getRegionalPrice(game.price, region);
   const discountedPrice = game.discount ? Math.round(regionalPrice * (1 - game.discount / 100)) : regionalPrice;
+  const savingsAmount = regionalPrice - discountedPrice;
 
   const handleCardClick = () => {
     // Store games in localStorage for GameDetail page
@@ -151,15 +152,35 @@ export default function GameCard({ game, onBuy, isFavorite, onToggleFavorite, on
             <div>
               {game.discount && game.discount > 0 ? (
                 <div className="flex items-center gap-2">
-                  <span className="text-lg font-bold text-neon-green">
+                  <motion.span 
+                    key={`price-${region}-${discountedPrice}`}
+                    initial={{ scale: 1.2, color: '#10b981' }}
+                    animate={{ scale: 1, color: '#10b981' }}
+                    transition={{ duration: 0.5, ease: 'easeOut' }}
+                    className="text-lg font-bold text-neon-green"
+                  >
                     {formatPrice(discountedPrice)}
-                  </span>
-                  <span className="text-sm text-muted-foreground line-through">
+                  </motion.span>
+                  <motion.span 
+                    key={`old-price-${region}-${regionalPrice}`}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.2 }}
+                    className="text-sm text-muted-foreground line-through"
+                  >
                     {formatPrice(regionalPrice)}
-                  </span>
+                  </motion.span>
                 </div>
               ) : (
-                <span className="text-lg font-bold text-neon-green">{formatPrice(regionalPrice)}</span>
+                <motion.span 
+                  key={`price-${region}-${regionalPrice}`}
+                  initial={{ scale: 1.2, color: '#10b981' }}
+                  animate={{ scale: 1, color: '#10b981' }}
+                  transition={{ duration: 0.5, ease: 'easeOut' }}
+                  className="text-lg font-bold text-neon-green"
+                >
+                  {formatPrice(regionalPrice)}
+                </motion.span>
               )}
             </div>
             <Badge variant="secondary" className="text-xs">
@@ -168,7 +189,13 @@ export default function GameCard({ game, onBuy, isFavorite, onToggleFavorite, on
           </div>
           
           {game.competitorPrices && game.competitorPrices.length > 0 && (
-            <div className="mt-3 pt-3 border-t border-border/50">
+            <motion.div 
+              key={`savings-${region}`}
+              initial={{ opacity: 0, y: 5 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 }}
+              className="mt-3 pt-3 border-t border-border/50"
+            >
               <div className="flex items-center gap-2 text-xs text-muted-foreground mb-1">
                 <Icon name="TrendingDown" size={12} className="text-neon-green" />
                 <span>Выгоднее на {Math.round(game.competitorPrices[0].price - (game.discount ? Math.round(game.price * (1 - game.discount / 100)) : game.price))}₽</span>
@@ -177,7 +204,7 @@ export default function GameCard({ game, onBuy, isFavorite, onToggleFavorite, on
                 <Icon name="Store" size={10} />
                 <span>чем в {game.competitorPrices[0].store}</span>
               </div>
-            </div>
+            </motion.div>
           )}
         </CardContent>
 

@@ -1,36 +1,36 @@
+import { lazy, Suspense, useState } from 'react';
+import { Button } from '@/components/ui/button';
+import Icon from '@/components/ui/icon';
+import { useIndexState } from '@/hooks/useIndexState';
 import Header from '@/components/Header';
 import Hero from '@/components/Hero';
 import MainTabs from '@/components/MainTabs';
 import GameDialog from '@/components/GameDialog';
-import UnifiedChat from '@/components/UnifiedChat';
-import TournamentsSection from '@/components/TournamentsSection';
-import LootboxSection from '@/components/LootboxSection';
-import RecommendedGames from '@/components/RecommendedGames';
-import AIRecommendations from '@/components/AIRecommendations';
-import GamingNews from '@/components/GamingNews';
-import BonusClickerGame from '@/components/BonusClickerGame';
-import Leaderboard from '@/components/Leaderboard';
-
-import SteamTopup from '@/components/SteamTopup';
-import RobloxStore from '@/components/RobloxStore';
-import GamerSocialNetwork from '@/components/GamerSocialNetwork';
-import CurrencyRegionSelector from '@/components/CurrencyRegionSelector';
-import GameStreamsTrailers from '@/components/GameStreamsTrailers';
-import AchievementsShowcase from '@/components/AchievementsShowcase';
-import DiscordAuth from '@/components/DiscordAuth';
-import StatsSection from '@/components/StatsSection';
-import InfoSection from '@/components/InfoSection';
-import FeaturesSection from '@/components/FeaturesSection';
-import PriceTracker from '@/components/PriceTracker';
-import TournamentReminder from '@/components/TournamentReminder';
-import GameComparison from '@/components/GameComparison';
-import FortuneWheel from '@/components/FortuneWheel';
-import VoiceSearch from '@/components/VoiceSearch';
 import Footer from '@/components/Footer';
-import { useIndexState } from '@/hooks/useIndexState';
-import { useState } from 'react';
-import { Button } from '@/components/ui/button';
-import Icon from '@/components/ui/icon';
+
+const UnifiedChat = lazy(() => import('@/components/UnifiedChat'));
+const TournamentsSection = lazy(() => import('@/components/TournamentsSection'));
+const LootboxSection = lazy(() => import('@/components/LootboxSection'));
+const RecommendedGames = lazy(() => import('@/components/RecommendedGames'));
+const AIRecommendations = lazy(() => import('@/components/AIRecommendations'));
+const GamingNews = lazy(() => import('@/components/GamingNews'));
+const BonusClickerGame = lazy(() => import('@/components/BonusClickerGame'));
+const Leaderboard = lazy(() => import('@/components/Leaderboard'));
+const SteamTopup = lazy(() => import('@/components/SteamTopup'));
+const RobloxStore = lazy(() => import('@/components/RobloxStore'));
+const GamerSocialNetwork = lazy(() => import('@/components/GamerSocialNetwork'));
+const CurrencyRegionSelector = lazy(() => import('@/components/CurrencyRegionSelector'));
+const GameStreamsTrailers = lazy(() => import('@/components/GameStreamsTrailers'));
+const AchievementsShowcase = lazy(() => import('@/components/AchievementsShowcase'));
+const DiscordAuth = lazy(() => import('@/components/DiscordAuth'));
+const StatsSection = lazy(() => import('@/components/StatsSection'));
+const InfoSection = lazy(() => import('@/components/InfoSection'));
+const FeaturesSection = lazy(() => import('@/components/FeaturesSection'));
+const PriceTracker = lazy(() => import('@/components/PriceTracker'));
+const TournamentReminder = lazy(() => import('@/components/TournamentReminder'));
+const GameComparison = lazy(() => import('@/components/GameComparison'));
+const FortuneWheel = lazy(() => import('@/components/FortuneWheel'));
+const VoiceSearch = lazy(() => import('@/components/VoiceSearch'));
 
 export default function Index() {
   const {
@@ -129,12 +129,14 @@ export default function Index() {
 
       <Hero />
 
-      <TournamentReminder 
-        tournaments={[
-          { id: 1, title: 'FIFA 24 Championship', startDate: '2025-10-15T18:00:00', prizePool: 50000 },
-          { id: 2, title: 'Call of Duty Warzone Battle', startDate: '2025-10-08T20:00:00', prizePool: 100000 }
-        ]} 
-      />
+      <Suspense fallback={<div className="h-20" />}>
+        <TournamentReminder 
+          tournaments={[
+            { id: 1, title: 'FIFA 24 Championship', startDate: '2025-10-15T18:00:00', prizePool: 50000 },
+            { id: 2, title: 'Call of Duty Warzone Battle', startDate: '2025-10-08T20:00:00', prizePool: 100000 }
+          ]} 
+        />
+      </Suspense>
 
       <MainTabs
         activeTab={activeTab}
@@ -171,66 +173,109 @@ export default function Index() {
         onBuy={(game) => addToCart(game, 'game')}
       />
 
-      <UnifiedChat />
+      <Suspense fallback={<div className="h-20" />}>
+        <UnifiedChat />
+      </Suspense>
 
-      <AIRecommendations games={games} />
+      <Suspense fallback={<div className="h-40" />}>
+        <AIRecommendations games={games} />
+      </Suspense>
 
-      <RecommendedGames
-        games={games}
-        favorites={favorites}
-        viewHistory={viewHistory}
-        onBuy={(game) => addToCart(game, 'game')}
-        onToggleFavorite={toggleFavorite}
-        onViewGame={handleViewGame}
-      />
+      <Suspense fallback={<div className="h-40" />}>
+        <RecommendedGames
+          games={games}
+          favorites={favorites}
+          viewHistory={viewHistory}
+          onBuy={(game) => addToCart(game, 'game')}
+          onToggleFavorite={toggleFavorite}
+          onViewGame={handleViewGame}
+        />
+      </Suspense>
 
-      <GamingNews />
+      <Suspense fallback={<div className="h-40" />}>
+        <GamingNews />
+      </Suspense>
 
-      <BonusClickerGame />
+      <Suspense fallback={<div className="h-40" />}>
+        <BonusClickerGame />
+      </Suspense>
 
-      <AchievementsShowcase />
+      <Suspense fallback={<div className="h-40" />}>
+        <AchievementsShowcase />
+      </Suspense>
 
-      <Leaderboard />
+      <Suspense fallback={<div className="h-40" />}>
+        <Leaderboard />
+      </Suspense>
 
-      <GamerSocialNetwork />
+      <Suspense fallback={<div className="h-40" />}>
+        <GamerSocialNetwork />
+      </Suspense>
 
-      <GameStreamsTrailers />
+      <Suspense fallback={<div className="h-40" />}>
+        <GameStreamsTrailers />
+      </Suspense>
 
-      <SteamTopup onTopup={handleSteamTopup} />
+      <Suspense fallback={<div className="h-40" />}>
+        <SteamTopup onTopup={handleSteamTopup} />
+      </Suspense>
 
-      <RobloxStore />
+      <Suspense fallback={<div className="h-40" />}>
+        <RobloxStore />
+      </Suspense>
 
-      <TournamentsSection />
+      <Suspense fallback={<div className="h-40" />}>
+        <TournamentsSection />
+      </Suspense>
 
-      <LootboxSection />
+      <Suspense fallback={<div className="h-40" />}>
+        <LootboxSection />
+      </Suspense>
 
-      <StatsSection />
+      <Suspense fallback={<div className="h-40" />}>
+        <StatsSection />
+      </Suspense>
 
-      <InfoSection />
+      <Suspense fallback={<div className="h-40" />}>
+        <InfoSection />
+      </Suspense>
 
-      <FeaturesSection />
+      <Suspense fallback={<div className="h-40" />}>
+        <FeaturesSection />
+      </Suspense>
 
-      <PriceTracker 
-        favorites={favorites}
-        games={games}
-        onBuy={(game) => addToCart(game, 'game')}
-      />
+      <Suspense fallback={<div className="h-40" />}>
+        <PriceTracker 
+          favorites={favorites}
+          games={games}
+          onBuy={(game) => addToCart(game, 'game')}
+        />
+      </Suspense>
 
       <Footer />
 
-      <VoiceSearch />
-      <DiscordAuth />
+      <Suspense fallback={null}>
+        <VoiceSearch />
+      </Suspense>
+      
+      <Suspense fallback={null}>
+        <DiscordAuth />
+      </Suspense>
 
-      <GameComparison 
-        games={games} 
-        isOpen={showComparison} 
-        onClose={() => setShowComparison(false)} 
-      />
+      <Suspense fallback={null}>
+        <GameComparison 
+          games={games} 
+          isOpen={showComparison} 
+          onClose={() => setShowComparison(false)} 
+        />
+      </Suspense>
 
-      <FortuneWheel 
-        isOpen={showWheel} 
-        onClose={() => setShowWheel(false)} 
-      />
+      <Suspense fallback={null}>
+        <FortuneWheel 
+          isOpen={showWheel} 
+          onClose={() => setShowWheel(false)} 
+        />
+      </Suspense>
     </div>
   );
 }
