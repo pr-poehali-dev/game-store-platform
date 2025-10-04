@@ -147,6 +147,19 @@ export default function NavigationBar({
         </TooltipContent>
       </Tooltip>
 
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <a href="/manager">
+            <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-neon-purple h-9 w-9 p-0">
+              <Icon name="Users" size={18} />
+            </Button>
+          </a>
+        </TooltipTrigger>
+        <TooltipContent>
+          <p>Менеджер команд</p>
+        </TooltipContent>
+      </Tooltip>
+
       <AdminPanel
         adminPassword={adminPassword}
         setAdminPassword={setAdminPassword}
