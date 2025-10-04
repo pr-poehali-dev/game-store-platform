@@ -9,6 +9,8 @@ import PriceComparison from './PriceComparison';
 import WishlistButton from './WishlistButton';
 import SaleCountdown from './SaleCountdown';
 import GameImage from './GameImage';
+import { useCurrency } from '@/contexts/CurrencyContext';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 interface GameCardProps {
   game: Game;
@@ -20,8 +22,12 @@ interface GameCardProps {
 
 export default function GameCard({ game, onBuy, isFavorite, onToggleFavorite, onView }: GameCardProps) {
   const navigate = useNavigate();
+  const { region, setRegion, getRegionalPrice, formatPrice } = useCurrency();
   const isNew = new Date().getFullYear() - game.release_year <= 1;
   const isHot = game.rating >= 8.5;
+
+  const regionalPrice = getRegionalPrice(game.price, region);
+  const discountedPrice = game.discount ? Math.round(regionalPrice * (1 - game.discount / 100)) : regionalPrice;
 
   const handleCardClick = () => {
     // Store games in localStorage for GameDetail page
@@ -126,19 +132,34 @@ export default function GameCard({ game, onBuy, isFavorite, onToggleFavorite, on
         </CardHeader>
 
         <CardContent className="pb-3">
+          <div className="mb-2" onClick={(e) => e.stopPropagation()}>
+            <Select value={region} onValueChange={(value) => setRegion(value as any)}>
+              <SelectTrigger className="h-8 text-xs">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="russia">🇷🇺 Россия</SelectItem>
+                <SelectItem value="turkey">🇹🇷 Турция (-65%)</SelectItem>
+                <SelectItem value="argentina">🇦🇷 Аргентина (-75%)</SelectItem>
+                <SelectItem value="ukraine">🇺🇦 Украина (-55%)</SelectItem>
+                <SelectItem value="kazakhstan">🇰🇿 Казахстан (-45%)</SelectItem>
+                <SelectItem value="usa">🇺🇸 USA (+20%)</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
           <div className="flex items-center justify-between">
             <div>
               {game.discount && game.discount > 0 ? (
                 <div className="flex items-center gap-2">
                   <span className="text-lg font-bold text-neon-green">
-                    {Math.round(game.price * (1 - game.discount / 100))}₽
+                    {formatPrice(discountedPrice)}
                   </span>
                   <span className="text-sm text-muted-foreground line-through">
-                    {game.price}₽
+                    {formatPrice(regionalPrice)}
                   </span>
                 </div>
               ) : (
-                <span className="text-lg font-bold text-neon-green">{game.price}₽</span>
+                <span className="text-lg font-bold text-neon-green">{formatPrice(regionalPrice)}</span>
               )}
             </div>
             <Badge variant="secondary" className="text-xs">

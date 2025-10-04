@@ -166,23 +166,6 @@ export default function VoiceSearch() {
 
   return (
     <>
-      <div className="fixed top-36 right-4 z-50">
-        <Button
-          onClick={toggleListening}
-          className={`relative shadow-lg hover:scale-110 transition-all duration-300 ${
-            isListening
-              ? 'bg-gradient-to-r from-red-500 to-pink-500 animate-pulse'
-              : 'bg-gradient-to-r from-purple-500 to-violet-500'
-          }`}
-          size="lg"
-        >
-          <Icon name={isListening ? 'MicOff' : 'Mic'} size={20} />
-          {isListening && (
-            <span className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full animate-ping" />
-          )}
-        </Button>
-      </div>
-
       <AnimatePresence>
         {isListening && (
           <motion.div

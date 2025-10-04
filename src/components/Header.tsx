@@ -14,6 +14,7 @@ import PromoCodeInput from '@/components/PromoCodeInput';
 import ThemeToggle from '@/components/ThemeToggle';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 import NotificationBadge from '@/components/NotificationBadge';
+import VoiceSearch from '@/components/VoiceSearch';
 
 interface CartItem {
   id: string;
@@ -90,7 +91,9 @@ export default function Header({
   const discountedTotal = Math.round(cartTotal * (1 - promoDiscount / 100));
 
   return (
-    <header className="border-b border-border bg-card/80 backdrop-blur-md sticky top-0 z-50">
+    <>
+      <VoiceSearch />
+      <header className="border-b border-border bg-card/80 backdrop-blur-md sticky top-0 z-50">
       <div className="container mx-auto px-4 py-3">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
@@ -168,7 +171,7 @@ export default function Header({
                 </a>
               </TooltipTrigger>
               <TooltipContent>
-                <p>Профиль</p>
+                <p>Личный кабинет</p>
               </TooltipContent>
             </Tooltip>
             
@@ -429,5 +432,6 @@ export default function Header({
         </div>
       </div>
     </header>
+    </>
   );
 }

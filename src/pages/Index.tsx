@@ -10,7 +10,7 @@ import AIRecommendations from '@/components/AIRecommendations';
 import GamingNews from '@/components/GamingNews';
 import BonusClickerGame from '@/components/BonusClickerGame';
 import Leaderboard from '@/components/Leaderboard';
-import VoiceSearch from '@/components/VoiceSearch';
+
 import SteamTopup from '@/components/SteamTopup';
 import RobloxStore from '@/components/RobloxStore';
 import GamerSocialNetwork from '@/components/GamerSocialNetwork';
@@ -98,7 +98,6 @@ export default function Index() {
 
   return (
     <div className="min-h-screen bg-background dark">
-      <VoiceSearch />
       <CurrencyRegionSelector />
       <Header
         cart={cart}
