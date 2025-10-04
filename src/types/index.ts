@@ -30,6 +30,8 @@ export interface Game {
     url?: string;
   }[];
   versions?: GameVersion[];
+  reviewCount?: number;
+  avgReviewRating?: number;
 }
 
 export interface Subscription {

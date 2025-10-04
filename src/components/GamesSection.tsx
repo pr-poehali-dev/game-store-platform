@@ -60,6 +60,8 @@ export default function GamesSection({
   const [onlyDiscounts, setOnlyDiscounts] = useState(false);
   const [onlyNew, setOnlyNew] = useState(false);
   const [onlyHot, setOnlyHot] = useState(false);
+  const [onlyWithReviews, setOnlyWithReviews] = useState(false);
+  const [minRating, setMinRating] = useState<number>(0);
 
   return (
     <section id="games" className="py-0 bg-background">
@@ -175,6 +177,30 @@ export default function GamesSection({
                         Только хиты
                       </label>
                     </div>
+                    <div className="flex items-center space-x-2">
+                      <Checkbox 
+                        id="only-reviews" 
+                        checked={onlyWithReviews}
+                        onCheckedChange={(checked) => setOnlyWithReviews(checked as boolean)}
+                      />
+                      <label htmlFor="only-reviews" className="text-sm cursor-pointer">
+                        Только с отзывами
+                      </label>
+                    </div>
+                  </div>
+                  <div className="space-y-2">
+                    <Label className="text-sm font-semibold">Минимальный рейтинг</Label>
+                    <Select value={minRating.toString()} onValueChange={(val) => setMinRating(Number(val))}>
+                      <SelectTrigger>
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="0">Любой</SelectItem>
+                        <SelectItem value="7">7+ ⭐</SelectItem>
+                        <SelectItem value="8">8+ ⭐⭐</SelectItem>
+                        <SelectItem value="9">9+ ⭐⭐⭐</SelectItem>
+                      </SelectContent>
+                    </Select>
                   </div>
                 </div>
               </PopoverContent>
@@ -197,7 +223,16 @@ export default function GamesSection({
         </Tabs>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {filteredGames.map((game, idx) => (
+          {filteredGames
+            .filter(game => {
+              if (onlyDiscounts && !game.discount) return false;
+              if (onlyNew && !game.isNew) return false;
+              if (onlyHot && !game.isHot) return false;
+              if (onlyWithReviews && (!game.reviewCount || game.reviewCount === 0)) return false;
+              if (minRating > 0 && game.rating < minRating) return false;
+              return true;
+            })
+            .map((game, idx) => (
             <motion.div
               key={game.id}
               initial={{ opacity: 0, y: 50 }}
@@ -216,7 +251,15 @@ export default function GamesSection({
           ))}
         </div>
 
-        {filteredGames.length === 0 && (
+        {filteredGames
+            .filter(game => {
+              if (onlyDiscounts && !game.discount) return false;
+              if (onlyNew && !game.isNew) return false;
+              if (onlyHot && !game.isHot) return false;
+              if (onlyWithReviews && (!game.reviewCount || game.reviewCount === 0)) return false;
+              if (minRating > 0 && game.rating < minRating) return false;
+              return true;
+            }).length === 0 && (
           <div className="text-center py-12 text-muted-foreground">
             <Icon name="Search" size={48} className="mx-auto mb-4 opacity-50" />
             <p>Игры не найдены</p>
