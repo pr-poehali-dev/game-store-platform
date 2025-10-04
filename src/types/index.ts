@@ -13,6 +13,8 @@ export interface Game {
   isNew?: boolean;
   region?: string;
   franchise?: string;
+  fullDescription?: string;
+  consoleModels?: string;
 }
 
 export interface Subscription {

@@ -53,7 +53,7 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.5 }}
           >
-            155+ игр, подписки, пополнение Steam. Покупка на свой или новый аккаунт.
+            Игры и подписки для PlayStation и Xbox. Покупка на ваш аккаунт или новый. Моментальная доставка.
           </motion.p>
           <motion.div
             className="flex flex-wrap gap-2 justify-center text-sm text-muted-foreground mt-2"

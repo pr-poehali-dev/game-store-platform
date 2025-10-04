@@ -60,9 +60,13 @@ export default function Footer() {
 
         <div className="border-t border-border pt-6 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
           <p>© 2024 GodStoreGame. Все права защищены.</p>
-          <div className="flex gap-4">
+          <div className="flex gap-4 items-center">
             <a href="#" className="hover:text-neon-green transition-colors">Политика конфиденциальности</a>
             <a href="#" className="hover:text-neon-pink transition-colors">Условия использования</a>
+            <a href="/manager" className="flex items-center gap-1 text-xs text-muted-foreground/50 hover:text-neon-purple transition-colors">
+              <Icon name="Lock" size={12} />
+              Для менеджеров
+            </a>
           </div>
         </div>
       </div>

@@ -199,6 +199,27 @@ export default function Header({
                             <Label>Телефон</Label>
                             <Input type="tel" placeholder="+7 (999) 123-45-67" />
                           </div>
+                          
+                          {cart.some(item => item.type === 'game') && (
+                            <>
+                              <div className="border-t border-border pt-4">
+                                <p className="text-sm font-medium mb-2 text-neon-purple">Данные аккаунта для покупки игр</p>
+                                <p className="text-xs text-muted-foreground mb-3">
+                                  Укажите логин и пароль от вашего аккаунта PlayStation/Xbox для активации игр. 
+                                  Если хотите новый аккаунт - оставьте поля пустыми.
+                                </p>
+                              </div>
+                              <div>
+                                <Label>Логин аккаунта (опционально)</Label>
+                                <Input placeholder="Логин PlayStation/Xbox" />
+                              </div>
+                              <div>
+                                <Label>Пароль аккаунта (опционально)</Label>
+                                <Input type="password" placeholder="Пароль от аккаунта" />
+                              </div>
+                            </>
+                          )}
+
                           <div>
                             <Label>Способ оплаты</Label>
                             <Select defaultValue="card">
