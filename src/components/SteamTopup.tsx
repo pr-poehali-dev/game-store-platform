@@ -16,6 +16,7 @@ const presetAmounts = [100, 250, 500, 1000, 2000, 5000];
 export default function SteamTopup({ onTopup }: SteamTopupProps) {
   const [customAmount, setCustomAmount] = useState<string>('');
   const [selectedAmount, setSelectedAmount] = useState<number>(500);
+  const [steamLogin, setSteamLogin] = useState<string>('');
 
   const calculateTotal = (amount: number) => {
     const commission = amount * 0.02;
@@ -24,9 +25,10 @@ export default function SteamTopup({ onTopup }: SteamTopupProps) {
 
   const handleTopup = () => {
     const amount = customAmount ? parseFloat(customAmount) : selectedAmount;
-    if (amount >= 50) {
+    if (amount >= 50 && steamLogin.trim()) {
       onTopup(calculateTotal(amount));
       setCustomAmount('');
+      setSteamLogin('');
     }
   };
 
@@ -63,6 +65,23 @@ export default function SteamTopup({ onTopup }: SteamTopupProps) {
               <CardDescription>Минимальная сумма: 50₽ • Комиссия: 2%</CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
+              <div>
+                <Label htmlFor="steam-login" className="mb-2 block">
+                  Логин Steam
+                </Label>
+                <div className="relative">
+                  <Icon name="User" size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-[#66c0f4]" />
+                  <Input
+                    id="steam-login"
+                    type="text"
+                    placeholder="Введите ваш логин Steam"
+                    value={steamLogin}
+                    onChange={(e) => setSteamLogin(e.target.value)}
+                    className="pl-10 border-[#66c0f4]/30 focus:border-[#66c0f4]"
+                  />
+                </div>
+              </div>
+
               <div>
                 <Label className="mb-3 block">Быстрый выбор суммы</Label>
                 <div className="grid grid-cols-3 md:grid-cols-6 gap-3">
@@ -142,8 +161,8 @@ export default function SteamTopup({ onTopup }: SteamTopupProps) {
             <CardFooter className="flex-col gap-3">
               <Button
                 onClick={handleTopup}
-                disabled={currentAmount < 50}
-                className="w-full bg-[#66c0f4] text-white hover:bg-[#4a9fd6] h-12 text-lg font-semibold"
+                disabled={currentAmount < 50 || !steamLogin.trim()}
+                className="w-full bg-[#66c0f4] text-white hover:bg-[#4a9fd6] h-12 text-lg font-semibold disabled:opacity-50"
                 size="lg"
               >
                 <Icon name="Wallet" size={20} className="mr-2" />
