@@ -21,7 +21,14 @@ export default function Hero() {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6, delay: 0.2 }}
+            className="flex items-center justify-center gap-3"
           >
+            <div className="relative">
+              <div className="absolute inset-0 bg-gradient-to-r from-neon-green to-neon-purple rounded-full blur-xl opacity-60"></div>
+              <div className="relative bg-gradient-to-br from-neon-green via-neon-pink to-neon-purple p-3 rounded-2xl">
+                <Icon name="Gamepad2" className="h-12 w-12 text-background" />
+              </div>
+            </div>
             <Badge className="bg-neon-purple/20 text-neon-purple border-neon-purple px-4 py-2 text-sm animate-pulse-glow">
               🎮 Лучшие цены на игры и подписки
             </Badge>
