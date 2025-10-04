@@ -2,14 +2,14 @@ import Header from '@/components/Header';
 import Hero from '@/components/Hero';
 import MainTabs from '@/components/MainTabs';
 import GameDialog from '@/components/GameDialog';
-import ChatWidget from '@/components/ChatWidget';
-import LiveChat from '@/components/LiveChat';
+import UnifiedChat from '@/components/UnifiedChat';
 import TournamentsSection from '@/components/TournamentsSection';
 import LootboxSection from '@/components/LootboxSection';
 import RecommendedGames from '@/components/RecommendedGames';
 import AIRecommendations from '@/components/AIRecommendations';
 import GamingNews from '@/components/GamingNews';
 import BonusClickerGame from '@/components/BonusClickerGame';
+import Leaderboard from '@/components/Leaderboard';
 import SteamTopup from '@/components/SteamTopup';
 import AccountsSection from '@/components/AccountsSection';
 import PSNCards from '@/components/PSNCards';
@@ -178,7 +178,7 @@ export default function Index() {
         onBuy={(game) => addToCart(game, 'game')}
       />
 
-      <ChatWidget />
+      <UnifiedChat />
 
       <AIRecommendations games={games} />
 
@@ -194,6 +194,8 @@ export default function Index() {
       <GamingNews />
 
       <BonusClickerGame />
+
+      <Leaderboard />
 
       <SteamTopup onTopup={handleSteamTopup} />
 
@@ -218,8 +220,6 @@ export default function Index() {
       />
 
       <Footer />
-
-      <LiveChat />
 
       <GameComparison 
         games={games} 
