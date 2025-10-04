@@ -53,7 +53,7 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.5 }}
           >
-            150+ игр, подписки, пополнение Steam. Покупка на свой или новый аккаунт.
+            155+ игр, подписки, пополнение Steam. Покупка на свой или новый аккаунт.
           </motion.p>
           <motion.div
             className="flex flex-wrap gap-2 justify-center text-sm text-muted-foreground mt-2"
@@ -61,13 +61,16 @@ export default function Hero() {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.6 }}
           >
-            <Badge variant="outline" className="border-blue-500/30 text-blue-400">
+            <Badge variant="outline" className="border-blue-500/30 text-blue-400 bg-blue-500/5">
+              <Icon name="Globe" size={12} className="mr-1" />
               PlayStation: Турция/Индия/Украина
             </Badge>
-            <Badge variant="outline" className="border-neon-green/30 text-neon-green">
+            <Badge variant="outline" className="border-neon-green/30 text-neon-green bg-neon-green/5">
+              <Icon name="TrendingDown" size={12} className="mr-1" />
               Скидки до 90%
             </Badge>
-            <Badge variant="outline" className="border-neon-pink/30 text-neon-pink">
+            <Badge variant="outline" className="border-neon-pink/30 text-neon-pink bg-neon-pink/5">
+              <Icon name="Zap" size={12} className="mr-1" />
               Моментальная доставка
             </Badge>
           </motion.div>

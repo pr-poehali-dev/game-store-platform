@@ -44,6 +44,7 @@ export default function ChatWidget() {
   ]);
   const [inputValue, setInputValue] = useState('');
   const [isTyping, setIsTyping] = useState(false);
+  const [showQuickReplies, setShowQuickReplies] = useState(true);
   const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -65,6 +66,7 @@ export default function ChatWidget() {
     setMessages(prev => [...prev, userMessage]);
     setInputValue('');
     setIsTyping(true);
+    setShowQuickReplies(false);
 
     setTimeout(() => {
       const botResponse = BOT_RESPONSES[text] || 
@@ -80,6 +82,10 @@ export default function ChatWidget() {
       setMessages(prev => [...prev, botMessage]);
       setIsTyping(false);
     }, 1000 + Math.random() * 1000);
+  };
+
+  const handleBackToQuestions = () => {
+    setShowQuickReplies(true);
   };
 
   return (
@@ -159,7 +165,7 @@ export default function ChatWidget() {
                 </div>
               </ScrollArea>
 
-              {messages.length <= 2 && (
+              {showQuickReplies && (
                 <div className="px-4 pb-3">
                   <p className="text-xs text-muted-foreground mb-2">Быстрые ответы:</p>
                   <div className="grid grid-cols-2 gap-2">
@@ -175,6 +181,20 @@ export default function ChatWidget() {
                       </Button>
                     ))}
                   </div>
+                </div>
+              )}
+
+              {!showQuickReplies && messages.length > 2 && (
+                <div className="px-4 pb-3">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="w-full border-neon-purple/30 hover:bg-neon-purple/10"
+                    onClick={handleBackToQuestions}
+                  >
+                    <Icon name="RotateCcw" size={14} className="mr-2" />
+                    Вернуться к вопросам
+                  </Button>
                 </div>
               )}
 

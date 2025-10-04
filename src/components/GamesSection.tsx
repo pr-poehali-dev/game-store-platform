@@ -15,10 +15,13 @@ import { Game } from '@/types';
 interface GamesSectionProps {
   filteredGames: Game[];
   categories: string[];
+  franchises: string[];
   platformFilter: string;
   setPlatformFilter: (filter: string) => void;
   categoryFilter: string;
   setCategoryFilter: (filter: string) => void;
+  franchiseFilter: string;
+  setFranchiseFilter: (filter: string) => void;
   searchQuery: string;
   setSearchQuery: (query: string) => void;
   addToCart: (item: Game, type: 'game') => void;
@@ -34,10 +37,13 @@ interface GamesSectionProps {
 export default function GamesSection({
   filteredGames,
   categories,
+  franchises,
   platformFilter,
   setPlatformFilter,
   categoryFilter,
   setCategoryFilter,
+  franchiseFilter,
+  setFranchiseFilter,
   searchQuery,
   setSearchQuery,
   addToCart,
@@ -79,6 +85,16 @@ export default function GamesSection({
               <SelectContent>
                 {categories.map(cat => (
                   <SelectItem key={cat} value={cat}>{cat}</SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+            <Select value={franchiseFilter} onValueChange={setFranchiseFilter}>
+              <SelectTrigger className="md:w-44">
+                <SelectValue placeholder="Франшиза" />
+              </SelectTrigger>
+              <SelectContent>
+                {franchises.map(franchise => (
+                  <SelectItem key={franchise} value={franchise}>{franchise}</SelectItem>
                 ))}
               </SelectContent>
             </Select>

@@ -12,6 +12,7 @@ export interface Game {
   isHot?: boolean;
   isNew?: boolean;
   region?: string;
+  franchise?: string;
 }
 
 export interface Subscription {

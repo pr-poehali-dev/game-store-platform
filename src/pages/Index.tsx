@@ -49,6 +49,7 @@ export default function Index() {
   const [subscriptions, setSubscriptions] = useState<Subscription[]>(initialSubscriptions);
   const [platformFilter, setPlatformFilter] = useState<string>('All');
   const [categoryFilter, setCategoryFilter] = useState<string>('All');
+  const [franchiseFilter, setFranchiseFilter] = useState<string>('All');
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [sortBy, setSortBy] = useState<string>('default');
   const [priceRange, setPriceRange] = useState<[number, number]>([0, 10000]);
@@ -104,14 +105,20 @@ export default function Index() {
     return ['All', ...Array.from(cats)];
   }, [games]);
 
+  const franchises = useMemo(() => {
+    const franchiseSet = new Set(games.filter(g => g.franchise).map(g => g.franchise!));
+    return ['All', ...Array.from(franchiseSet).sort()];
+  }, [games]);
+
   const filteredGames = useMemo(() => {
     const filtered = games.filter(g => {
       const matchesPlatform = platformFilter === 'All' || g.platform === platformFilter || g.platform === 'Both';
       const matchesCategory = categoryFilter === 'All' || g.category === categoryFilter;
+      const matchesFranchise = franchiseFilter === 'All' || g.franchise === franchiseFilter;
       const matchesSearch = g.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
                            g.description.toLowerCase().includes(searchQuery.toLowerCase());
       const matchesPrice = g.price >= priceRange[0] && g.price <= priceRange[1];
-      return matchesPlatform && matchesCategory && matchesSearch && matchesPrice;
+      return matchesPlatform && matchesCategory && matchesFranchise && matchesSearch && matchesPrice;
     });
 
     switch (sortBy) {
@@ -310,10 +317,13 @@ export default function Index() {
               <GamesSection
                 filteredGames={filteredGames}
                 categories={categories}
+                franchises={franchises}
                 platformFilter={platformFilter}
                 setPlatformFilter={setPlatformFilter}
                 categoryFilter={categoryFilter}
                 setCategoryFilter={setCategoryFilter}
+                franchiseFilter={franchiseFilter}
+                setFranchiseFilter={setFranchiseFilter}
                 searchQuery={searchQuery}
                 setSearchQuery={setSearchQuery}
                 sortBy={sortBy}
