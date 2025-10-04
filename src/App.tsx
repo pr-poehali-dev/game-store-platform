@@ -19,13 +19,17 @@ import AdminEnrichment from "./pages/AdminEnrichment";
 import Tournaments from "./pages/Tournaments";
 import OfflineIndicator from "@/components/OfflineIndicator";
 import NotificationPermissionBanner from "@/components/NotificationPermissionBanner";
+import PendingPurchasesBadge from "@/components/PendingPurchasesBadge";
+import OfflinePurchaseHandler from "@/components/OfflinePurchaseHandler";
 import { registerServiceWorker } from "@/utils/registerServiceWorker";
+import { initBackgroundSync } from "@/utils/backgroundSync";
 
 const queryClient = new QueryClient();
 
 const App = () => {
   useEffect(() => {
     registerServiceWorker();
+    initBackgroundSync();
   }, []);
 
   return (
@@ -37,6 +41,7 @@ const App = () => {
           <Sonner />
           <OfflineIndicator />
           <NotificationPermissionBanner />
+          <OfflinePurchaseHandler />
           <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
             <Routes>
               <Route path="/" element={<Index />} />

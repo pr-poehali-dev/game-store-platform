@@ -255,3 +255,100 @@ self.addEventListener('notificationclick', (event) => {
 self.addEventListener('notificationclose', (event) => {
   console.log('Notification closed:', event.notification.tag);
 });
+
+self.addEventListener('sync', (event) => {
+  console.log('Background Sync event:', event.tag);
+
+  if (event.tag === 'sync-purchases') {
+    event.waitUntil(syncPendingPurchases());
+  }
+});
+
+async function syncPendingPurchases() {
+  const PENDING_PURCHASES_KEY = 'pending_purchases';
+  
+  let pending = [];
+  try {
+    const data = await self.clients.matchAll().then(clients => {
+      if (clients.length > 0) {
+        return clients[0].postMessage({ type: 'GET_PENDING_PURCHASES' });
+      }
+    });
+    
+    const stored = self.localStorage?.getItem?.(PENDING_PURCHASES_KEY);
+    if (stored) {
+      pending = JSON.parse(stored);
+    }
+  } catch (error) {
+    console.error('Ошибка чтения отложенных покупок:', error);
+    return;
+  }
+
+  if (pending.length === 0) {
+    console.log('Нет отложенных покупок для синхронизации');
+    return;
+  }
+
+  console.log(`Синхронизация ${pending.length} отложенных покупок...`);
+
+  let success = 0;
+  let failed = 0;
+
+  for (const purchase of pending) {
+    try {
+      const response = await fetch('/api/purchases', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          game_id: purchase.gameId,
+          user_id: purchase.userId || 1,
+          payment_method: purchase.paymentMethod || 'card',
+          amount: purchase.price,
+        }),
+      });
+
+      if (response.ok) {
+        success++;
+        console.log(`✅ Покупка ${purchase.gameName} отправлена`);
+        
+        pending = pending.filter(p => p.id !== purchase.id);
+      } else {
+        failed++;
+        console.log(`❌ Покупка ${purchase.gameName} не отправлена (${response.status})`);
+      }
+    } catch (error) {
+      failed++;
+      console.error(`❌ Ошибка отправки покупки ${purchase.gameName}:`, error);
+    }
+  }
+
+  try {
+    const clients = await self.clients.matchAll();
+    if (clients.length > 0) {
+      clients[0].postMessage({
+        type: 'UPDATE_PENDING_PURCHASES',
+        purchases: pending
+      });
+    }
+  } catch (error) {
+    console.error('Ошибка обновления localStorage:', error);
+  }
+
+  if (success > 0) {
+    const message = failed > 0
+      ? `Отправлено ${success} покупок, ${failed} не удалось`
+      : `Все покупки отправлены (${success})`;
+
+    await self.registration.showNotification('Синхронизация завершена', {
+      body: message,
+      icon: '/icon-192.png',
+      badge: '/icon-192.png',
+      tag: 'sync-complete',
+      requireInteraction: false,
+    });
+  }
+
+  console.log(`Синхронизация завершена: ${success} успешно, ${failed} ошибок`);
+}

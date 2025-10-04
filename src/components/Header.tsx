@@ -14,6 +14,7 @@ import PromoCodeInput from '@/components/PromoCodeInput';
 import ThemeToggle from '@/components/ThemeToggle';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 import NotificationBadge from '@/components/NotificationBadge';
+import PendingPurchasesBadge from '@/components/PendingPurchasesBadge';
 
 interface CartItem {
   id: string;
@@ -205,6 +206,8 @@ export default function Header({
                 <p>Уведомления (4 новых)</p>
               </TooltipContent>
             </Tooltip>
+
+            <PendingPurchasesBadge />
 
             <ThemeToggle />
             
