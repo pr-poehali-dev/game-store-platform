@@ -59,20 +59,22 @@ export default function GameCard({ game, onBuy, isFavorite, onToggleFavorite, on
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      whileHover={{ y: -4, scale: 1.01, transition: { duration: 0.2 } }}
+      whileHover={{ y: -4, scale: 1.01, transition: { duration: 0.15, ease: "easeOut" } }}
       whileTap={{ scale: 0.98 }}
       onClick={handleCardClick}
       onMouseEnter={handleMouseEnter}
       className="cursor-pointer touch-manipulation"
+      style={{ willChange: 'transform' }}
     >
-      <Card className="h-full bg-gradient-to-br from-card/80 via-card/60 to-card/40 backdrop-blur-xl border-2 border-border/50 hover:border-primary/80 active:border-primary hover:shadow-2xl hover:shadow-primary/30 transition-all duration-300 overflow-hidden group relative">
+      <Card className="h-full bg-gradient-to-br from-card/80 via-card/60 to-card/40 backdrop-blur-xl border-2 border-border/50 hover:border-primary/80 active:border-primary hover:shadow-2xl hover:shadow-primary/30 smooth-transition overflow-hidden group relative">
         <div className="relative overflow-hidden h-48">
           <LazyImage
             src={game.image_url || '/img/game-placeholder.jpg'}
             alt={game.title}
-            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300 ease-out"
+            style={{ willChange: 'transform' }}
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+          <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
           
           <div className="absolute top-1.5 sm:top-2 left-1.5 sm:left-2 flex flex-wrap gap-1">
             {game.discount && game.discount > 0 && (

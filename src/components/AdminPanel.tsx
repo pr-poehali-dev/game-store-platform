@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
@@ -11,6 +11,10 @@ import GameForm from '@/components/GameForm';
 import SubscriptionForm from '@/components/SubscriptionForm';
 import PromoCodesManager from '@/components/PromoCodesManager';
 import QuickReplies from '@/components/QuickReplies';
+import TournamentForm from '@/components/TournamentForm';
+import { Tournament, initialTournaments } from '@/data/tournaments';
+import { Badge } from '@/components/ui/badge';
+import { toast } from 'sonner';
 
 interface Game {
   id: number;
@@ -68,6 +72,39 @@ export default function AdminPanel({
   handleDeleteSubscription
 }: AdminPanelProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const [tournaments, setTournaments] = useState<Tournament[]>([]);
+  const [editingTournament, setEditingTournament] = useState<Tournament | null>(null);
+
+  useEffect(() => {
+    const saved = localStorage.getItem('godstore-tournaments');
+    if (saved) {
+      setTournaments(JSON.parse(saved));
+    } else {
+      setTournaments(initialTournaments);
+    }
+  }, []);
+
+  const handleSaveTournament = (tournament: Partial<Tournament>) => {
+    let updated: Tournament[];
+    if (editingTournament) {
+      updated = tournaments.map(t => t.id === editingTournament.id ? { ...t, ...tournament } : t);
+      toast.success(`Турнир "${tournament.title}" обновлён`);
+    } else {
+      const newTournament = { ...tournament, id: Date.now() } as Tournament;
+      updated = [...tournaments, newTournament];
+      toast.success(`Турнир "${tournament.title}" создан`);
+    }
+    setTournaments(updated);
+    localStorage.setItem('godstore-tournaments', JSON.stringify(updated));
+    setEditingTournament(null);
+  };
+
+  const handleDeleteTournament = (id: number) => {
+    const updated = tournaments.filter(t => t.id !== id);
+    setTournaments(updated);
+    localStorage.setItem('godstore-tournaments', JSON.stringify(updated));
+    toast.success('Турнир удалён');
+  };
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
@@ -107,7 +144,7 @@ export default function AdminPanel({
             </DialogHeader>
             
             <Tabs defaultValue="games" className="w-full">
-              <TabsList className="grid w-full grid-cols-5">
+              <TabsList className="grid w-full grid-cols-6">
                 <TabsTrigger value="games">
                   <Icon name="Gamepad2" size={16} className="mr-2" />
                   Игры ({games.length})
@@ -115,6 +152,10 @@ export default function AdminPanel({
                 <TabsTrigger value="subscriptions">
                   <Icon name="Star" size={16} className="mr-2" />
                   Подписки ({subscriptions.length})
+                </TabsTrigger>
+                <TabsTrigger value="tournaments">
+                  <Icon name="Trophy" size={16} className="mr-2" />
+                  Турниры ({tournaments.length})
                 </TabsTrigger>
                 <TabsTrigger value="promo">
                   <Icon name="Tag" size={16} className="mr-2" />
@@ -254,6 +295,85 @@ export default function AdminPanel({
                             onClick={() => {
                               if (confirm(`Удалить подписку "${sub.name}"?`)) {
                                 handleDeleteSubscription(sub.id);
+                              }
+                            }}
+                          >
+                            <Icon name="Trash2" size={14} />
+                          </Button>
+                        </CardFooter>
+                      </Card>
+                    ))}
+                  </div>
+                </ScrollArea>
+              </TabsContent>
+
+              <TabsContent value="tournaments" className="space-y-4">
+                <Dialog>
+                  <DialogTrigger asChild>
+                    <Button className="w-full bg-neon-purple text-white" onClick={() => setEditingTournament(null)}>
+                      <Icon name="Plus" size={16} className="mr-2" />
+                      Создать турнир
+                    </Button>
+                  </DialogTrigger>
+                  <DialogContent className="bg-card max-w-3xl max-h-[90vh] overflow-y-auto">
+                    <DialogHeader>
+                      <DialogTitle>{editingTournament ? 'Редактировать' : 'Создать'} турнир</DialogTitle>
+                    </DialogHeader>
+                    <TournamentForm tournament={editingTournament} onSave={handleSaveTournament} />
+                  </DialogContent>
+                </Dialog>
+
+                <ScrollArea className="h-[400px] pr-4">
+                  <div className="space-y-3">
+                    {tournaments.map(tournament => (
+                      <Card key={tournament.id} className="bg-muted/50 hover:bg-muted/70 transition-colors">
+                        <CardHeader className="pb-3">
+                          <div className="flex items-start justify-between">
+                            <div className="flex-1">
+                              <CardTitle className="text-sm flex items-center gap-2">
+                                {tournament.title}
+                                <span className="text-xs font-normal text-muted-foreground">
+                                  #{tournament.id}
+                                </span>
+                              </CardTitle>
+                              <CardDescription className="mt-1">
+                                {tournament.game} • {tournament.platform} • {tournament.format}
+                              </CardDescription>
+                              <div className="flex items-center gap-2 mt-2">
+                                <Badge variant={tournament.status === 'active' ? 'default' : tournament.status === 'upcoming' ? 'secondary' : 'outline'}>
+                                  {tournament.status === 'active' ? '🔴 Активный' : tournament.status === 'upcoming' ? '🟡 Предстоящий' : '⚪ Завершён'}
+                                </Badge>
+                                <span className="text-xs text-muted-foreground">
+                                  💰 {tournament.prizePool.toLocaleString()}₽
+                                </span>
+                                <span className="text-xs text-muted-foreground">
+                                  👥 {tournament.participants}/{tournament.maxParticipants}
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                        </CardHeader>
+                        <CardFooter className="gap-2">
+                          <Dialog>
+                            <DialogTrigger asChild>
+                              <Button variant="outline" size="sm" onClick={() => setEditingTournament(tournament)} className="flex-1">
+                                <Icon name="Edit" size={14} className="mr-1" />
+                                Редактировать
+                              </Button>
+                            </DialogTrigger>
+                            <DialogContent className="bg-card max-w-3xl max-h-[90vh] overflow-y-auto">
+                              <DialogHeader>
+                                <DialogTitle>Редактировать турнир</DialogTitle>
+                              </DialogHeader>
+                              <TournamentForm tournament={tournament} onSave={handleSaveTournament} />
+                            </DialogContent>
+                          </Dialog>
+                          <Button 
+                            variant="destructive" 
+                            size="sm" 
+                            onClick={() => {
+                              if (confirm(`Удалить турнир "${tournament.title}"?`)) {
+                                handleDeleteTournament(tournament.id);
                               }
                             }}
                           >
