@@ -8,8 +8,6 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import Icon from '@/components/ui/icon';
-import { PremiumSubscription } from '@/components/PremiumSubscription';
-import { GiftCards } from '@/components/GiftCards';
 
 export const ActionsMenu = () => {
   return (
@@ -81,14 +79,6 @@ export const ActionsMenu = () => {
             <span>Избранное</span>
           </a>
         </DropdownMenuItem>
-
-        <DropdownMenuSeparator />
-        <DropdownMenuLabel>Premium функции</DropdownMenuLabel>
-
-        <div className="p-2 space-y-2">
-          <PremiumSubscription />
-          <GiftCards />
-        </div>
       </DropdownMenuContent>
     </DropdownMenu>
   );
