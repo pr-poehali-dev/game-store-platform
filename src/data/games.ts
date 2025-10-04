@@ -17,6 +17,8 @@ export interface Game {
   consoleModels?: string;
   reviewCount?: number;
   avgReviewRating?: number;
+  developer: string;
+  publisher: string;
 }
 
 export const initialGames: Game[] = [

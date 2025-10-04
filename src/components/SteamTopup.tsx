@@ -47,6 +47,14 @@ export default function SteamTopup({ onTopup }: SteamTopupProps) {
           className="max-w-4xl mx-auto"
         >
           <div className="text-center mb-8">
+            <motion.h3 
+              className="text-4xl font-bold bg-gradient-to-r from-[#66c0f4] to-neon-blue bg-clip-text text-transparent mb-2"
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+            >
+              Пополнение Steam
+            </motion.h3>
             <div className="flex items-center justify-center gap-3 mb-4">
               <Icon name="Wallet" size={40} className="text-[#66c0f4]" />
               <h3 className="text-4xl font-bold">Пополнение Steam</h3>
