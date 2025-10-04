@@ -8,6 +8,8 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, Di
 import Icon from '@/components/ui/icon';
 import { useToast } from '@/hooks/use-toast';
 import ReferralProgram from '@/components/ReferralProgram';
+import UserLevel from '@/components/UserLevel';
+import CashbackDisplay from '@/components/CashbackDisplay';
 
 interface UserData {
   user: {
@@ -198,43 +200,53 @@ export default function UserProfile() {
           </div>
         </div>
 
-        <div className="grid gap-6 md:grid-cols-4 mb-8">
-          <Card className="bg-gradient-to-br from-neon-green/20 to-transparent border-neon-green/50">
-            <CardHeader className="pb-3">
-              <CardTitle className="text-sm text-muted-foreground">Потрачено всего</CardTitle>
-              <CardDescription className="text-2xl font-bold text-neon-green">
-                {userData.user.total_spent.toLocaleString()}₽
-              </CardDescription>
-            </CardHeader>
-          </Card>
+        <div className="grid gap-6 lg:grid-cols-3 mb-8">
+          <div className="lg:col-span-2">
+            <div className="grid gap-6 md:grid-cols-2 mb-6">
+              <Card className="bg-gradient-to-br from-neon-green/20 to-transparent border-neon-green/50">
+                <CardHeader className="pb-3">
+                  <CardTitle className="text-sm text-muted-foreground">Потрачено всего</CardTitle>
+                  <CardDescription className="text-2xl font-bold text-neon-green">
+                    {userData.user.total_spent.toLocaleString()}₽
+                  </CardDescription>
+                </CardHeader>
+              </Card>
 
-          <Card className="bg-gradient-to-br from-neon-pink/20 to-transparent border-neon-pink/50">
-            <CardHeader className="pb-3">
-              <CardTitle className="text-sm text-muted-foreground">Баллы лояльности</CardTitle>
-              <CardDescription className="text-2xl font-bold text-neon-pink flex items-center gap-2">
-                <Icon name="Star" size={24} />
-                {userData.user.loyalty_points}
-              </CardDescription>
-            </CardHeader>
-          </Card>
+              <Card className="bg-gradient-to-br from-neon-pink/20 to-transparent border-neon-pink/50">
+                <CardHeader className="pb-3">
+                  <CardTitle className="text-sm text-muted-foreground">Баллы лояльности</CardTitle>
+                  <CardDescription className="text-2xl font-bold text-neon-pink flex items-center gap-2">
+                    <Icon name="Star" size={24} />
+                    {userData.user.loyalty_points}
+                  </CardDescription>
+                </CardHeader>
+              </Card>
 
-          <Card className="bg-gradient-to-br from-neon-purple/20 to-transparent border-neon-purple/50">
-            <CardHeader className="pb-3">
-              <CardTitle className="text-sm text-muted-foreground">Заказов</CardTitle>
-              <CardDescription className="text-2xl font-bold text-neon-purple">
-                {userData.stats.total_orders}
-              </CardDescription>
-            </CardHeader>
-          </Card>
+              <Card className="bg-gradient-to-br from-neon-purple/20 to-transparent border-neon-purple/50">
+                <CardHeader className="pb-3">
+                  <CardTitle className="text-sm text-muted-foreground">Заказов</CardTitle>
+                  <CardDescription className="text-2xl font-bold text-neon-purple">
+                    {userData.stats.total_orders}
+                  </CardDescription>
+                </CardHeader>
+              </Card>
 
-          <Card className="bg-gradient-to-br from-yellow-500/20 to-transparent border-yellow-500/50">
-            <CardHeader className="pb-3">
-              <CardTitle className="text-sm text-muted-foreground">Игр в библиотеке</CardTitle>
-              <CardDescription className="text-2xl font-bold text-yellow-500">
-                {userData.stats.games_owned}
-              </CardDescription>
-            </CardHeader>
-          </Card>
+              <Card className="bg-gradient-to-br from-yellow-500/20 to-transparent border-yellow-500/50">
+                <CardHeader className="pb-3">
+                  <CardTitle className="text-sm text-muted-foreground">Игр в библиотеке</CardTitle>
+                  <CardDescription className="text-2xl font-bold text-yellow-500">
+                    {userData.stats.games_owned}
+                  </CardDescription>
+                </CardHeader>
+              </Card>
+            </div>
+
+            <CashbackDisplay userId={1} />
+          </div>
+
+          <div>
+            <UserLevel userId={1} />
+          </div>
         </div>
 
         <Card className="mb-8">

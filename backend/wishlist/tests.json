@@ -1,0 +1,27 @@
+{
+  "tests": [
+    {
+      "name": "Get user wishlist",
+      "method": "GET",
+      "path": "/",
+      "headers": {
+        "X-User-Id": "1"
+      },
+      "expectedStatus": 200,
+      "expectedBody": {
+        "wishlist": []
+      },
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "Missing X-User-Id header",
+      "method": "GET",
+      "path": "/",
+      "expectedStatus": 401,
+      "expectedBody": {
+        "error": "string"
+      },
+      "bodyMatcher": "partial"
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "tests": [
+    {
+      "name": "Get Elden Ring cover",
+      "method": "GET",
+      "path": "/?game_name=Elden Ring",
+      "expectedStatus": 200,
+      "expectedBody": {
+        "cover_image": "string",
+        "name": "string"
+      },
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "Missing game_name parameter",
+      "method": "GET",
+      "path": "/",
+      "expectedStatus": 400,
+      "expectedBody": {
+        "error": "string"
+      },
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "OPTIONS request",
+      "method": "OPTIONS",
+      "path": "/",
+      "expectedStatus": 200
+    }
+  ]
+}

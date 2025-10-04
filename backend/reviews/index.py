@@ -46,12 +46,12 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
             
             if game_id:
                 cur.execute(
-                    "SELECT id, game_id, user_name, rating, comment, created_at, is_verified FROM reviews WHERE game_id = %s ORDER BY created_at DESC",
+                    "SELECT id, game_id, user_name, rating, comment, created_at, is_verified, helpful_count, verified_purchase FROM t_p1573360_game_store_platform.reviews WHERE game_id = %s ORDER BY created_at DESC",
                     (int(game_id),)
                 )
             else:
                 cur.execute(
-                    "SELECT id, game_id, user_name, rating, comment, created_at, is_verified FROM reviews ORDER BY created_at DESC LIMIT 100"
+                    "SELECT id, game_id, user_name, rating, comment, created_at, is_verified, helpful_count, verified_purchase FROM t_p1573360_game_store_platform.reviews ORDER BY created_at DESC LIMIT 100"
                 )
             
             reviews = cur.fetchall()
@@ -104,9 +104,11 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                     'body': json.dumps({'error': 'rating must be between 1 and 5'})
                 }
             
+            verified_purchase = body_data.get('verified_purchase', False)
+            
             cur.execute(
-                "INSERT INTO reviews (game_id, user_name, rating, comment) VALUES (%s, %s, %s, %s) RETURNING id",
-                (game_id, user_name, rating, comment)
+                "INSERT INTO t_p1573360_game_store_platform.reviews (game_id, user_name, rating, comment, verified_purchase) VALUES (%s, %s, %s, %s, %s) RETURNING id",
+                (game_id, user_name, rating, comment, verified_purchase)
             )
             
             review_id = cur.fetchone()['id']

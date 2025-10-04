@@ -1,0 +1,24 @@
+{
+  "tests": [
+    {
+      "name": "Mark review as helpful",
+      "method": "POST",
+      "path": "/",
+      "body": {
+        "review_id": 1
+      },
+      "expectedStatus": 200,
+      "expectedBody": {
+        "helpful_count": 1
+      },
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "Missing review_id",
+      "method": "POST",
+      "path": "/",
+      "body": {},
+      "expectedStatus": 400
+    }
+  ]
+}

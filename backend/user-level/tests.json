@@ -1,0 +1,19 @@
+{
+  "tests": [
+    {
+      "name": "Get user level and achievements",
+      "method": "GET",
+      "path": "/",
+      "headers": {
+        "X-User-Id": "1"
+      },
+      "expectedStatus": 200,
+      "expectedBody": {
+        "level": "string",
+        "experience_points": 0,
+        "achievements": []
+      },
+      "bodyMatcher": "partial"
+    }
+  ]
+}

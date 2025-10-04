@@ -1,4 +1,11 @@
 {
+  "review-helpful": "https://functions.poehali.dev/7b18c430-3e8f-403a-b444-c3ef19388202",
+  "user-level": "https://functions.poehali.dev/e313e3be-3b5d-486e-8d3e-c6a811dc3b96",
+  "game-covers": "https://functions.poehali.dev/5dc47f77-23a2-4e73-a198-56491af9c900",
+  "cashback": "https://functions.poehali.dev/4a283c69-5bfe-4d26-ab96-8ef99bbdcf0c",
+  "price-history": "https://functions.poehali.dev/a75f78fa-3d8f-49c2-8bb7-d71e8446f46f",
+  "wishlist": "https://functions.poehali.dev/085014ea-8c98-4ea8-918e-7882a51b287c",
+  "gifts": "https://functions.poehali.dev/22aca520-7090-427a-b156-8c45e64827bf",
   "referrals": "https://functions.poehali.dev/9b31b64f-ac2e-470f-b1a3-623931cb83ca",
   "user-profile": "https://functions.poehali.dev/368c55f6-e1ab-410d-aa1d-64a0532bcae5",
   "promo-codes": "https://functions.poehali.dev/937dbb3b-6c25-4f23-b3e2-27bca4627638",
