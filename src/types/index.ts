@@ -1,3 +1,12 @@
+export interface GameVersion {
+  id: string;
+  name: string;
+  price: number;
+  description: string;
+  platform?: string;
+  region?: string;
+}
+
 export interface Game {
   id: number;
   title: string;
@@ -20,6 +29,7 @@ export interface Game {
     price: number;
     url?: string;
   }[];
+  versions?: GameVersion[];
 }
 
 export interface Subscription {

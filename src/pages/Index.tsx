@@ -14,7 +14,11 @@ import ChatWidget from '@/components/ChatWidget';
 import RecommendedGames from '@/components/RecommendedGames';
 import GameReviews from '@/components/GameReviews';
 import PriceComparison from '@/components/PriceComparison';
+import PriceTracker from '@/components/PriceTracker';
+import GameVersionSelector from '@/components/GameVersionSelector';
+import AccountsSection from '@/components/AccountsSection';
 import { initialGames, type Game } from '@/data/games';
+import type { GameVersion } from '@/types';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -33,9 +37,10 @@ interface Subscription {
 
 interface CartItem {
   id: string;
-  type: 'game' | 'subscription' | 'steam-topup';
+  type: 'game' | 'subscription' | 'steam-topup' | 'account';
   item: Game | Subscription | { id: number; price: number; title: string };
   quantity: number;
+  selectedVersion?: GameVersion;
 }
 
 const initialSubscriptions: Subscription[] = [
@@ -85,6 +90,7 @@ export default function Index() {
   const [favorites, setFavorites] = useState<number[]>([]);
   const [viewHistory, setViewHistory] = useState<number[]>([]);
   const [selectedGame, setSelectedGame] = useState<Game | null>(null);
+  const [selectedVersion, setSelectedVersion] = useState<GameVersion | null>(null);
   const [activeTab, setActiveTab] = useState<string>('games');
   const { toast } = useToast();
 
@@ -120,6 +126,12 @@ export default function Index() {
   const handleViewGame = (game: Game) => {
     setSelectedGame(game);
     addToViewHistory(game.id);
+    
+    if (game.versions && game.versions.length > 0) {
+      setSelectedVersion(game.versions[0]);
+    } else {
+      setSelectedVersion(null);
+    }
   };
 
   const categories = useMemo(() => {
@@ -290,6 +302,29 @@ export default function Index() {
     });
   };
 
+  const handleBuyAccount = (account: any) => {
+    const accountItem = {
+      id: Date.now(),
+      title: `Аккаунт ${account.platform}${account.region ? ` (${account.region})` : ''}`,
+      price: account.price
+    };
+    
+    setCart([...cart, { 
+      id: `account-${Date.now()}`, 
+      type: 'account' as const, 
+      item: accountItem, 
+      quantity: 1 
+    }]);
+    
+    setIsCartOpen(true);
+    
+    toast({ 
+      title: 'Аккаунт добавлен в корзину', 
+      description: accountItem.title,
+      duration: 3000
+    });
+  };
+
   return (
     <div className="min-h-screen bg-background dark">
       <Header
@@ -429,6 +464,15 @@ export default function Index() {
                       discount={selectedGame.discount}
                     />
                     
+                    {selectedGame.versions && selectedGame.versions.length > 0 && selectedVersion && (
+                      <GameVersionSelector
+                        versions={selectedGame.versions}
+                        selectedVersion={selectedVersion}
+                        onVersionChange={setSelectedVersion}
+                        baseDiscount={selectedGame.discount}
+                      />
+                    )}
+                    
                     <div className="flex items-center justify-between pt-4 border-t">
                       <div>
                         {selectedGame.discount && selectedGame.discount > 0 ? (
@@ -481,11 +525,19 @@ export default function Index() {
 
       <SteamTopup onTopup={handleSteamTopup} />
 
+      <AccountsSection onBuyAccount={handleBuyAccount} />
+
       <StatsSection />
 
       <InfoSection />
 
       <FeaturesSection />
+
+      <PriceTracker 
+        favorites={favorites}
+        games={games}
+        onBuy={(game) => addToCart(game, 'game')}
+      />
 
       <Footer />
     </div>

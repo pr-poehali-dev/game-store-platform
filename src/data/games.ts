@@ -58,10 +58,17 @@ export const initialGames: Game[] = [
   { id: 23, title: 'Uncharted 4', platform: 'PlayStation', price: 2999, description: 'Последнее приключение Нейтана Дрейка', image_url: 'https://cdn.cloudflare.steamstatic.com/steam/apps/1659420/header.jpg', category: 'Adventure', rating: 9.5, release_year: 2016, discount: 40, region: 'TR/IN/UA', franchise: 'Uncharted', fullDescription: 'Поиски пиратских сокровищ в захватывающем финале серии. Киноматографический сюжет и невероятные виды.', consoleModels: 'PS4, PS5' },
   { id: 24, title: 'Uncharted: The Lost Legacy', platform: 'PlayStation', price: 2299, description: 'Новые герои, новые сокровища', image_url: 'https://cdn.cloudflare.steamstatic.com/steam/apps/1659421/header.jpg', category: 'Adventure', rating: 8.8, release_year: 2017, discount: 50, region: 'TR/IN/UA', franchise: 'Uncharted', consoleModels: 'PS4, PS5' },
 
-  { id: 25, title: 'Horizon Forbidden West', platform: 'PlayStation', price: 4199, description: 'Запретный Запад полон тайн', image_url: 'https://cdn.cloudflare.steamstatic.com/steam/apps/2420110/header.jpg', category: 'Action', rating: 9.2, release_year: 2022, region: 'TR/IN/UA', isNew: true, franchise: 'Horizon', fullDescription: 'Элой исследует новые земли, полные опасных машин. Подводные локации, летающие звери и эпическая история.', consoleModels: 'PS4, PS5' },
+  { id: 25, title: 'Horizon Forbidden West', platform: 'PlayStation', price: 4199, description: 'Запретный Запад полон тайн', image_url: 'https://cdn.cloudflare.steamstatic.com/steam/apps/2420110/header.jpg', category: 'Action', rating: 9.2, release_year: 2022, region: 'TR/IN/UA', isNew: true, franchise: 'Horizon', fullDescription: 'Элой исследует новые земли, полные опасных машин. Подводные локации, летающие звери и эпическая история.', consoleModels: 'PS4, PS5', versions: [
+    { id: 'horizon-fw-v1', name: 'Standard PS4', price: 2999, description: 'Для PlayStation 4', platform: 'PlayStation', region: 'TR/IN/UA' },
+    { id: 'horizon-fw-v2', name: 'Standard PS5', price: 4299, description: 'Версия для PS5', platform: 'PlayStation', region: 'TR/IN/UA' },
+    { id: 'horizon-fw-v3', name: 'Complete Edition PS5', price: 4999, description: 'PS5 + DLC Burning Shores', platform: 'PlayStation', region: 'TR/IN/UA' }
+  ] },
   { id: 26, title: 'Horizon Zero Dawn', platform: 'PlayStation', price: 2499, description: 'Начало легендарной серии', image_url: 'https://cdn.cloudflare.steamstatic.com/steam/apps/1151640/header.jpg', category: 'Action', rating: 9.0, release_year: 2017, discount: 60, region: 'TR/IN/UA', franchise: 'Horizon', consoleModels: 'PS4, PS5' },
 
-  { id: 27, title: 'Ghost of Tsushima', platform: 'PlayStation', price: 3999, description: 'Самурайская легенда острова Цусима', image_url: 'https://cdn.cloudflare.steamstatic.com/steam/apps/2215430/header.jpg', category: 'Action', rating: 9.5, release_year: 2020, region: 'TR/IN/UA', isHot: true, franchise: 'Ghost of Tsushima', fullDescription: 'Феодальная Япония 1274 года. Станьте призраком и защитите остров от монголов. Красивейшая игра поколения.', consoleModels: 'PS4, PS5' },
+  { id: 27, title: 'Ghost of Tsushima', platform: 'PlayStation', price: 3999, description: 'Самурайская легенда острова Цусима', image_url: 'https://cdn.cloudflare.steamstatic.com/steam/apps/2215430/header.jpg', category: 'Action', rating: 9.5, release_year: 2020, region: 'TR/IN/UA', isHot: true, franchise: 'Ghost of Tsushima', fullDescription: 'Феодальная Япония 1274 года. Станьте призраком и защитите остров от монголов. Красивейшая игра поколения.', consoleModels: 'PS4, PS5', versions: [
+    { id: 'ghost-tsushima-v1', name: 'PS4 версия', price: 2799, description: 'Для PlayStation 4', platform: 'PlayStation', region: 'TR/IN/UA' },
+    { id: 'ghost-tsushima-v2', name: 'PS5 версия', price: 3999, description: "Director's Cut для PS5 с островом Ики", platform: 'PlayStation', region: 'TR/IN/UA' }
+  ] },
 
   { id: 28, title: 'Ratchet & Clank: Rift Apart', platform: 'PlayStation', price: 3799, description: 'Межпространственные приключения', image_url: 'https://cdn.cloudflare.steamstatic.com/steam/apps/1895880/header.jpg', category: 'Action', rating: 9.1, release_year: 2021, region: 'TR/IN/UA', franchise: 'Ratchet & Clank', consoleModels: 'PS5' },
 
@@ -93,6 +100,9 @@ export const initialGames: Game[] = [
     { store: 'Steam', price: 4999 },
     { store: 'Epic Games', price: 4799 },
     { store: 'Plati.ru', price: 4500 }
+  ], versions: [
+    { id: 'elden-ring-v1', name: 'Standard Edition', price: 2999, description: 'Базовая версия игры' },
+    { id: 'elden-ring-v2', name: 'Deluxe Edition', price: 3799, description: 'Включает артбук и саундтрек', platform: 'Both' }
   ] },
   { id: 41, title: 'Dark Souls III', platform: 'Both', price: 2499, description: 'Темное фэнтези', image_url: 'https://cdn.cloudflare.steamstatic.com/steam/apps/374320/header.jpg', category: 'RPG', rating: 9.5, release_year: 2016, discount: 70, franchise: 'Dark Souls', consoleModels: 'PS4, Xbox One' },
   { id: 42, title: 'Sekiro: Shadows Die Twice', platform: 'Both', price: 2999, description: 'Самурайский экшен', image_url: 'https://cdn.cloudflare.steamstatic.com/steam/apps/814380/header.jpg', category: 'Action', rating: 9.6, release_year: 2019, discount: 55, consoleModels: 'PS4, Xbox One' },
@@ -101,6 +111,9 @@ export const initialGames: Game[] = [
     { store: 'PlayStation Store', price: 3999 },
     { store: 'Plati.ru', price: 3700 },
     { store: 'Gabes.ru', price: 3600 }
+  ], versions: [
+    { id: 'cyberpunk-v1', name: 'Standard Edition', price: 2199, description: 'Базовая версия игры' },
+    { id: 'cyberpunk-v2', name: 'Ultimate Edition', price: 3299, description: 'Все DLC + Phantom Liberty', platform: 'Both' }
   ] },
   { id: 44, title: 'The Witcher 3', platform: 'Both', price: 1999, description: 'Эпическая RPG о ведьмаке', image_url: 'https://cdn.cloudflare.steamstatic.com/steam/apps/292030/header.jpg', category: 'RPG', rating: 9.8, release_year: 2015, discount: 60, franchise: 'The Witcher', consoleModels: 'PS4, PS5, Xbox One, Xbox Series X/S' },
 
@@ -156,6 +169,9 @@ export const initialGames: Game[] = [
     { store: 'PlayStation Store', price: 4499 },
     { store: 'Plati.ru', price: 4200 },
     { store: 'Gabes.ru', price: 4100 }
+  ], versions: [
+    { id: 'baldurs-gate-v1', name: 'Standard Edition', price: 2799, description: 'Полная игра' },
+    { id: 'baldurs-gate-v2', name: 'Digital Deluxe', price: 3499, description: 'Артбук, саундтрек, маски дайсов', platform: 'Both' }
   ] },
 
   { id: 61, title: 'Alan Wake 2', platform: 'Both', price: 3799, description: 'Психологический хоррор', image_url: 'https://cdn.cloudflare.steamstatic.com/steam/apps/1282730/header.jpg', category: 'Horror', rating: 9.3, release_year: 2023, isNew: true, franchise: 'Alan Wake', consoleModels: 'PS5, Xbox Series X/S', competitorPrices: [

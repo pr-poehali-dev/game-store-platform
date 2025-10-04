@@ -1,0 +1,3 @@
+-- Добавление колонок discount и region
+ALTER TABLE games ADD COLUMN IF NOT EXISTS discount INTEGER DEFAULT NULL;
+ALTER TABLE games ADD COLUMN IF NOT EXISTS region VARCHAR(50) DEFAULT NULL;
