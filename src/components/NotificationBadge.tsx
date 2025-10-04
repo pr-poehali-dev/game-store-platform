@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, forwardRef } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -45,7 +45,7 @@ const mockNotifications: Notification[] = [
   }
 ];
 
-export default function NotificationBadge() {
+const NotificationBadge = forwardRef<HTMLButtonElement>((props, ref) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const getIcon = (type: Notification['type']) => {
@@ -145,6 +145,8 @@ export default function NotificationBadge() {
       </AnimatePresence>
 
       <Button 
+        ref={ref}
+        {...props}
         onClick={() => setIsOpen(!isOpen)}
         variant="ghost" 
         size="sm" 
@@ -157,4 +159,8 @@ export default function NotificationBadge() {
       </Button>
     </>
   );
-}
+});
+
+NotificationBadge.displayName = 'NotificationBadge';
+
+export default NotificationBadge;

@@ -124,11 +124,11 @@ export default function InfoSection() {
                     <Icon name="Globe" size={18} />
                     Регионы PlayStation
                   </h4>
-                  <p className="text-sm text-muted-foreground">
+                  <div className="text-sm text-muted-foreground">
                     Игры для PlayStation доступны в регионах: <Badge variant="outline" className="ml-1">Турция</Badge> 
                     <Badge variant="outline" className="ml-1">Индия</Badge> 
                     <Badge variant="outline" className="ml-1">Украина</Badge>
-                  </p>
+                  </div>
                   <p className="text-xs text-muted-foreground mt-2">
                     При покупке укажите нужный регион или получите готовый аккаунт
                   </p>
