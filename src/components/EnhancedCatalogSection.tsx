@@ -6,7 +6,7 @@ import GameCard from './GameCard';
 
 interface EnhancedCatalogSectionProps {
   games: Game[];
-  favorites: Set<number>;
+  favorites: number[];
   onToggleFavorite: (id: number) => void;
   onViewGame: (game: Game) => void;
   onAddToCart: (item: any, type: 'game' | 'subscription') => void;
@@ -145,7 +145,7 @@ export const EnhancedCatalogSection = ({
             <GameCard
               key={game.id}
               game={game}
-              isFavorite={favorites.has(game.id)}
+              isFavorite={favorites.includes(game.id)}
               onToggleFavorite={onToggleFavorite}
               onView={() => onViewGame(game)}
               onBuy={() => onAddToCart(game, 'game')}
