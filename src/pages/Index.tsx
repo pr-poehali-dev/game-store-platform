@@ -4,21 +4,11 @@ import Header from '@/components/Header';
 import Hero from '@/components/Hero';
 import GamesSection from '@/components/GamesSection';
 import SubscriptionsSection from '@/components/SubscriptionsSection';
+import SteamTopup from '@/components/SteamTopup';
 import FeaturesSection from '@/components/FeaturesSection';
 import Footer from '@/components/Footer';
 import GameForm from '@/components/GameForm';
-
-interface Game {
-  id: number;
-  title: string;
-  platform: string;
-  price: number;
-  description: string;
-  image_url: string;
-  category: string;
-  rating: number;
-  release_year: number;
-}
+import { initialGames, type Game } from '@/data/games';
 
 interface Subscription {
   id: number;
@@ -32,37 +22,10 @@ interface Subscription {
 
 interface CartItem {
   id: string;
-  type: 'game' | 'subscription';
-  item: Game | Subscription;
+  type: 'game' | 'subscription' | 'steam-topup';
+  item: Game | Subscription | { id: number; price: number; title: string };
   quantity: number;
 }
-
-const initialGames: Game[] = [
-  { id: 1, title: 'Starfield', platform: 'Xbox', price: 2999, description: 'Космическая RPG от Bethesda', image_url: 'https://cdn.cloudflare.steamstatic.com/steam/apps/1716740/header.jpg', category: 'RPG', rating: 8.5, release_year: 2023 },
-  { id: 2, title: 'Spider-Man 2', platform: 'PlayStation', price: 3499, description: 'Продолжение приключений Человека-паука', image_url: 'https://image.api.playstation.com/vulcan/ap/rnd/202306/1219/1c7b75d8ed9271516546560d219ad0b22ee0a263b4537bd8.png', category: 'Action', rating: 9.2, release_year: 2023 },
-  { id: 3, title: 'Forza Horizon 5', platform: 'Xbox', price: 2499, description: 'Лучший гоночный симулятор', image_url: 'https://cdn.cloudflare.steamstatic.com/steam/apps/1551360/header.jpg', category: 'Racing', rating: 9.0, release_year: 2021 },
-  { id: 4, title: 'God of War Ragnarök', platform: 'PlayStation', price: 3999, description: 'Эпическое приключение Кратоса', image_url: 'https://image.api.playstation.com/vulcan/ap/rnd/202207/1210/4xJ8XB3bi888QTLZYdl7Oi0A.png', category: 'Action', rating: 9.5, release_year: 2022 },
-  { id: 5, title: 'Halo Infinite', platform: 'Xbox', price: 1999, description: 'Культовый шутер от 343 Industries', image_url: 'https://cdn.cloudflare.steamstatic.com/steam/apps/1240440/header.jpg', category: 'Shooter', rating: 8.0, release_year: 2021 },
-  { id: 6, title: 'The Last of Us Part II', platform: 'PlayStation', price: 2999, description: 'Постапокалиптический экшен', image_url: 'https://image.api.playstation.com/vulcan/img/rnd/202010/2618/Y02ljdBodKFBiziorYgqftLE.png', category: 'Action', rating: 9.3, release_year: 2020 },
-  { id: 7, title: 'Cyberpunk 2077', platform: 'Both', price: 2799, description: 'Футуристическая RPG в Найт-Сити', image_url: 'https://cdn.cloudflare.steamstatic.com/steam/apps/1091500/header.jpg', category: 'RPG', rating: 8.7, release_year: 2020 },
-  { id: 8, title: 'Hogwarts Legacy', platform: 'Both', price: 3299, description: 'Магический мир Гарри Поттера', image_url: 'https://cdn.cloudflare.steamstatic.com/steam/apps/990080/header.jpg', category: 'RPG', rating: 8.8, release_year: 2023 },
-  { id: 9, title: 'Elden Ring', platform: 'Both', price: 3799, description: 'Темное фэнтези от FromSoftware', image_url: 'https://cdn.cloudflare.steamstatic.com/steam/apps/1245620/header.jpg', category: 'RPG', rating: 9.7, release_year: 2022 },
-  { id: 10, title: 'Resident Evil 4', platform: 'Both', price: 3299, description: 'Ремейк легендарного хоррора', image_url: 'https://cdn.cloudflare.steamstatic.com/steam/apps/2050650/header.jpg', category: 'Horror', rating: 9.4, release_year: 2023 },
-  { id: 11, title: 'Gears 5', platform: 'Xbox', price: 1999, description: 'Шутер третьего лица', image_url: 'https://cdn.cloudflare.steamstatic.com/steam/apps/1097840/header.jpg', category: 'Shooter', rating: 8.3, release_year: 2019 },
-  { id: 12, title: 'Horizon Forbidden West', platform: 'PlayStation', price: 3999, description: 'Постапокалиптическое приключение', image_url: 'https://image.api.playstation.com/vulcan/ap/rnd/202107/3100/ki0STHGAkIF06Q4AU8Ow4OkN.png', category: 'Action', rating: 9.1, release_year: 2022 },
-  { id: 13, title: 'FIFA 24', platform: 'Both', price: 2999, description: 'Футбольный симулятор', image_url: 'https://cdn.cloudflare.steamstatic.com/steam/apps/2195250/header.jpg', category: 'Sports', rating: 7.8, release_year: 2023 },
-  { id: 14, title: 'Call of Duty: Modern Warfare III', platform: 'Both', price: 4299, description: 'Легендарный шутер возвращается', image_url: 'https://cdn.cloudflare.steamstatic.com/steam/apps/2519060/header.jpg', category: 'Shooter', rating: 8.2, release_year: 2023 },
-  { id: 15, title: 'Assassins Creed Mirage', platform: 'Both', price: 3199, description: 'Возвращение к истокам серии', image_url: 'https://cdn.cloudflare.steamstatic.com/steam/apps/2369980/header.jpg', category: 'Action', rating: 8.4, release_year: 2023 },
-  { id: 16, title: 'Alan Wake 2', platform: 'Both', price: 3499, description: 'Психологический хоррор', image_url: 'https://cdn.cloudflare.steamstatic.com/steam/apps/1811260/header.jpg', category: 'Horror', rating: 9.0, release_year: 2023 },
-  { id: 17, title: 'Sea of Thieves', platform: 'Xbox', price: 1799, description: 'Пиратские приключения', image_url: 'https://cdn.cloudflare.steamstatic.com/steam/apps/1172620/header.jpg', category: 'Adventure', rating: 8.5, release_year: 2018 },
-  { id: 18, title: 'Ratchet & Clank: Rift Apart', platform: 'PlayStation', price: 3699, description: 'Платформер-экшен', image_url: 'https://image.api.playstation.com/vulcan/ap/rnd/202101/2921/DwVvI8KdQLsVBqvV4LpMcAFH.png', category: 'Action', rating: 9.0, release_year: 2021 },
-  { id: 19, title: 'Baldurs Gate 3', platform: 'Both', price: 3999, description: 'Эпическая RPG по D&D', image_url: 'https://cdn.cloudflare.steamstatic.com/steam/apps/1086940/header.jpg', category: 'RPG', rating: 9.8, release_year: 2023 },
-  { id: 20, title: 'Lies of P', platform: 'Both', price: 2899, description: 'Soulslike по мотивам Пиноккио', image_url: 'https://cdn.cloudflare.steamstatic.com/steam/apps/1627720/header.jpg', category: 'Action', rating: 8.6, release_year: 2023 },
-  { id: 21, title: 'Gran Turismo 7', platform: 'PlayStation', price: 3499, description: 'Реалистичный гоночный симулятор', image_url: 'https://image.api.playstation.com/vulcan/ap/rnd/202110/2915/aYWv7MF5UvQ0aTB8ynwKRchL.png', category: 'Racing', rating: 8.7, release_year: 2022 },
-  { id: 22, title: 'Diablo IV', platform: 'Both', price: 3799, description: 'Возвращение легендарной ARPG', image_url: 'https://cdn.cloudflare.steamstatic.com/steam/apps/2344520/header.jpg', category: 'RPG', rating: 8.9, release_year: 2023 },
-  { id: 23, title: 'Dead Space Remake', platform: 'Both', price: 3199, description: 'Ремейк культового хоррора', image_url: 'https://cdn.cloudflare.steamstatic.com/steam/apps/1693980/header.jpg', category: 'Horror', rating: 9.2, release_year: 2023 },
-  { id: 24, title: 'Mortal Kombat 1', platform: 'Both', price: 3299, description: 'Легендарный файтинг', image_url: 'https://cdn.cloudflare.steamstatic.com/steam/apps/1971870/header.jpg', category: 'Fighting', rating: 8.5, release_year: 2023 }
-];
 
 const initialSubscriptions: Subscription[] = [
   { id: 1, name: 'Game Pass Ultimate', platform: 'Xbox', price: 599, duration: '1 месяц', description: 'Доступ к 100+ играм', features: ['Онлайн-мультиплеер', 'Игры EA Play', 'Cloud Gaming', 'Скидки до 20%'] },
@@ -79,6 +42,8 @@ export default function Index() {
   const [platformFilter, setPlatformFilter] = useState<string>('All');
   const [categoryFilter, setCategoryFilter] = useState<string>('All');
   const [searchQuery, setSearchQuery] = useState<string>('');
+  const [sortBy, setSortBy] = useState<string>('default');
+  const [priceRange, setPriceRange] = useState<[number, number]>([0, 10000]);
   const [cart, setCart] = useState<CartItem[]>([]);
   const [adminPassword, setAdminPassword] = useState<string>('');
   const [isAdminAuth, setIsAdminAuth] = useState<boolean>(false);
@@ -94,14 +59,28 @@ export default function Index() {
   }, [games]);
 
   const filteredGames = useMemo(() => {
-    return games.filter(g => {
+    const filtered = games.filter(g => {
       const matchesPlatform = platformFilter === 'All' || g.platform === platformFilter || g.platform === 'Both';
       const matchesCategory = categoryFilter === 'All' || g.category === categoryFilter;
       const matchesSearch = g.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
                            g.description.toLowerCase().includes(searchQuery.toLowerCase());
-      return matchesPlatform && matchesCategory && matchesSearch;
+      const matchesPrice = g.price >= priceRange[0] && g.price <= priceRange[1];
+      return matchesPlatform && matchesCategory && matchesSearch && matchesPrice;
     });
-  }, [games, platformFilter, categoryFilter, searchQuery]);
+
+    switch (sortBy) {
+      case 'price-asc':
+        return filtered.sort((a, b) => a.price - b.price);
+      case 'price-desc':
+        return filtered.sort((a, b) => b.price - a.price);
+      case 'rating':
+        return filtered.sort((a, b) => b.rating - a.rating);
+      case 'year':
+        return filtered.sort((a, b) => b.release_year - a.release_year);
+      default:
+        return filtered;
+    }
+  }, [games, platformFilter, categoryFilter, searchQuery, sortBy, priceRange]);
 
   const filteredSubs = useMemo(() => {
     return subscriptions.filter(s => 
@@ -208,6 +187,29 @@ export default function Index() {
     toast({ title: 'Подписка удалена', description: 'Подписка удалена из каталога' });
   };
 
+  const handleSteamTopup = (amount: number) => {
+    const topupItem = {
+      id: Date.now(),
+      title: `Пополнение Steam на ${amount - Math.ceil(amount * 0.02)}₽`,
+      price: amount
+    };
+    
+    setCart([...cart, { 
+      id: `steam-topup-${Date.now()}`, 
+      type: 'steam-topup' as const, 
+      item: topupItem, 
+      quantity: 1 
+    }]);
+    
+    setIsCartOpen(true);
+    
+    toast({ 
+      title: 'Пополнение добавлено в корзину', 
+      description: `Сумма к оплате: ${amount}₽`,
+      duration: 3000
+    });
+  };
+
   return (
     <div className="min-h-screen bg-background dark">
       <Header
@@ -248,6 +250,10 @@ export default function Index() {
         setCategoryFilter={setCategoryFilter}
         searchQuery={searchQuery}
         setSearchQuery={setSearchQuery}
+        sortBy={sortBy}
+        setSortBy={setSortBy}
+        priceRange={priceRange}
+        setPriceRange={setPriceRange}
         addToCart={addToCart}
       />
 
@@ -255,6 +261,8 @@ export default function Index() {
         filteredSubs={filteredSubs}
         addToCart={addToCart}
       />
+
+      <SteamTopup onTopup={handleSteamTopup} />
 
       <FeaturesSection />
 

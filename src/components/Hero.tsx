@@ -51,6 +51,10 @@ export default function Hero() {
               <Icon name="GamepadIcon" size={20} className="mr-2" />
               Каталог игр
             </Button>
+            <Button size="lg" variant="outline" className="border-[#66c0f4] text-[#66c0f4] hover:bg-[#66c0f4]/10" onClick={() => document.getElementById('steam-topup')?.scrollIntoView({ behavior: 'smooth' })}>
+              <Icon name="Wallet" size={20} className="mr-2" />
+              Пополнить Steam
+            </Button>
             <Button size="lg" variant="outline" className="border-neon-pink text-neon-pink hover:bg-neon-pink/10" onClick={() => document.getElementById('subscriptions')?.scrollIntoView({ behavior: 'smooth' })}>
               <Icon name="Star" size={20} className="mr-2" />
               Подписки

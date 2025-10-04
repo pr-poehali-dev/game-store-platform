@@ -29,6 +29,10 @@ interface GamesSectionProps {
   searchQuery: string;
   setSearchQuery: (query: string) => void;
   addToCart: (item: Game, type: 'game') => void;
+  sortBy: string;
+  setSortBy: (sort: string) => void;
+  priceRange: [number, number];
+  setPriceRange: (range: [number, number]) => void;
 }
 
 export default function GamesSection({
@@ -41,12 +45,21 @@ export default function GamesSection({
   searchQuery,
   setSearchQuery,
   addToCart,
+  sortBy,
+  setSortBy,
+  priceRange,
+  setPriceRange,
 }: GamesSectionProps) {
   return (
     <section id="games" className="py-16 bg-background">
       <div className="container mx-auto px-4">
-        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-8">
-          <h3 className="text-4xl font-bold">Каталог игр</h3>
+        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-6">
+          <div>
+            <h3 className="text-4xl font-bold">Каталог игр</h3>
+            <p className="text-muted-foreground mt-1">
+              {filteredGames.length} {filteredGames.length === 1 ? 'игра' : 'игр'} найдено
+            </p>
+          </div>
           <div className="flex flex-col md:flex-row gap-3 w-full md:w-auto">
             <Input 
               placeholder="Поиск игр..." 
@@ -62,6 +75,18 @@ export default function GamesSection({
                 {categories.map(cat => (
                   <SelectItem key={cat} value={cat}>{cat}</SelectItem>
                 ))}
+              </SelectContent>
+            </Select>
+            <Select value={sortBy} onValueChange={setSortBy}>
+              <SelectTrigger className="md:w-44">
+                <SelectValue placeholder="Сортировка" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="default">По умолчанию</SelectItem>
+                <SelectItem value="price-asc">Цена: по возрастанию</SelectItem>
+                <SelectItem value="price-desc">Цена: по убыванию</SelectItem>
+                <SelectItem value="rating">По рейтингу</SelectItem>
+                <SelectItem value="year">По году</SelectItem>
               </SelectContent>
             </Select>
           </div>
