@@ -8,6 +8,7 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import Icon from '@/components/ui/icon';
+import AdminPanel from '@/components/AdminPanel';
 
 interface CartItem {
   id: string;
@@ -39,9 +40,12 @@ interface HeaderProps {
   subscriptions: any[];
   editingGame: any;
   setEditingGame: (game: any) => void;
+  editingSubscription: any;
+  setEditingSubscription: (sub: any) => void;
   handleSaveGame: (game: any) => void;
   handleDeleteGame: (id: number) => void;
-  GameForm: React.ComponentType<any>;
+  handleSaveSubscription: (sub: any) => void;
+  handleDeleteSubscription: (id: number) => void;
 }
 
 export default function Header({
@@ -63,25 +67,24 @@ export default function Header({
   subscriptions,
   editingGame,
   setEditingGame,
+  editingSubscription,
+  setEditingSubscription,
   handleSaveGame,
   handleDeleteGame,
-  GameForm,
+  handleSaveSubscription,
+  handleDeleteSubscription,
 }: HeaderProps) {
   return (
     <header className="border-b border-border bg-card/80 backdrop-blur-md sticky top-0 z-50">
       <div className="container mx-auto px-4 py-3">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-4">
-            <img 
-              src="/img/7c012c19-01a6-4326-8859-ccbee27e9f29.jpg" 
-              alt="PixelVault Logo" 
-              className="w-12 h-12 rounded-lg glow-green"
-            />
+            <Icon name="Gamepad2" className="h-12 w-12 text-neon-green" />
             <div>
               <h1 className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-neon-green via-neon-pink to-neon-purple bg-clip-text text-transparent">
-                PIXELVAULT
+                GODSTOREGAME
               </h1>
-              <p className="text-xs text-muted-foreground hidden md:block">Твоё игровое хранилище</p>
+              <p className="text-xs text-muted-foreground hidden md:block">Божественный магазин игр</p>
             </div>
           </div>
           
@@ -217,80 +220,22 @@ export default function Header({
               </SheetContent>
             </Sheet>
 
-            <Dialog>
-              <DialogTrigger asChild>
-                <Button variant="ghost" size="sm" className="text-neon-purple">
-                  <Icon name="Settings" size={18} />
-                </Button>
-              </DialogTrigger>
-              <DialogContent className="bg-card border-border">
-                {!isAdminAuth ? (
-                  <>
-                    <DialogHeader>
-                      <DialogTitle>Вход в админ-панель</DialogTitle>
-                      <DialogDescription>Введите пароль для доступа</DialogDescription>
-                    </DialogHeader>
-                    <div className="space-y-4">
-                      <div>
-                        <Label>Пароль</Label>
-                        <Input 
-                          type="password" 
-                          value={adminPassword}
-                          onChange={(e) => setAdminPassword(e.target.value)}
-                          placeholder="pixelvault123"
-                        />
-                      </div>
-                      <Button onClick={handleAdminLogin} className="w-full bg-neon-green text-background hover:bg-neon-green/90">
-                        Войти
-                      </Button>
-                    </div>
-                  </>
-                ) : (
-                  <>
-                    <DialogHeader>
-                      <DialogTitle>Админ-панель</DialogTitle>
-                      <DialogDescription>Управление товарами</DialogDescription>
-                    </DialogHeader>
-                    <div className="space-y-4 max-h-[400px] overflow-y-auto">
-                      <Dialog>
-                        <DialogTrigger asChild>
-                          <Button className="w-full bg-neon-green text-background" onClick={() => setEditingGame(null)}>
-                            <Icon name="Plus" size={16} className="mr-2" />
-                            Добавить игру
-                          </Button>
-                        </DialogTrigger>
-                        <DialogContent className="bg-card">
-                          <GameForm game={editingGame} onSave={handleSaveGame} />
-                        </DialogContent>
-                      </Dialog>
-                      {games.map(game => (
-                        <Card key={game.id} className="bg-muted/50">
-                          <CardHeader className="pb-3">
-                            <CardTitle className="text-sm">{game.title}</CardTitle>
-                            <CardDescription>{game.platform} - {game.price}₽</CardDescription>
-                          </CardHeader>
-                          <CardFooter className="gap-2">
-                            <Dialog>
-                              <DialogTrigger asChild>
-                                <Button variant="outline" size="sm" onClick={() => setEditingGame(game)}>
-                                  <Icon name="Edit" size={14} />
-                                </Button>
-                              </DialogTrigger>
-                              <DialogContent className="bg-card">
-                                <GameForm game={game} onSave={handleSaveGame} />
-                              </DialogContent>
-                            </Dialog>
-                            <Button variant="destructive" size="sm" onClick={() => handleDeleteGame(game.id)}>
-                              <Icon name="Trash2" size={14} />
-                            </Button>
-                          </CardFooter>
-                        </Card>
-                      ))}
-                    </div>
-                  </>
-                )}
-              </DialogContent>
-            </Dialog>
+            <AdminPanel
+              adminPassword={adminPassword}
+              setAdminPassword={setAdminPassword}
+              isAdminAuth={isAdminAuth}
+              handleAdminLogin={handleAdminLogin}
+              games={games}
+              subscriptions={subscriptions}
+              editingGame={editingGame}
+              setEditingGame={setEditingGame}
+              editingSubscription={editingSubscription}
+              setEditingSubscription={setEditingSubscription}
+              handleSaveGame={handleSaveGame}
+              handleDeleteGame={handleDeleteGame}
+              handleSaveSubscription={handleSaveSubscription}
+              handleDeleteSubscription={handleDeleteSubscription}
+            />
           </nav>
         </div>
       </div>

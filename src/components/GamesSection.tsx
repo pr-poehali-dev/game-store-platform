@@ -5,6 +5,7 @@ import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import Icon from '@/components/ui/icon';
+import { motion } from 'framer-motion';
 
 interface Game {
   id: number;
@@ -82,10 +83,14 @@ export default function GamesSection({
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {filteredGames.map((game, idx) => (
-            <Card 
-              key={game.id} 
-              className="group overflow-hidden border-border bg-card hover:border-neon-green/50 transition-all duration-300 hover:glow-green animate-slide-up"
-              style={{ animationDelay: `${idx * 50}ms` }}
+            <motion.div
+              key={game.id}
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.5, delay: idx * 0.05 }}
+            >
+              <Card className="group overflow-hidden border-border bg-card hover:border-neon-green/50 transition-all duration-300 hover:glow-green h-full"
             >
               <div className="relative overflow-hidden aspect-video">
                 <img 
@@ -129,6 +134,7 @@ export default function GamesSection({
                 </Button>
               </CardFooter>
             </Card>
+            </motion.div>
           ))}
         </div>
 

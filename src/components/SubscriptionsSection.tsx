@@ -2,6 +2,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import Icon from '@/components/ui/icon';
+import { motion } from 'framer-motion';
 
 interface Subscription {
   id: number;
@@ -25,11 +26,14 @@ export default function SubscriptionsSection({ filteredSubs, addToCart }: Subscr
         <h3 className="text-4xl font-bold mb-8">Подписки</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredSubs.map((sub, idx) => (
-            <Card 
+            <motion.div
               key={sub.id}
-              className="border-border bg-card hover:border-neon-purple/50 transition-all duration-300 hover:glow-purple animate-slide-up"
-              style={{ animationDelay: `${idx * 100}ms` }}
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.5, delay: idx * 0.1 }}
             >
+            <Card className="border-border bg-card hover:border-neon-purple/50 transition-all duration-300 hover:glow-purple h-full">
               <CardHeader>
                 <div className="flex items-center justify-between mb-2">
                   <Badge className={sub.platform === 'Xbox' ? 'bg-xbox text-white' : 'bg-playstation text-white'}>
@@ -61,6 +65,7 @@ export default function SubscriptionsSection({ filteredSubs, addToCart }: Subscr
                 </Button>
               </CardFooter>
             </Card>
+            </motion.div>
           ))}
         </div>
       </div>
