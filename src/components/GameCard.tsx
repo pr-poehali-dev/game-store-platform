@@ -26,7 +26,7 @@ export default function GameCard({ game, onBuy, isFavorite, onToggleFavorite, on
       onClick={() => onView(game)}
       className="cursor-pointer"
     >
-      <Card className="h-full bg-card/50 backdrop-blur-sm border-border hover:border-neon-purple/50 transition-all duration-300 overflow-hidden group">
+      <Card className="h-full bg-gradient-to-br from-card/60 via-card/50 to-card/40 backdrop-blur-md border-border hover:border-neon-purple/60 hover:shadow-lg hover:shadow-neon-purple/20 transition-all duration-300 overflow-hidden group">
         <div className="relative overflow-hidden">
           <img 
             src={game.image_url} 
@@ -64,13 +64,13 @@ export default function GameCard({ game, onBuy, isFavorite, onToggleFavorite, on
           </Button>
 
           <div className="absolute bottom-2 left-2 right-2 flex items-center justify-between opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-            <div className="flex items-center gap-1 bg-background/90 backdrop-blur-sm px-2 py-1 rounded-md">
-              <Icon name="Star" size={14} className="text-yellow-500" />
-              <span className="text-xs font-semibold">{game.rating}/10</span>
+            <div className="flex items-center gap-1 bg-background/95 backdrop-blur-md px-2.5 py-1 rounded-lg shadow-lg">
+              <Icon name="Star" size={14} className="text-yellow-400" />
+              <span className="text-xs font-bold">{game.rating}/10</span>
             </div>
-            <div className="flex items-center gap-1 bg-background/90 backdrop-blur-sm px-2 py-1 rounded-md">
-              <Icon name="Calendar" size={14} className="text-muted-foreground" />
-              <span className="text-xs">{game.release_year}</span>
+            <div className="flex items-center gap-1 bg-background/95 backdrop-blur-md px-2.5 py-1 rounded-lg shadow-lg">
+              <Icon name="Calendar" size={14} className="text-neon-purple" />
+              <span className="text-xs font-semibold">{game.release_year}</span>
             </div>
           </div>
         </div>
@@ -85,6 +85,16 @@ export default function GameCard({ game, onBuy, isFavorite, onToggleFavorite, on
           <CardDescription className="line-clamp-2 text-sm">
             {game.description}
           </CardDescription>
+          <div className="flex flex-col gap-0.5 mt-2 text-xs text-muted-foreground">
+            <div className="flex items-center gap-1.5">
+              <Icon name="Code" size={12} />
+              <span className="truncate">{game.developer}</span>
+            </div>
+            <div className="flex items-center gap-1.5">
+              <Icon name="Building2" size={12} />
+              <span className="truncate">{game.publisher}</span>
+            </div>
+          </div>
         </CardHeader>
 
         <CardContent className="pb-3">

@@ -172,10 +172,16 @@ export default function UserProfile() {
             </h1>
             <p className="text-muted-foreground mt-1">Управление профилем и покупками</p>
           </div>
-          <Button variant="outline" onClick={loadUserProfile}>
-            <Icon name="RefreshCw" size={16} className="mr-2" />
-            Обновить
-          </Button>
+          <div className="flex gap-2">
+            <Button variant="outline" onClick={() => window.location.href = '/'}>
+              <Icon name="Home" size={16} className="mr-2" />
+              На главную
+            </Button>
+            <Button variant="outline" onClick={loadUserProfile}>
+              <Icon name="RefreshCw" size={16} className="mr-2" />
+              Обновить
+            </Button>
+          </div>
         </div>
 
         <div className="grid gap-6 md:grid-cols-4 mb-8">

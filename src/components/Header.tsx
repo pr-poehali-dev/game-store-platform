@@ -283,22 +283,30 @@ export default function Header({
               </SheetContent>
             </Sheet>
 
-            <AdminPanel
-              adminPassword={adminPassword}
-              setAdminPassword={setAdminPassword}
-              isAdminAuth={isAdminAuth}
-              handleAdminLogin={handleAdminLogin}
-              games={games}
-              subscriptions={subscriptions}
-              editingGame={editingGame}
-              setEditingGame={setEditingGame}
-              editingSubscription={editingSubscription}
-              setEditingSubscription={setEditingSubscription}
-              handleSaveGame={handleSaveGame}
-              handleDeleteGame={handleDeleteGame}
-              handleSaveSubscription={handleSaveSubscription}
-              handleDeleteSubscription={handleDeleteSubscription}
-            />
+            <div className="flex items-center gap-2">
+              <a href="/manager">
+                <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-neon-purple">
+                  <Icon name="Users" size={18} />
+                </Button>
+              </a>
+              
+              <AdminPanel
+                adminPassword={adminPassword}
+                setAdminPassword={setAdminPassword}
+                isAdminAuth={isAdminAuth}
+                handleAdminLogin={handleAdminLogin}
+                games={games}
+                subscriptions={subscriptions}
+                editingGame={editingGame}
+                setEditingGame={setEditingGame}
+                editingSubscription={editingSubscription}
+                setEditingSubscription={setEditingSubscription}
+                handleSaveGame={handleSaveGame}
+                handleDeleteGame={handleDeleteGame}
+                handleSaveSubscription={handleSaveSubscription}
+                handleDeleteSubscription={handleDeleteSubscription}
+              />
+            </div>
           </nav>
         </div>
       </div>

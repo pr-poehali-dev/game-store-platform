@@ -5,11 +5,11 @@ import { motion } from 'framer-motion';
 
 export default function Hero() {
   return (
-    <section className="relative overflow-hidden py-32 bg-gradient-to-br from-background via-neon-purple/5 to-neon-pink/5">
+    <section className="relative overflow-hidden py-32 bg-gradient-to-br from-background via-neon-purple/10 to-neon-pink/10">
       <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAxMCAwIEwgMCAwIDAgMTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiYSgyNTUsMjU1LDI1NSwwLjAzKSIgc3Ryb2tlLXdpZHRoPSIxIi8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyaWQpIi8+PC9zdmc+')] opacity-20"></div>
-      <div className="absolute top-20 left-10 w-80 h-80 bg-neon-purple/20 rounded-full blur-3xl animate-pulse"></div>
-      <div className="absolute bottom-20 right-10 w-96 h-96 bg-neon-pink/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-neon-green/10 rounded-full blur-3xl animate-pulse delay-2000"></div>
+      <div className="absolute top-20 left-10 w-80 h-80 bg-neon-purple/30 rounded-full blur-3xl animate-pulse"></div>
+      <div className="absolute bottom-20 right-10 w-96 h-96 bg-neon-pink/30 rounded-full blur-3xl animate-pulse delay-1000"></div>
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-neon-green/20 rounded-full blur-3xl animate-pulse delay-2000"></div>
       <div className="container mx-auto px-4 relative z-10">
         <motion.div 
           className="text-center max-w-4xl mx-auto space-y-6"
@@ -29,7 +29,7 @@ export default function Hero() {
                 <Icon name="Gamepad2" className="h-12 w-12 text-background" />
               </div>
             </div>
-            <Badge className="bg-neon-purple/20 text-neon-purple border-neon-purple px-4 py-2 text-sm animate-pulse-glow">
+            <Badge className="bg-gradient-to-r from-neon-purple/20 to-neon-pink/20 text-white border-neon-purple/40 px-4 py-2 text-sm font-semibold shadow-lg shadow-neon-purple/30 animate-pulse-glow">
               🎮 Лучшие цены на игры и подписки
             </Badge>
           </motion.div>
