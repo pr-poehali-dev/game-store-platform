@@ -1,0 +1,41 @@
+{
+  "tests": [
+    {
+      "name": "Get active promo codes",
+      "method": "GET",
+      "path": "/",
+      "expectedStatus": 200
+    },
+    {
+      "name": "Validate new promo code",
+      "method": "POST",
+      "path": "/",
+      "body": {
+        "code": "GAME20",
+        "userIdentifier": "test-new-user-{{timestamp}}",
+        "purchaseAmount": 1000
+      },
+      "expectedStatus": 200,
+      "expectedBody": {
+        "success": true,
+        "discount": 20
+      },
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "Reject invalid promo code",
+      "method": "POST",
+      "path": "/",
+      "body": {
+        "code": "INVALID",
+        "userIdentifier": "test-user-456",
+        "purchaseAmount": 1000
+      },
+      "expectedStatus": 404,
+      "expectedBody": {
+        "error": "string"
+      },
+      "bodyMatcher": "partial"
+    }
+  ]
+}

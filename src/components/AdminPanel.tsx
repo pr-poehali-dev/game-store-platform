@@ -9,6 +9,7 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import Icon from '@/components/ui/icon';
 import GameForm from '@/components/GameForm';
 import SubscriptionForm from '@/components/SubscriptionForm';
+import PromoCodesManager from '@/components/PromoCodesManager';
 
 interface Game {
   id: number;
@@ -105,7 +106,7 @@ export default function AdminPanel({
             </DialogHeader>
             
             <Tabs defaultValue="games" className="w-full">
-              <TabsList className="grid w-full grid-cols-3">
+              <TabsList className="grid w-full grid-cols-4">
                 <TabsTrigger value="games">
                   <Icon name="Gamepad2" size={16} className="mr-2" />
                   Игры ({games.length})
@@ -113,6 +114,10 @@ export default function AdminPanel({
                 <TabsTrigger value="subscriptions">
                   <Icon name="Star" size={16} className="mr-2" />
                   Подписки ({subscriptions.length})
+                </TabsTrigger>
+                <TabsTrigger value="promo">
+                  <Icon name="Tag" size={16} className="mr-2" />
+                  Промокоды
                 </TabsTrigger>
                 <TabsTrigger value="stats">
                   <Icon name="BarChart3" size={16} className="mr-2" />
@@ -254,6 +259,10 @@ export default function AdminPanel({
                     ))}
                   </div>
                 </ScrollArea>
+              </TabsContent>
+
+              <TabsContent value="promo" className="space-y-4">
+                <PromoCodesManager />
               </TabsContent>
 
               <TabsContent value="stats" className="space-y-4">

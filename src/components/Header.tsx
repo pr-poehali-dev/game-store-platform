@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
@@ -9,6 +10,7 @@ import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from '@/comp
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import Icon from '@/components/ui/icon';
 import AdminPanel from '@/components/AdminPanel';
+import PromoCodeInput from '@/components/PromoCodeInput';
 
 interface CartItem {
   id: string;
@@ -74,6 +76,16 @@ export default function Header({
   handleSaveSubscription,
   handleDeleteSubscription,
 }: HeaderProps) {
+  const [promoDiscount, setPromoDiscount] = useState(0);
+  const [appliedPromoCode, setAppliedPromoCode] = useState('');
+
+  const handlePromoApplied = (discount: number, code: string) => {
+    setPromoDiscount(discount);
+    setAppliedPromoCode(code);
+  };
+
+  const discountedTotal = Math.round(cartTotal * (1 - promoDiscount / 100));
+
   return (
     <header className="border-b border-border bg-card/80 backdrop-blur-md sticky top-0 z-50">
       <div className="container mx-auto px-4 py-3">
@@ -170,10 +182,29 @@ export default function Header({
                   )}
                 </ScrollArea>
                 {cart.length > 0 && (
-                  <div className="absolute bottom-0 left-0 right-0 p-6 bg-card border-t border-border">
+                  <div className="absolute bottom-0 left-0 right-0 p-6 bg-card border-t border-border space-y-4">
+                    <PromoCodeInput
+                      purchaseAmount={cartTotal}
+                      onPromoApplied={handlePromoApplied}
+                      userIdentifier={`user-${Date.now()}`}
+                    />
+                    
+                    {promoDiscount > 0 && (
+                      <div className="space-y-2 text-sm">
+                        <div className="flex items-center justify-between text-muted-foreground">
+                          <span>Сумма:</span>
+                          <span className="line-through">{cartTotal}₽</span>
+                        </div>
+                        <div className="flex items-center justify-between text-green-600 font-semibold">
+                          <span>Скидка ({appliedPromoCode}):</span>
+                          <span>-{Math.round(cartTotal * promoDiscount / 100)}₽</span>
+                        </div>
+                      </div>
+                    )}
+                    
                     <div className="flex items-center justify-between mb-4">
                       <span className="text-lg font-bold">Итого:</span>
-                      <span className="text-2xl font-bold text-neon-green">{cartTotal}₽</span>
+                      <span className="text-2xl font-bold text-neon-green">{discountedTotal}₽</span>
                     </div>
                     <Dialog open={isCheckoutOpen} onOpenChange={setIsCheckoutOpen}>
                       <DialogTrigger asChild>
@@ -236,7 +267,7 @@ export default function Header({
                         </div>
                         <DialogFooter>
                           <Button onClick={handleCheckout} className="w-full bg-neon-green text-background hover:bg-neon-green/90">
-                            Оплатить {cartTotal}₽
+                            Оплатить {discountedTotal}₽
                           </Button>
                         </DialogFooter>
                       </DialogContent>
