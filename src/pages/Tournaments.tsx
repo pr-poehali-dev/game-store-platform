@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import Icon from '@/components/ui/icon';
 import { useToast } from '@/hooks/use-toast';
+import DiscordNotificationForm from '@/components/DiscordNotificationForm';
 
 interface Tournament {
   id: number;
@@ -87,11 +88,14 @@ const mockTournaments: Tournament[] = [
 
 export default function Tournaments() {
   const [filter, setFilter] = useState<'all' | 'upcoming' | 'active' | 'finished'>('all');
+  const [selectedTournament, setSelectedTournament] = useState<Tournament | null>(null);
+  const [isFormOpen, setIsFormOpen] = useState(false);
+  const [tournaments, setTournaments] = useState(mockTournaments);
   const { toast } = useToast();
 
   const filteredTournaments = filter === 'all' 
-    ? mockTournaments 
-    : mockTournaments.filter(t => t.status === filter);
+    ? tournaments 
+    : tournaments.filter(t => t.status === filter);
 
   const handleRegister = (tournament: Tournament) => {
     if (tournament.participants >= tournament.maxParticipants) {
@@ -103,10 +107,18 @@ export default function Tournaments() {
       return;
     }
 
-    toast({
-      title: '✅ Регистрация успешна!',
-      description: `Вы зарегистрированы на "${tournament.title}"`,
-    });
+    setSelectedTournament(tournament);
+    setIsFormOpen(true);
+  };
+
+  const handleRegistrationSuccess = () => {
+    if (selectedTournament) {
+      setTournaments(prev => prev.map(t => 
+        t.id === selectedTournament.id 
+          ? { ...t, participants: t.participants + 1 }
+          : t
+      ));
+    }
   };
 
   const getStatusBadge = (status: Tournament['status']) => {
@@ -299,6 +311,15 @@ export default function Tournaments() {
           </motion.div>
         )}
       </div>
+
+      {selectedTournament && (
+        <DiscordNotificationForm
+          isOpen={isFormOpen}
+          onClose={() => setIsFormOpen(false)}
+          tournament={selectedTournament}
+          onSuccess={handleRegistrationSuccess}
+        />
+      )}
     </div>
   );
 }

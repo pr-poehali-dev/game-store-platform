@@ -1,0 +1,46 @@
+{
+  "tests": [
+    {
+      "name": "Test tournament registration notification",
+      "method": "POST",
+      "body": {
+        "type": "registration",
+        "tournamentTitle": "FIFA 24 Championship",
+        "tournamentId": 1,
+        "userName": "Player123",
+        "userDiscord": "player123#1234",
+        "prizePool": 50000,
+        "participants": 146,
+        "maxParticipants": 256
+      },
+      "expectedStatus": 200,
+      "expectedBody": {
+        "success": true
+      },
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "Test tournament start notification",
+      "method": "POST",
+      "body": {
+        "type": "start",
+        "tournamentTitle": "Call of Duty Warzone Battle",
+        "tournamentId": 2,
+        "prizePool": 100000,
+        "startDate": "2025-10-08",
+        "participants": 64,
+        "maxParticipants": 128
+      },
+      "expectedStatus": 200,
+      "expectedBody": {
+        "success": true
+      },
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "Test OPTIONS request (CORS)",
+      "method": "OPTIONS",
+      "expectedStatus": 200
+    }
+  ]
+}

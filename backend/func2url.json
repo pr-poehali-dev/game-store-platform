@@ -1,4 +1,5 @@
 {
+  "discord-notify": "https://functions.poehali.dev/2f7a0e0c-3268-47c6-8611-ce21fd7b80be",
   "tournaments": "https://functions.poehali.dev/44d0df50-6503-4edb-a8b4-a3fdcb5b8f26",
   "lootbox": "https://functions.poehali.dev/a3bb1dad-0650-4df9-a95d-5104678c176e",
   "game-enrichment": "https://functions.poehali.dev/a1284e02-5be4-41c1-b779-41a8d0479adc",
