@@ -64,7 +64,7 @@ export default function MainTabs({
   onAddToCart
 }: MainTabsProps) {
   return (
-    <section className="py-8 bg-background">
+    <section className="py-8 bg-background" data-section="catalog">
       <div className="container mx-auto px-4">
         <Tabs value={activeTab} onValueChange={onTabChange} className="w-full">
           <TabsList className="grid w-full max-w-md mx-auto grid-cols-2 mb-8 bg-muted h-12">

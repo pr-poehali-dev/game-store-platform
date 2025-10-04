@@ -199,7 +199,7 @@ const LootboxSection = () => {
   }
   
   return (
-    <div className="space-y-6">
+    <div className="space-y-6" data-section="lootbox">
       {/* Lootboxes Grid */}
       <Card className="border-neon-purple/30 bg-card/50 backdrop-blur-sm">
         <CardHeader>

@@ -85,7 +85,7 @@ export default function Leaderboard() {
   };
 
   return (
-    <div className="container mx-auto px-4 py-12">
+    <div className="container mx-auto px-4 py-12" data-section="leaderboard">
       <div className="mb-8">
         <h2 className="text-4xl font-bold bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent mb-2">
           🏆 Таблица лидеров

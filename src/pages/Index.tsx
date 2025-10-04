@@ -10,6 +10,9 @@ import AIRecommendations from '@/components/AIRecommendations';
 import GamingNews from '@/components/GamingNews';
 import BonusClickerGame from '@/components/BonusClickerGame';
 import Leaderboard from '@/components/Leaderboard';
+import QuickAccessPanel from '@/components/QuickAccessPanel';
+import NotificationSystem from '@/components/NotificationSystem';
+import VoiceSearch from '@/components/VoiceSearch';
 import SteamTopup from '@/components/SteamTopup';
 import AccountsSection from '@/components/AccountsSection';
 import PSNCards from '@/components/PSNCards';
@@ -89,10 +92,14 @@ export default function Index() {
 
   return (
     <div className="min-h-screen bg-background dark">
-      <div className="fixed bottom-4 left-4 z-30 flex gap-3">
+      <QuickAccessPanel />
+      <NotificationSystem />
+      <VoiceSearch />
+      
+      <div className="fixed bottom-20 right-4 z-30 flex flex-col gap-3">
         <Button
           onClick={() => setShowComparison(true)}
-          className="bg-gradient-to-r from-accent to-primary shadow-lg"
+          className="bg-gradient-to-r from-accent to-primary shadow-lg hover:scale-105 transition-transform"
           size="lg"
         >
           <Icon name="Scale" size={20} className="mr-2" />
@@ -100,7 +107,7 @@ export default function Index() {
         </Button>
         <Button
           onClick={() => setShowWheel(true)}
-          className="bg-gradient-to-r from-orange-500 to-red-500 shadow-lg animate-pulse"
+          className="bg-gradient-to-r from-orange-500 to-red-500 shadow-lg animate-pulse hover:scale-105 transition-transform"
           size="lg"
         >
           <Icon name="CircleDot" size={20} className="mr-2" />
