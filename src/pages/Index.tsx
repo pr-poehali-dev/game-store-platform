@@ -14,8 +14,6 @@ import QuickAccessPanel from '@/components/QuickAccessPanel';
 import NotificationSystem from '@/components/NotificationSystem';
 import VoiceSearch from '@/components/VoiceSearch';
 import SteamTopup from '@/components/SteamTopup';
-import AccountsSection from '@/components/AccountsSection';
-import PSNCards from '@/components/PSNCards';
 import RobloxStore from '@/components/RobloxStore';
 import GamerSocialNetwork from '@/components/GamerSocialNetwork';
 import CurrencyRegionSelector from '@/components/CurrencyRegionSelector';
