@@ -1,0 +1,25 @@
+{
+  "tests": [
+    {
+      "name": "Get demo user profile",
+      "method": "GET",
+      "path": "/?email=demo@godstore.game",
+      "expectedStatus": 200
+    },
+    {
+      "name": "Toggle subscription auto-renew",
+      "method": "POST",
+      "path": "/",
+      "body": {
+        "action": "toggle_auto_renew",
+        "email": "demo@godstore.game",
+        "subscription_id": 1
+      },
+      "expectedStatus": 200,
+      "expectedBody": {
+        "success": true
+      },
+      "bodyMatcher": "partial"
+    }
+  ]
+}

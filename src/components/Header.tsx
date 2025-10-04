@@ -113,6 +113,12 @@ export default function Header({
               Подписки
             </a>
             
+            <a href="/profile">
+              <Button variant="ghost" size="sm" className="text-neon-purple hover:text-neon-purple/80">
+                <Icon name="User" size={18} />
+              </Button>
+            </a>
+            
             <Sheet open={isCartOpen} onOpenChange={setIsCartOpen}>
               <SheetTrigger asChild>
                 <Button variant="outline" size="sm" className="relative border-neon-green text-neon-green hover:bg-neon-green/10">
