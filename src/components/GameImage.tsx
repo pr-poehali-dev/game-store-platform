@@ -8,11 +8,8 @@ interface GameImageProps {
 }
 
 export default function GameImage({ title, fallbackUrl, alt, className }: GameImageProps) {
-  // Пытаемся получить обложку из нашей базы
   const coverUrl = gameCovers[title];
-  
-  // Если есть - используем, если нет - fallback или заглушка
-  const finalUrl = coverUrl || fallbackUrl || 'https://via.placeholder.com/400x600/1a1a2e/eee?text=' + encodeURIComponent(title);
+  const finalUrl = fallbackUrl || coverUrl || '/img/game-placeholder.jpg';
 
   return (
     <img
@@ -20,10 +17,6 @@ export default function GameImage({ title, fallbackUrl, alt, className }: GameIm
       alt={alt || title}
       className={className}
       loading="lazy"
-      onError={(e) => {
-        // Если изображение не загрузилось, показываем заглушку
-        (e.target as HTMLImageElement).src = 'https://via.placeholder.com/400x600/1a1a2e/eee?text=' + encodeURIComponent(title);
-      }}
     />
   );
 }
