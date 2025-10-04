@@ -10,6 +10,7 @@ import Icon from '@/components/ui/icon';
 import GameForm from '@/components/GameForm';
 import SubscriptionForm from '@/components/SubscriptionForm';
 import PromoCodesManager from '@/components/PromoCodesManager';
+import QuickReplies from '@/components/QuickReplies';
 
 interface Game {
   id: number;
@@ -106,7 +107,7 @@ export default function AdminPanel({
             </DialogHeader>
             
             <Tabs defaultValue="games" className="w-full">
-              <TabsList className="grid w-full grid-cols-4">
+              <TabsList className="grid w-full grid-cols-5">
                 <TabsTrigger value="games">
                   <Icon name="Gamepad2" size={16} className="mr-2" />
                   Игры ({games.length})
@@ -118,6 +119,10 @@ export default function AdminPanel({
                 <TabsTrigger value="promo">
                   <Icon name="Tag" size={16} className="mr-2" />
                   Промокоды
+                </TabsTrigger>
+                <TabsTrigger value="replies">
+                  <Icon name="MessageSquare" size={16} className="mr-2" />
+                  Ответы
                 </TabsTrigger>
                 <TabsTrigger value="stats">
                   <Icon name="BarChart3" size={16} className="mr-2" />
@@ -263,6 +268,10 @@ export default function AdminPanel({
 
               <TabsContent value="promo" className="space-y-4">
                 <PromoCodesManager />
+              </TabsContent>
+
+              <TabsContent value="replies" className="space-y-4">
+                <QuickReplies />
               </TabsContent>
 
               <TabsContent value="stats" className="space-y-4">

@@ -38,9 +38,9 @@ export default function Footer() {
           <div>
             <h4 className="font-semibold mb-4 text-neon-pink">Связь с нами</h4>
             <div className="flex flex-col gap-3">
-              <a href="mailto:support@godstore.game" className="flex items-center gap-2 text-sm text-muted-foreground hover:text-neon-pink transition-colors">
+              <a href="mailto:godstoregame@yandex.ru" className="flex items-center gap-2 text-sm text-muted-foreground hover:text-neon-pink transition-colors">
                 <Icon name="Mail" size={16} />
-                support@godstore.game
+                godstoregame@yandex.ru
               </a>
               <a href="https://t.me/GodStoreGame" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-sm text-muted-foreground hover:text-[#0088cc] transition-colors">
                 <Icon name="Send" size={16} />

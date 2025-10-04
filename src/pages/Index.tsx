@@ -37,12 +37,31 @@ interface CartItem {
 }
 
 const initialSubscriptions: Subscription[] = [
-  { id: 1, name: 'Game Pass Ultimate', platform: 'Xbox', price: 599, duration: '1 месяц', description: 'Доступ к 100+ играм', features: ['Онлайн-мультиплеер', 'Игры EA Play', 'Cloud Gaming', 'Скидки до 20%'] },
-  { id: 2, name: 'Game Pass Ultimate', platform: 'Xbox', price: 1699, duration: '3 месяца', description: 'Доступ к 100+ играм на 3 месяца', features: ['Онлайн-мультиплеер', 'Игры EA Play', 'Cloud Gaming', 'Скидки до 20%'] },
-  { id: 3, name: 'PlayStation Plus Extra', platform: 'PlayStation', price: 699, duration: '1 месяц', description: 'Коллекция из 400+ игр', features: ['Онлайн-мультиплеер', 'Ежемесячные игры', 'Каталог классики', 'Скидки'] },
-  { id: 4, name: 'PlayStation Plus Premium', platform: 'PlayStation', price: 899, duration: '1 месяц', description: 'Премиум доступ ко всем функциям', features: ['Онлайн-мультиплеер', '700+ игр', 'Классические игры', 'Облачный гейминг'] },
-  { id: 5, name: 'EA Play', platform: 'Xbox', price: 299, duration: '1 месяц', description: 'Игры от Electronic Arts', features: ['50+ игр EA', 'Ранний доступ', 'Скидки 10%'] },
-  { id: 6, name: 'PlayStation Plus Essential', platform: 'PlayStation', price: 499, duration: '1 месяц', description: 'Базовая подписка', features: ['Онлайн-мультиплеер', 'Ежемесячные игры', 'Облачные сохранения'] }
+  { id: 1, name: 'Xbox Game Pass Ultimate', platform: 'Xbox', price: 599, duration: '1 месяц', description: 'Полный доступ к играм Xbox и EA Play', features: ['100+ игр Xbox Game Pass', 'EA Play (50+ игр)', 'Cloud Gaming', 'Xbox Live Gold', 'Скидки до 20%'] },
+  { id: 2, name: 'Xbox Game Pass Ultimate', platform: 'Xbox', price: 1699, duration: '3 месяца', description: 'Ultimate подписка на 3 месяца', features: ['100+ игр Xbox Game Pass', 'EA Play', 'Cloud Gaming', 'Xbox Live Gold', 'Скидки до 20%'] },
+  { id: 3, name: 'Xbox Game Pass Core', platform: 'Xbox', price: 399, duration: '1 месяц', description: 'Базовая подписка для онлайн-игр', features: ['Онлайн-мультиплеер', '25 игр в каталоге', 'Скидки участникам', 'Облачные сохранения'] },
+  { id: 4, name: 'Xbox Game Pass для ПК', platform: 'Xbox', price: 449, duration: '1 месяц', description: 'Game Pass для PC-геймеров', features: ['100+ игр на ПК', 'Новинки в день релиза', 'EA Play', 'Скидки до 20%'] },
+  
+  { id: 5, name: 'PlayStation Plus Essential', platform: 'PlayStation', price: 499, duration: '1 месяц', description: 'Базовая подписка PlayStation', features: ['Онлайн-мультиплеер', '2 игры каждый месяц', 'Облачные сохранения', 'Эксклюзивные скидки'] },
+  { id: 6, name: 'PlayStation Plus Essential', platform: 'PlayStation', price: 1299, duration: '3 месяца', description: 'Essential на 3 месяца', features: ['Онлайн-мультиплеер', '2 игры каждый месяц', 'Облачные сохранения', 'Эксклюзивные скидки'] },
+  { id: 7, name: 'PlayStation Plus Essential', platform: 'PlayStation', price: 2499, duration: '12 месяцев', description: 'Essential на год (выгодно!)', features: ['Онлайн-мультиплеер', '24 игры за год', 'Облачные сохранения', 'Эксклюзивные скидки'] },
+  
+  { id: 8, name: 'PlayStation Plus Extra', platform: 'PlayStation', price: 899, duration: '1 месяц', description: 'Каталог из 400+ игр PlayStation', features: ['Все из Essential', '400+ игр каталога', 'Игры PS4 и PS5', 'Хиты Ubisoft+'] },
+  { id: 9, name: 'PlayStation Plus Extra', platform: 'PlayStation', price: 2499, duration: '3 месяца', description: 'Extra на 3 месяца', features: ['Все из Essential', '400+ игр каталога', 'Игры PS4 и PS5', 'Хиты Ubisoft+'] },
+  { id: 10, name: 'PlayStation Plus Extra', platform: 'PlayStation', price: 4999, duration: '12 месяцев', description: 'Extra на год', features: ['Все из Essential', '400+ игр каталога', 'Игры PS4 и PS5', 'Хиты Ubisoft+'] },
+  
+  { id: 11, name: 'PlayStation Plus Premium', platform: 'PlayStation', price: 1099, duration: '1 месяц', description: 'Максимальная подписка PlayStation', features: ['Все из Extra', '700+ игр с PS1/PS2/PS3', 'Облачный гейминг', 'Пробные версии на 2 часа', 'Классические хиты'] },
+  { id: 12, name: 'PlayStation Plus Premium', platform: 'PlayStation', price: 2999, duration: '3 месяца', description: 'Premium на 3 месяца', features: ['Все из Extra', '700+ игр с PS1/PS2/PS3', 'Облачный гейминг', 'Пробные версии', 'Классические хиты'] },
+  { id: 13, name: 'PlayStation Plus Premium', platform: 'PlayStation', price: 5999, duration: '12 месяцев', description: 'Premium на год (лучшее предложение!)', features: ['Все из Extra', '700+ игр всех поколений', 'Облачный гейминг', 'Пробные версии', 'Классика PS'] },
+  
+  { id: 14, name: 'EA Play', platform: 'Both', price: 299, duration: '1 месяц', description: 'Подписка на игры Electronic Arts', features: ['50+ игр EA (FIFA, Battlefield)', 'Ранний доступ к новинкам', 'Скидки 10% на покупки EA', 'Эксклюзивный контент'] },
+  { id: 15, name: 'EA Play', platform: 'Both', price: 849, duration: '3 месяца', description: 'EA Play на 3 месяца', features: ['50+ игр EA', 'Ранний доступ', 'Скидки 10%', 'Эксклюзивный контент'] },
+  { id: 16, name: 'EA Play Pro', platform: 'Both', price: 999, duration: '1 месяц', description: 'Премиум EA Play для хардкорных фанатов', features: ['Все игры EA в день релиза', 'Unlimited доступ', 'Все DLC и дополнения', 'Скидки 10%'] },
+  
+  { id: 17, name: 'Nintendo Switch Online', platform: 'Nintendo', price: 249, duration: '1 месяц', description: 'Онлайн-подписка для Nintendo Switch', features: ['Онлайн-мультиплеер', 'Классические NES/SNES игры', 'Облачные сохранения', 'Эксклюзивные предложения'] },
+  { id: 18, name: 'Nintendo Switch Online', platform: 'Nintendo', price: 1199, duration: '12 месяцев', description: 'Switch Online на год', features: ['Онлайн-мультиплеер', 'NES/SNES игры', 'Облачные сохранения', 'Эксклюзивные предложения'] },
+  { id: 19, name: 'Nintendo Switch Online + DLC', platform: 'Nintendo', price: 499, duration: '1 месяц', description: 'Расширенная подписка Switch', features: ['Все из базовой', 'Игры N64 и SEGA Genesis', 'DLC для Animal Crossing, Splatoon', 'Mario Kart 8 треки'] },
+  { id: 20, name: 'Nintendo Switch Online + DLC', platform: 'Nintendo', price: 3999, duration: '12 месяцев', description: 'Расширенная на год', features: ['Все из базовой', 'N64 и SEGA игры', 'DLC для топ-игр', 'Mario Kart 8 треки'] }
 ];
 
 export default function Index() {
