@@ -1,0 +1,2 @@
+INSERT INTO games (title, platform, price, description, image_url, category, rating, release_year) 
+VALUES ('Assassin''s Creed Mirage', 'PlayStation', 3499.00, 'Отправьтесь в Багдад IX века и испытайте историю Басима, хитрого уличного вора, который станет легендарным Мастером-Ассасином. Откройте для себя истоки Братства Ассасинов в золотой век Багдада.', '/img/a954a943-0611-4d7b-b6ad-a09583e9c189.jpg', 'Экшен', 4.7, 2023);

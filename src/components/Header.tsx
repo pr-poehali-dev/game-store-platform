@@ -101,7 +101,7 @@ export default function Header({
               <h1 className="text-xl md:text-2xl font-bold bg-gradient-to-r from-neon-green via-neon-pink to-neon-purple bg-clip-text text-transparent">
                 GodStoreGame
               </h1>
-              <p className="text-xs text-muted-foreground hidden md:block">Магазин игр премиум класса</p>
+              <p className="text-xs text-muted-foreground hidden md:block">Магазин консольных игр</p>
             </div>
           </div>
           

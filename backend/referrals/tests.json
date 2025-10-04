@@ -1,0 +1,26 @@
+{
+  "tests": [
+    {
+      "name": "Get referral stats",
+      "method": "GET",
+      "path": "/?user_id=1",
+      "expectedStatus": 200
+    },
+    {
+      "name": "Invite friend",
+      "method": "POST",
+      "path": "/",
+      "body": {
+        "user_id": 1,
+        "action": "invite",
+        "email": "newtest@example.com"
+      },
+      "expectedStatus": 200,
+      "expectedBody": {
+        "success": true,
+        "invite_link": "string"
+      },
+      "bodyMatcher": "partial"
+    }
+  ]
+}

@@ -7,6 +7,7 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import Icon from '@/components/ui/icon';
 import { useToast } from '@/hooks/use-toast';
+import ReferralProgram from '@/components/ReferralProgram';
 
 interface UserData {
   user: {
@@ -252,7 +253,7 @@ export default function UserProfile() {
         </Card>
 
         <Tabs defaultValue="orders" className="w-full">
-          <TabsList className="grid w-full grid-cols-3">
+          <TabsList className="grid w-full grid-cols-4">
             <TabsTrigger value="orders">
               <Icon name="ShoppingBag" size={16} className="mr-2" />
               История покупок
@@ -264,6 +265,10 @@ export default function UserProfile() {
             <TabsTrigger value="library">
               <Icon name="Library" size={16} className="mr-2" />
               Библиотека игр
+            </TabsTrigger>
+            <TabsTrigger value="referrals">
+              <Icon name="Users" size={16} className="mr-2" />
+              Рефералы
             </TabsTrigger>
           </TabsList>
 
@@ -423,6 +428,10 @@ export default function UserProfile() {
                 </div>
               )}
             </ScrollArea>
+          </TabsContent>
+
+          <TabsContent value="referrals" className="space-y-4">
+            <ReferralProgram userId={1} />
           </TabsContent>
         </Tabs>
       </div>
