@@ -15,29 +15,22 @@ interface Message {
 }
 
 const QUICK_REPLIES = [
-  { id: '1', text: '💰 Есть ли скидки?', icon: 'Tag' },
-  { id: '2', text: '🎮 Как купить игру?', icon: 'ShoppingCart' },
-  { id: '3', text: '🔄 Условия возврата?', icon: 'RefreshCw' },
-  { id: '4', text: '📦 Доставка ключей?', icon: 'Package' },
-  { id: '5', text: '⭐ Популярные игры?', icon: 'Star' },
-  { id: '6', text: '💳 Способы оплаты?', icon: 'CreditCard' },
+  { id: '1', text: '🎮 Посоветуй игру для PlayStation', icon: 'Gamepad2' },
+  { id: '2', text: '🎯 Посоветуй игру для Xbox', icon: 'Target' },
+  { id: '3', text: '💰 Какие игры со скидками?', icon: 'Tag' },
+  { id: '4', text: '🔥 Что сейчас популярно?', icon: 'TrendingUp' },
+  { id: '5', text: '⭐ Лучшие эксклюзивы PS5', icon: 'Star' },
+  { id: '6', text: '🎖️ Лучшие шутеры', icon: 'Crosshair' },
 ];
 
-const BOT_RESPONSES: Record<string, string> = {
-  '💰 Есть ли скидки?': 'Да! У нас постоянно действуют скидки до 70% на популярные игры. Также есть специальные предложения для подписчиков GodStore Plus. Смотрите раздел "Игры" с фильтром "Только со скидками" 🔥',
-  '🎮 Как купить игру?': 'Очень просто! 1) Выберите игру в каталоге 2) Нажмите "Купить сейчас" 3) Оплатите удобным способом 4) Получите ключ мгновенно на email! ⚡',
-  '🔄 Условия возврата?': 'Мы предлагаем возврат в течение 14 дней, если ключ не был активирован. Свяжитесь с нами по email: support@godstore.game 📧',
-  '📦 Доставка ключей?': 'Все ключи доставляются моментально после оплаты на вашу электронную почту! Обычно это занимает 1-5 минут ⚡',
-  '⭐ Популярные игры?': 'Сейчас самые популярные: Cyberpunk 2077, Elden Ring, Hogwarts Legacy! Проверьте наш раздел с фильтром "Только хиты" 🔥',
-  '💳 Способы оплаты?': 'Принимаем: банковские карты 💳, СБП, электронные кошельки (ЮМoney, Qiwi), криптовалюту! Оплата полностью безопасна 🔒',
-};
+const GROK_API_URL = 'https://functions.poehali.dev/c25a9f0d-aae2-47db-ab57-9583c8539c3d';
 
 export default function ChatWidget() {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
     {
       id: '0',
-      text: 'Привет! 👋 Я AI-ассистент GodStore. Чем могу помочь?',
+      text: 'Привет! 👋 Я AI-консультант магазина консольных игр. Помогу выбрать игру для PlayStation или Xbox! Спрашивайте что угодно 🎮',
       sender: 'bot',
       timestamp: new Date(),
     },
@@ -53,7 +46,7 @@ export default function ChatWidget() {
     }
   }, [messages]);
 
-  const handleSendMessage = (text: string) => {
+  const handleSendMessage = async (text: string) => {
     if (!text.trim()) return;
 
     const userMessage: Message = {
@@ -68,20 +61,39 @@ export default function ChatWidget() {
     setIsTyping(true);
     setShowQuickReplies(false);
 
-    setTimeout(() => {
-      const botResponse = BOT_RESPONSES[text] || 
-        'Спасибо за вопрос! Наш менеджер скоро с вами свяжется. А пока можете посмотреть популярные игры в каталоге! 🎮';
+    try {
+      const response = await fetch(GROK_API_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          question: text,
+          game_title: ''
+        })
+      });
 
+      const data = await response.json();
+      
       const botMessage: Message = {
         id: (Date.now() + 1).toString(),
-        text: botResponse,
+        text: data.answer || 'Извините, произошла ошибка. Попробуйте позже.',
         sender: 'bot',
         timestamp: new Date(),
       };
 
       setMessages(prev => [...prev, botMessage]);
       setIsTyping(false);
-    }, 1000 + Math.random() * 1000);
+    } catch (error) {
+      const errorMessage: Message = {
+        id: (Date.now() + 1).toString(),
+        text: 'Не удалось получить ответ. Проверьте соединение с интернетом.',
+        sender: 'bot',
+        timestamp: new Date(),
+      };
+      setMessages(prev => [...prev, errorMessage]);
+      setIsTyping(false);
+    }
   };
 
   const handleBackToQuestions = () => {

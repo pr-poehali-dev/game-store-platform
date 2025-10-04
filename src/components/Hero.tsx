@@ -48,30 +48,38 @@ export default function Hero() {
             </span>
           </motion.h2>
           <motion.p 
-            className="text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto"
+            className="text-xl md:text-2xl text-foreground/90 max-w-2xl mx-auto font-semibold"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.5 }}
           >
-            Игры и подписки для PlayStation и Xbox. Покупка на ваш аккаунт или новый. Моментальная доставка.
+            72 консольных игры для PlayStation и Xbox 🎮
           </motion.p>
-          <motion.div
-            className="flex flex-wrap gap-2 justify-center text-sm text-muted-foreground mt-2"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
+          <motion.p 
+            className="text-base md:text-lg text-muted-foreground max-w-xl mx-auto"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
           >
-            <Badge variant="outline" className="border-blue-500/30 text-blue-400 bg-blue-500/5">
-              <Icon name="Globe" size={12} className="mr-1" />
-              PlayStation: Турция/Индия/Украина
+            Call of Duty • Battlefield • GTA • Spider-Man • God of War • Halo и многое другое
+          </motion.p>
+          <motion.div
+            className="flex flex-wrap gap-2 justify-center text-sm text-muted-foreground mt-4"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.7 }}
+          >
+            <Badge variant="outline" className="border-primary/30 text-primary bg-primary/5 px-3 py-1">
+              <Icon name="Zap" size={14} className="mr-1.5" />
+              Моментальная покупка
             </Badge>
-            <Badge variant="outline" className="border-neon-green/30 text-neon-green bg-neon-green/5">
-              <Icon name="TrendingDown" size={12} className="mr-1" />
-              Скидки до 90%
+            <Badge variant="outline" className="border-secondary/30 text-secondary bg-secondary/5 px-3 py-1">
+              <Icon name="TrendingDown" size={14} className="mr-1.5" />
+              Скидки до 80%
             </Badge>
-            <Badge variant="outline" className="border-neon-pink/30 text-neon-pink bg-neon-pink/5">
-              <Icon name="Zap" size={12} className="mr-1" />
-              Моментальная доставка
+            <Badge variant="outline" className="border-accent/30 text-accent bg-accent/5 px-3 py-1">
+              <Icon name="Globe" size={14} className="mr-1.5" />
+              Регионы: TR/IN/UA
             </Badge>
           </motion.div>
           <motion.div 

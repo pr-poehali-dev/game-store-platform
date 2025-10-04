@@ -1,0 +1,31 @@
+{
+  "tests": [
+    {
+      "name": "Ask about game",
+      "method": "POST",
+      "path": "/",
+      "body": {
+        "question": "Расскажи про эту игру",
+        "game_title": "Call of Duty Modern Warfare III"
+      },
+      "expectedStatus": 200,
+      "expectedBody": {
+        "answer": "string",
+        "game_title": "Call of Duty Modern Warfare III"
+      }
+    },
+    {
+      "name": "General question",
+      "method": "POST",
+      "path": "/",
+      "body": {
+        "question": "Какую игру выбрать для Xbox?"
+      },
+      "expectedStatus": 200,
+      "expectedBody": {
+        "answer": "string"
+      },
+      "bodyMatcher": "partial"
+    }
+  ]
+}
