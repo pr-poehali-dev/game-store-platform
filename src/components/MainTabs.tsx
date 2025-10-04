@@ -64,16 +64,16 @@ export default function MainTabs({
   onAddToCart
 }: MainTabsProps) {
   return (
-    <section className="py-8 bg-background" data-section="catalog">
-      <div className="container mx-auto px-4">
+    <section className="py-4 sm:py-6 md:py-8 bg-background" data-section="catalog">
+      <div className="container mx-auto px-2 sm:px-4">
         <Tabs value={activeTab} onValueChange={onTabChange} className="w-full">
-          <TabsList className="grid w-full max-w-md mx-auto grid-cols-2 mb-8 bg-muted h-12">
-            <TabsTrigger value="games" className="text-base data-[state=active]:bg-gradient-to-r data-[state=active]:from-neon-green data-[state=active]:to-neon-purple data-[state=active]:text-background">
-              <Icon name="Gamepad2" size={18} className="mr-2" />
+          <TabsList className="grid w-full max-w-md mx-auto grid-cols-2 mb-4 sm:mb-6 md:mb-8 bg-muted h-10 sm:h-12">
+            <TabsTrigger value="games" className="text-sm sm:text-base data-[state=active]:bg-gradient-to-r data-[state=active]:from-neon-green data-[state=active]:to-neon-purple data-[state=active]:text-background">
+              <Icon name="Gamepad2" size={16} className="mr-1 sm:mr-2 sm:w-[18px] sm:h-[18px]" />
               Игры
             </TabsTrigger>
-            <TabsTrigger value="subscriptions" className="text-base data-[state=active]:bg-gradient-to-r data-[state=active]:from-neon-pink data-[state=active]:to-neon-purple data-[state=active]:text-background">
-              <Icon name="Star" size={18} className="mr-2" />
+            <TabsTrigger value="subscriptions" className="text-sm sm:text-base data-[state=active]:bg-gradient-to-r data-[state=active]:from-neon-pink data-[state=active]:to-neon-purple data-[state=active]:text-background">
+              <Icon name="Star" size={16} className="mr-1 sm:mr-2 sm:w-[18px] sm:h-[18px]" />
               Подписки
             </TabsTrigger>
           </TabsList>

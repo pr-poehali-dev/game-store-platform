@@ -50,11 +50,12 @@ export default function GameCard({ game, onBuy, isFavorite, onToggleFavorite, on
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      whileHover={{ y: -8, scale: 1.02, transition: { duration: 0.3 } }}
+      whileHover={{ y: -4, scale: 1.01, transition: { duration: 0.2 } }}
+      whileTap={{ scale: 0.98 }}
       onClick={handleCardClick}
-      className="cursor-pointer"
+      className="cursor-pointer touch-manipulation"
     >
-      <Card className="h-full bg-gradient-to-br from-card/80 via-card/60 to-card/40 backdrop-blur-xl border-2 border-border/50 hover:border-primary/80 hover:shadow-2xl hover:shadow-primary/30 transition-all duration-500 overflow-hidden group relative">
+      <Card className="h-full bg-gradient-to-br from-card/80 via-card/60 to-card/40 backdrop-blur-xl border-2 border-border/50 hover:border-primary/80 active:border-primary hover:shadow-2xl hover:shadow-primary/30 transition-all duration-300 overflow-hidden group relative">
         <div className="relative overflow-hidden">
           <GameImage
             title={game.title}
@@ -64,22 +65,22 @@ export default function GameCard({ game, onBuy, isFavorite, onToggleFavorite, on
           />
           <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
           
-          <div className="absolute top-2 left-2 flex flex-wrap gap-1">
+          <div className="absolute top-1.5 sm:top-2 left-1.5 sm:left-2 flex flex-wrap gap-1">
             {game.discount && game.discount > 0 && (
               <>
-                <Badge className="bg-red-600 text-white border-0">-{game.discount}%</Badge>
+                <Badge className="bg-red-600 text-white border-0 text-xs sm:text-sm px-1.5 sm:px-2">-{game.discount}%</Badge>
                 <SaleCountdown endDate={new Date(Date.now() + 86400000 * 3).toISOString()} compact />
               </>
             )}
             {isNew && (
-              <Badge className="bg-neon-green text-background border-0">NEW</Badge>
+              <Badge className="bg-neon-green text-background border-0 text-xs sm:text-sm px-1.5 sm:px-2">NEW</Badge>
             )}
             {isHot && (
-              <Badge className="bg-gradient-to-r from-orange-500 to-red-500 text-white border-0">🔥 ХИТ</Badge>
+              <Badge className="bg-gradient-to-r from-orange-500 to-red-500 text-white border-0 text-xs sm:text-sm px-1.5 sm:px-2">🔥 ХИТ</Badge>
             )}
           </div>
 
-          <div className="absolute top-2 right-2 flex gap-1">
+          <div className="absolute top-1.5 sm:top-2 right-1.5 sm:right-2 flex gap-1">
             <WishlistButton gameId={game.id} userId={1} compact />
             <Button
               variant="ghost"

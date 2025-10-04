@@ -91,24 +91,24 @@ export default function Header({
 
   return (
     <header className="border-b border-border bg-card/80 backdrop-blur-md sticky top-0 z-50">
-      <div className="container mx-auto px-4 py-3">
+      <div className="container mx-auto px-2 sm:px-4 py-2 sm:py-3">
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 sm:gap-3">
             <div className="relative">
               <div className="absolute inset-0 bg-gradient-to-r from-neon-green to-neon-purple rounded-full blur-lg opacity-50"></div>
-              <div className="relative bg-gradient-to-br from-neon-green via-neon-pink to-neon-purple p-2 rounded-xl">
-                <Icon name="Gamepad2" className="h-8 w-8 text-background" />
+              <div className="relative bg-gradient-to-br from-neon-green via-neon-pink to-neon-purple p-1.5 sm:p-2 rounded-xl">
+                <Icon name="Gamepad2" className="h-6 w-6 sm:h-8 sm:w-8 text-background" />
               </div>
             </div>
             <div>
-              <h1 className="text-xl md:text-2xl font-bold bg-gradient-to-r from-neon-green via-neon-pink to-neon-purple bg-clip-text text-transparent">
+              <h1 className="text-base sm:text-xl md:text-2xl font-bold bg-gradient-to-r from-neon-green via-neon-pink to-neon-purple bg-clip-text text-transparent">
                 GodStoreGame
               </h1>
-              <p className="text-xs text-muted-foreground hidden md:block">Магазин консольных игр</p>
+              <p className="text-xs text-muted-foreground hidden sm:block">Магазин консольных игр</p>
             </div>
           </div>
           
-          <nav className="flex items-center gap-2 md:gap-4">
+          <nav className="flex items-center gap-1 sm:gap-2 md:gap-4">
             <a href="/#games" className="text-sm md:text-base text-foreground hover:text-primary transition-colors hidden md:block">
               Игры
             </a>
@@ -125,9 +125,9 @@ export default function Header({
                   onClick={() => (window as any).toggleVoiceSearch?.()}
                   variant="ghost" 
                   size="sm" 
-                  className="relative border border-purple-500/30 bg-gradient-to-r from-purple-500/10 to-pink-500/10"
+                  className="relative border border-purple-500/30 bg-gradient-to-r from-purple-500/10 to-pink-500/10 h-8 w-8 sm:h-9 sm:w-9 p-0"
                 >
-                  <Icon name="Mic" size={18} className="text-purple-500" />
+                  <Icon name="Mic" size={16} className="text-purple-500 sm:w-[18px] sm:h-[18px]" />
                 </Button>
               </TooltipTrigger>
               <TooltipContent>
@@ -149,8 +149,8 @@ export default function Header({
             <Tooltip>
               <TooltipTrigger asChild>
                 <a href="/wishlist">
-                  <Button variant="ghost" size="sm" className="text-neon-pink hover:text-neon-pink/80">
-                    <Icon name="Heart" size={18} />
+                  <Button variant="ghost" size="sm" className="text-neon-pink hover:text-neon-pink/80 h-8 w-8 sm:h-9 sm:w-9 p-0">
+                    <Icon name="Heart" size={16} className="sm:w-[18px] sm:h-[18px]" />
                   </Button>
                 </a>
               </TooltipTrigger>
