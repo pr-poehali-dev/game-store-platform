@@ -14,8 +14,13 @@ import StatsSection from '@/components/StatsSection';
 import InfoSection from '@/components/InfoSection';
 import FeaturesSection from '@/components/FeaturesSection';
 import PriceTracker from '@/components/PriceTracker';
+import TournamentReminder from '@/components/TournamentReminder';
+import GameComparison from '@/components/GameComparison';
 import Footer from '@/components/Footer';
 import { useIndexState } from '@/hooks/useIndexState';
+import { useState } from 'react';
+import { Button } from '@/components/ui/button';
+import Icon from '@/components/ui/icon';
 
 export default function Index() {
   const {
@@ -75,8 +80,20 @@ export default function Index() {
     handleBuyPSNCard
   } = useIndexState();
 
+  const [showComparison, setShowComparison] = useState(false);
+
   return (
     <div className="min-h-screen bg-background dark">
+      <div className="fixed bottom-4 left-4 z-30">
+        <Button
+          onClick={() => setShowComparison(true)}
+          className="bg-gradient-to-r from-accent to-primary shadow-lg"
+          size="lg"
+        >
+          <Icon name="Scale" size={20} className="mr-2" />
+          Сравнить игры
+        </Button>
+      </div>
       <Header
         cart={cart}
         cartCount={cartCount}
@@ -105,6 +122,13 @@ export default function Index() {
       />
 
       <Hero />
+
+      <TournamentReminder 
+        tournaments={[
+          { id: 1, title: 'FIFA 24 Championship', startDate: '2025-10-15T18:00:00', prizePool: 50000 },
+          { id: 2, title: 'Call of Duty Warzone Battle', startDate: '2025-10-08T20:00:00', prizePool: 100000 }
+        ]} 
+      />
 
       <MainTabs
         activeTab={activeTab}
@@ -177,6 +201,12 @@ export default function Index() {
       <Footer />
 
       <LiveChat />
+
+      <GameComparison 
+        games={games} 
+        isOpen={showComparison} 
+        onClose={() => setShowComparison(false)} 
+      />
     </div>
   );
 }
