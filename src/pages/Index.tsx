@@ -16,6 +16,11 @@ import VoiceSearch from '@/components/VoiceSearch';
 import SteamTopup from '@/components/SteamTopup';
 import AccountsSection from '@/components/AccountsSection';
 import PSNCards from '@/components/PSNCards';
+import RobloxStore from '@/components/RobloxStore';
+import GamerSocialNetwork from '@/components/GamerSocialNetwork';
+import CurrencyRegionSelector from '@/components/CurrencyRegionSelector';
+import GameStreamsTrailers from '@/components/GameStreamsTrailers';
+import AchievementsShowcase from '@/components/AchievementsShowcase';
 import StatsSection from '@/components/StatsSection';
 import InfoSection from '@/components/InfoSection';
 import FeaturesSection from '@/components/FeaturesSection';
@@ -90,30 +95,16 @@ export default function Index() {
   const [showComparison, setShowComparison] = useState(false);
   const [showWheel, setShowWheel] = useState(false);
 
+  // Делаем функции доступными глобально
+  (window as any).showGameComparison = () => setShowComparison(true);
+  (window as any).showFortuneWheel = () => setShowWheel(true);
+
   return (
     <div className="min-h-screen bg-background dark">
       <QuickAccessPanel />
       <NotificationSystem />
       <VoiceSearch />
-      
-      <div className="fixed bottom-20 right-4 z-30 flex flex-col gap-3">
-        <Button
-          onClick={() => setShowComparison(true)}
-          className="bg-gradient-to-r from-accent to-primary shadow-lg hover:scale-105 transition-transform"
-          size="lg"
-        >
-          <Icon name="Scale" size={20} className="mr-2" />
-          Сравнить игры
-        </Button>
-        <Button
-          onClick={() => setShowWheel(true)}
-          className="bg-gradient-to-r from-orange-500 to-red-500 shadow-lg animate-pulse hover:scale-105 transition-transform"
-          size="lg"
-        >
-          <Icon name="CircleDot" size={20} className="mr-2" />
-          Колесо фортуны
-        </Button>
-      </div>
+      <CurrencyRegionSelector />
       <Header
         cart={cart}
         cartCount={cartCount}
@@ -202,9 +193,17 @@ export default function Index() {
 
       <BonusClickerGame />
 
+      <AchievementsShowcase />
+
       <Leaderboard />
 
+      <GamerSocialNetwork />
+
+      <GameStreamsTrailers />
+
       <SteamTopup onTopup={handleSteamTopup} />
+
+      <RobloxStore />
 
       <AccountsSection onBuyAccount={handleBuyAccount} />
 

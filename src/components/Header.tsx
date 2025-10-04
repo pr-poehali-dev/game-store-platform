@@ -12,6 +12,7 @@ import Icon from '@/components/ui/icon';
 import AdminPanel from '@/components/AdminPanel';
 import PromoCodeInput from '@/components/PromoCodeInput';
 import ThemeToggle from '@/components/ThemeToggle';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 
 interface CartItem {
   id: string;
@@ -106,7 +107,7 @@ export default function Header({
             </div>
           </div>
           
-          <nav className="flex items-center gap-3 md:gap-6">
+          <nav className="flex items-center gap-2 md:gap-4">
             <a href="/#games" className="text-sm md:text-base text-foreground hover:text-primary transition-colors hidden md:block">
               Игры
             </a>
@@ -119,27 +120,101 @@ export default function Header({
             
             <ThemeToggle />
             
-            <a href="/wishlist">
-              <Button variant="ghost" size="sm" className="text-neon-pink hover:text-neon-pink/80">
-                <Icon name="Heart" size={18} />
-              </Button>
-            </a>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <a href="/wishlist">
+                  <Button variant="ghost" size="sm" className="text-neon-pink hover:text-neon-pink/80">
+                    <Icon name="Heart" size={18} />
+                  </Button>
+                </a>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>Избранное</p>
+              </TooltipContent>
+            </Tooltip>
             
-            <a href="/profile">
-              <Button variant="ghost" size="sm" className="text-neon-purple hover:text-neon-purple/80">
-                <Icon name="User" size={18} />
-              </Button>
-            </a>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <a href="/profile">
+                  <Button variant="ghost" size="sm" className="text-neon-purple hover:text-neon-purple/80">
+                    <Icon name="User" size={18} />
+                  </Button>
+                </a>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>Профиль</p>
+              </TooltipContent>
+            </Tooltip>
             
-            <Sheet open={isCartOpen} onOpenChange={setIsCartOpen}>
-              <SheetTrigger asChild>
-                <Button variant="outline" size="sm" className="relative border-neon-green text-neon-green hover:bg-neon-green/10">
-                  <Icon name="ShoppingCart" size={18} />
-                  {cartCount > 0 && (
-                    <Badge className="absolute -top-2 -right-2 bg-neon-pink text-white px-1.5 py-0.5 text-xs">
-                      {cartCount}
-                    </Badge>
-                  )}
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button 
+                  onClick={() => {
+                    const element = document.querySelector('[data-section="leaderboard"]');
+                    element?.scrollIntoView({ behavior: 'smooth' });
+                  }}
+                  variant="ghost" 
+                  size="sm" 
+                  className="text-yellow-500 hover:text-yellow-400"
+                >
+                  <Icon name="Trophy" size={18} />
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>Рейтинг игроков</p>
+              </TooltipContent>
+            </Tooltip>
+
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button 
+                  onClick={() => {
+                    const element = document.querySelector('[data-section="comparison"]');
+                    if (element) {
+                      element.scrollIntoView({ behavior: 'smooth' });
+                    } else {
+                      (window as any).showGameComparison?.();
+                    }
+                  }}
+                  variant="ghost" 
+                  size="sm" 
+                  className="text-cyan-500 hover:text-cyan-400"
+                >
+                  <Icon name="Scale" size={18} />
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>Сравнить игры</p>
+              </TooltipContent>
+            </Tooltip>
+
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button 
+                  onClick={() => (window as any).showFortuneWheel?.()}
+                  variant="ghost" 
+                  size="sm" 
+                  className="text-orange-500 hover:text-orange-400"
+                >
+                  <Icon name="CircleDot" size={18} />
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>Колесо фортуны</p>
+              </TooltipContent>
+            </Tooltip>
+            
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Sheet open={isCartOpen} onOpenChange={setIsCartOpen}>
+                  <SheetTrigger asChild>
+                    <Button variant="outline" size="sm" className="relative border-neon-green text-neon-green hover:bg-neon-green/10">
+                      <Icon name="ShoppingCart" size={18} />
+                      {cartCount > 0 && (
+                        <Badge className="absolute -top-2 -right-2 bg-neon-pink text-white px-1.5 py-0.5 text-xs">
+                          {cartCount}
+                        </Badge>
+                      )}
                 </Button>
               </SheetTrigger>
               <SheetContent className="bg-card border-border w-full sm:max-w-md">
@@ -293,7 +368,12 @@ export default function Header({
                   </div>
                 )}
               </SheetContent>
-            </Sheet>
+                </Sheet>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>Корзина</p>
+              </TooltipContent>
+            </Tooltip>
 
             <div className="flex items-center gap-2">
               <a href="/manager">

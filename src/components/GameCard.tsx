@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import PriceComparison from './PriceComparison';
 import WishlistButton from './WishlistButton';
 import SaleCountdown from './SaleCountdown';
+import GameImage from './GameImage';
 
 interface GameCardProps {
   game: Game;
@@ -48,8 +49,9 @@ export default function GameCard({ game, onBuy, isFavorite, onToggleFavorite, on
     >
       <Card className="h-full bg-gradient-to-br from-card/80 via-card/60 to-card/40 backdrop-blur-xl border-2 border-border/50 hover:border-primary/80 hover:shadow-2xl hover:shadow-primary/30 transition-all duration-500 overflow-hidden group relative">
         <div className="relative overflow-hidden">
-          <img 
-            src={game.image_url} 
+          <GameImage
+            title={game.title}
+            fallbackUrl={game.image_url}
             alt={game.title}
             className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500"
           />

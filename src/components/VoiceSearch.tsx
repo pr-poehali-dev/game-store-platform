@@ -187,6 +187,26 @@ export default function VoiceSearch() {
             className="fixed top-52 right-4 z-50 w-80"
           >
             <Card className="bg-card/95 backdrop-blur-xl border-2 border-purple-500/50 shadow-2xl">
+              {/* Визуализация звука */}
+              <div className="absolute inset-0 overflow-hidden rounded-lg pointer-events-none">
+                <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 animate-pulse" />
+                <div className="flex items-center justify-center h-16 gap-1 mt-2">
+                  {[...Array(20)].map((_, i) => (
+                    <motion.div
+                      key={i}
+                      className="w-1 bg-gradient-to-t from-purple-500 to-pink-500 rounded-full"
+                      animate={{
+                        height: [4, Math.random() * 40 + 10, 4],
+                      }}
+                      transition={{
+                        duration: 0.5,
+                        repeat: Infinity,
+                        delay: i * 0.05,
+                      }}
+                    />
+                  ))}
+                </div>
+              </div>
               <CardContent className="p-4">
                 <div className="flex items-center gap-3 mb-3">
                   <div className="w-3 h-3 bg-red-500 rounded-full animate-pulse" />

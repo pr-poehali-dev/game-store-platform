@@ -1,3 +1,5 @@
+import { gameCovers } from './gameCovers';
+
 export interface Game {
   id: number;
   title: string;
