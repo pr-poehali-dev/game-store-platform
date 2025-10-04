@@ -1,4 +1,7 @@
 {
+  "tournaments": "https://functions.poehali.dev/44d0df50-6503-4edb-a8b4-a3fdcb5b8f26",
+  "lootbox": "https://functions.poehali.dev/a3bb1dad-0650-4df9-a95d-5104678c176e",
+  "game-enrichment": "https://functions.poehali.dev/a1284e02-5be4-41c1-b779-41a8d0479adc",
   "review-helpful": "https://functions.poehali.dev/7b18c430-3e8f-403a-b444-c3ef19388202",
   "user-level": "https://functions.poehali.dev/e313e3be-3b5d-486e-8d3e-c6a811dc3b96",
   "game-covers": "https://functions.poehali.dev/5dc47f77-23a2-4e73-a198-56491af9c900",

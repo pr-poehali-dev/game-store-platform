@@ -1,0 +1,25 @@
+{
+  "tests": [
+    {
+      "name": "Get tournaments list",
+      "method": "GET",
+      "path": "/?action=list_tournaments",
+      "expectedStatus": 200,
+      "expectedBody": {
+        "tournaments": "array"
+      },
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "Get leaderboard",
+      "method": "GET",
+      "path": "/?action=leaderboard&category=total_spent",
+      "expectedStatus": 200,
+      "expectedBody": {
+        "leaderboard": "array",
+        "category": "string"
+      },
+      "bodyMatcher": "partial"
+    }
+  ]
+}

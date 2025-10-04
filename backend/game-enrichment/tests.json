@@ -1,0 +1,14 @@
+{
+  "tests": [
+    {
+      "name": "Enrich game by ID",
+      "method": "GET",
+      "path": "/?action=enrich_game&game_id=1",
+      "expectedStatus": 200,
+      "expectedBody": {
+        "success": "boolean"
+      },
+      "bodyMatcher": "partial"
+    }
+  ]
+}
