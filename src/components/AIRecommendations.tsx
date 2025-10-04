@@ -192,19 +192,19 @@ export default function AIRecommendations({ games }: AIRecommendationsProps) {
                     <CardTitle className="text-lg line-clamp-1 group-hover:text-primary transition-colors">
                       {game.title}
                     </CardTitle>
-                    <CardDescription className="flex items-center gap-2 text-xs">
+                    <div className="flex items-center gap-2 text-xs text-muted-foreground">
                       <Icon name="Tag" size={12} />
-                      {game.genre}
+                      <span>{game.genre}</span>
                       {game.rating && (
                         <>
                           <span>•</span>
-                          <div className="flex items-center gap-1">
+                          <span className="flex items-center gap-1">
                             <Icon name="Star" size={12} className="text-yellow-500 fill-yellow-500" />
                             <span>{game.rating}</span>
-                          </div>
+                          </span>
                         </>
                       )}
-                    </CardDescription>
+                    </div>
                   </CardHeader>
 
                   <CardContent className="space-y-3">

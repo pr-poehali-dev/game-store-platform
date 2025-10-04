@@ -9,6 +9,7 @@ import PriceComparison from './PriceComparison';
 import WishlistButton from './WishlistButton';
 import SaleCountdown from './SaleCountdown';
 import GameImage from './GameImage';
+import LazyImage from './LazyImage';
 import { useCurrency } from '@/contexts/CurrencyContext';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
@@ -56,12 +57,11 @@ export default function GameCard({ game, onBuy, isFavorite, onToggleFavorite, on
       className="cursor-pointer touch-manipulation"
     >
       <Card className="h-full bg-gradient-to-br from-card/80 via-card/60 to-card/40 backdrop-blur-xl border-2 border-border/50 hover:border-primary/80 active:border-primary hover:shadow-2xl hover:shadow-primary/30 transition-all duration-300 overflow-hidden group relative">
-        <div className="relative overflow-hidden">
-          <GameImage
-            title={game.title}
-            fallbackUrl={game.image_url}
+        <div className="relative overflow-hidden h-48">
+          <LazyImage
+            src={game.image_url || '/img/game-placeholder.jpg'}
             alt={game.title}
-            className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500"
+            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
           
