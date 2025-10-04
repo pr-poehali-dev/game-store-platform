@@ -13,14 +13,14 @@ interface Currency {
   name: string;
 }
 
-// Актуальные курсы на октябрь 2024
+// Актуальные курсы на 5 октября 2025
 const currencies: Currency[] = [
   { code: 'RUB', symbol: '₽', rate: 1, flag: '🇷🇺', name: 'Российский рубль' },
-  { code: 'USD', symbol: '$', rate: 0.0104, flag: '🇺🇸', name: 'Доллар США' }, // 1 USD = 96 RUB
-  { code: 'EUR', symbol: '€', rate: 0.0095, flag: '🇪🇺', name: 'Евро' }, // 1 EUR = 105 RUB
-  { code: 'CNY', symbol: '¥', rate: 0.074, flag: '🇨🇳', name: 'Китайский юань' }, // 1 CNY = 13.5 RUB
-  { code: 'TRY', symbol: '₺', rate: 0.352, flag: '🇹🇷', name: 'Турецкая лира' }, // 1 TRY = 2.84 RUB
-  { code: 'UAH', symbol: '₴', rate: 0.426, flag: '🇺🇦', name: 'Украинская гривна' }, // 1 UAH = 2.35 RUB
+  { code: 'USD', symbol: '$', rate: 0.0122, flag: '🇺🇸', name: 'Доллар США' }, // 1 USD = 82 RUB
+  { code: 'EUR', symbol: '€', rate: 0.0105, flag: '🇪🇺', name: 'Евро' }, // 1 EUR = 95.5 RUB
+  { code: 'CNY', symbol: '¥', rate: 0.0877, flag: '🇨🇳', name: 'Китайский юань' }, // 1 CNY = 11.4 RUB
+  { code: 'TRY', symbol: '₺', rate: 0.422, flag: '🇹🇷', name: 'Турецкая лира' }, // 1 TRY = 2.37 RUB
+  { code: 'UAH', symbol: '₴', rate: 0.500, flag: '🇺🇦', name: 'Украинская гривна' }, // 1 UAH = 2.0 RUB
 ];
 
 const regions: Region[] = [
