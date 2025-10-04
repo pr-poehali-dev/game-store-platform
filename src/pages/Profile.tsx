@@ -2,6 +2,7 @@ import { useState } from 'react';
 import UserProfile from '@/components/UserProfile';
 import AchievementsSystem from '@/components/AchievementsSystem';
 import DailyQuests from '@/components/DailyQuests';
+import { PlayerAchievementsSystem } from '@/components/PlayerAchievementsSystem';
 import { Button } from '@/components/ui/button';
 import Icon from '@/components/ui/icon';
 
@@ -29,6 +30,10 @@ export default function Profile() {
       </div>
       
       <UserProfile />
+      
+      <div className="container mx-auto px-4 py-8">
+        <PlayerAchievementsSystem />
+      </div>
       
       <AchievementsSystem 
         isOpen={showAchievements} 

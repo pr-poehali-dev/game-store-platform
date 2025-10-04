@@ -7,6 +7,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 import { CurrencyProvider } from "@/contexts/CurrencyContext";
+import { LanguageProvider } from "@/contexts/LanguageContext";
 import Index from "./pages/Index";
 import Manager from "./pages/Manager";
 import Profile from "./pages/Profile";
@@ -41,8 +42,9 @@ const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider>
-        <CurrencyProvider>
-          <TooltipProvider>
+        <LanguageProvider>
+          <CurrencyProvider>
+            <TooltipProvider>
           <Toaster />
           <Sonner />
           <OfflineIndicator />
@@ -65,8 +67,9 @@ const App = () => {
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>
-          </TooltipProvider>
-        </CurrencyProvider>
+            </TooltipProvider>
+          </CurrencyProvider>
+        </LanguageProvider>
       </ThemeProvider>
     </QueryClientProvider>
   );

@@ -8,6 +8,8 @@ import SyncStatusIndicator from '@/components/SyncStatusIndicator';
 import AdminPanel from '@/components/AdminPanel';
 import MobileMenu from './MobileMenu';
 import CartSheet from './CartSheet';
+import { PremiumSubscription } from '@/components/PremiumSubscription';
+import { GiftCards } from '@/components/GiftCards';
 
 interface CartItem {
   id: string;
@@ -220,6 +222,11 @@ export default function NavigationBar({
           <p>Колесо фортуны</p>
         </TooltipContent>
       </Tooltip>
+
+      <div className="hidden lg:flex items-center gap-2">
+        <PremiumSubscription />
+        <GiftCards />
+      </div>
       
       <Tooltip>
         <TooltipTrigger asChild>

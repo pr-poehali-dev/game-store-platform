@@ -11,6 +11,7 @@ import SaleCountdown from '@/components/SaleCountdown';
 import PriceHistoryChart from '@/components/PriceHistoryChart';
 import GiftGameDialog from '@/components/GiftGameDialog';
 import ReviewsSection from '@/components/ReviewsSection';
+import { UserReviews } from '@/components/UserReviews';
 import { Game } from '@/types';
 
 export default function GameDetail() {
@@ -175,7 +176,7 @@ export default function GameDetail() {
               </TabsContent>
 
               <TabsContent value="reviews">
-                <ReviewsSection gameId={game.id} userId={1} />
+                <UserReviews gameId={game.id} gameName={game.title} />
               </TabsContent>
 
               <TabsContent value="specs" className="mt-6">

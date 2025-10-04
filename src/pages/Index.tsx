@@ -7,6 +7,7 @@ import Hero from '@/components/Hero';
 import MainTabs from '@/components/MainTabs';
 import GameDialog from '@/components/GameDialog';
 import Footer from '@/components/Footer';
+import { EnhancedCatalogSection } from '@/components/EnhancedCatalogSection';
 
 const UnifiedChat = lazy(() => import('@/components/UnifiedChat'));
 const TournamentsSection = lazy(() => import('@/components/TournamentsSection'));
@@ -128,6 +129,14 @@ export default function Index() {
       />
 
       <Hero />
+
+      <EnhancedCatalogSection
+        games={games}
+        favorites={favorites}
+        onToggleFavorite={toggleFavorite}
+        onViewGame={handleViewGame}
+        onAddToCart={addToCart}
+      />
 
       <Suspense fallback={<div className="h-20" />}>
         <TournamentReminder 
