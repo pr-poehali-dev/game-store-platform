@@ -8,8 +8,7 @@ import SyncStatusIndicator from '@/components/SyncStatusIndicator';
 import AdminPanel from '@/components/AdminPanel';
 import MobileMenu from './MobileMenu';
 import CartSheet from './CartSheet';
-import { PremiumSubscription } from '@/components/PremiumSubscription';
-import { GiftCards } from '@/components/GiftCards';
+import { ActionsMenu } from './ActionsMenu';
 
 interface CartItem {
   id: string;
@@ -88,7 +87,7 @@ export default function NavigationBar({
   discountedTotal,
 }: NavigationBarProps) {
   return (
-    <nav className="flex items-center gap-1 sm:gap-2 md:gap-4">
+    <nav className="flex items-center gap-2 md:gap-3">
       <MobileMenu isOpen={isMobileMenuOpen} setIsOpen={setIsMobileMenuOpen} />
 
       <a href="/#games" className="text-sm md:text-base text-foreground hover:text-primary transition-colors hidden md:block">
@@ -97,43 +96,13 @@ export default function NavigationBar({
       <a href="/#subscriptions" className="text-sm md:text-base text-foreground hover:text-secondary transition-colors hidden md:block">
         Подписки
       </a>
-      <a href="/tournaments" className="text-sm md:text-base text-foreground hover:text-accent transition-colors hidden md:block">
-        🏆 Турниры
-      </a>
-      
-      <Tooltip>
-        <TooltipTrigger asChild>
-          <Button 
-            onClick={() => (window as any).toggleVoiceSearch?.()}
-            variant="ghost" 
-            size="sm" 
-            className="relative border border-purple-500/30 bg-gradient-to-r from-purple-500/10 to-pink-500/10 h-8 w-8 sm:h-9 sm:w-9 p-0"
-          >
-            <Icon name="Mic" size={16} className="text-purple-500 sm:w-[18px] sm:h-[18px]" />
-          </Button>
-        </TooltipTrigger>
-        <TooltipContent>
-          <p>Голосовой поиск</p>
-        </TooltipContent>
-      </Tooltip>
 
       <Tooltip>
         <TooltipTrigger asChild>
           <NotificationBadge />
         </TooltipTrigger>
         <TooltipContent>
-          <p>Уведомления (4 новых)</p>
-        </TooltipContent>
-      </Tooltip>
-
-      <PendingPurchasesBadge />
-
-      <Tooltip>
-        <TooltipTrigger asChild>
-          <SyncStatusIndicator />
-        </TooltipTrigger>
-        <TooltipContent>
-          <p>Статус синхронизации</p>
+          <p>Уведомления</p>
         </TooltipContent>
       </Tooltip>
 
@@ -141,92 +110,18 @@ export default function NavigationBar({
       
       <Tooltip>
         <TooltipTrigger asChild>
-          <a href="/wishlist">
-            <Button variant="ghost" size="sm" className="text-neon-pink hover:text-neon-pink/80 h-8 w-8 sm:h-9 sm:w-9 p-0">
-              <Icon name="Heart" size={16} className="sm:w-[18px] sm:h-[18px]" />
-            </Button>
-          </a>
-        </TooltipTrigger>
-        <TooltipContent>
-          <p>Избранное</p>
-        </TooltipContent>
-      </Tooltip>
-      
-      <Tooltip>
-        <TooltipTrigger asChild>
           <a href="/profile">
-            <Button variant="ghost" size="sm" className="text-neon-purple hover:text-neon-purple/80">
+            <Button variant="ghost" size="sm" className="text-neon-purple hover:text-neon-purple/80 h-9 w-9 p-0">
               <Icon name="User" size={18} />
             </Button>
           </a>
         </TooltipTrigger>
         <TooltipContent>
-          <p>Личный кабинет</p>
-        </TooltipContent>
-      </Tooltip>
-      
-      <Tooltip>
-        <TooltipTrigger asChild>
-          <Button 
-            onClick={() => {
-              const element = document.querySelector('[data-section="leaderboard"]');
-              element?.scrollIntoView({ behavior: 'smooth' });
-            }}
-            variant="ghost" 
-            size="sm" 
-            className="text-yellow-500 hover:text-yellow-400"
-          >
-            <Icon name="Trophy" size={18} />
-          </Button>
-        </TooltipTrigger>
-        <TooltipContent>
-          <p>Рейтинг игроков</p>
+          <p>Профиль</p>
         </TooltipContent>
       </Tooltip>
 
-      <Tooltip>
-        <TooltipTrigger asChild>
-          <Button 
-            onClick={() => {
-              const element = document.querySelector('[data-section="comparison"]');
-              if (element) {
-                element.scrollIntoView({ behavior: 'smooth' });
-              } else {
-                (window as any).showGameComparison?.();
-              }
-            }}
-            variant="ghost" 
-            size="sm" 
-            className="text-cyan-500 hover:text-cyan-400"
-          >
-            <Icon name="Scale" size={18} />
-          </Button>
-        </TooltipTrigger>
-        <TooltipContent>
-          <p>Сравнить игры</p>
-        </TooltipContent>
-      </Tooltip>
-
-      <Tooltip>
-        <TooltipTrigger asChild>
-          <Button 
-            onClick={() => (window as any).showFortuneWheel?.()}
-            variant="ghost" 
-            size="sm" 
-            className="text-orange-500 hover:text-orange-400"
-          >
-            <Icon name="CircleDot" size={18} />
-          </Button>
-        </TooltipTrigger>
-        <TooltipContent>
-          <p>Колесо фортуны</p>
-        </TooltipContent>
-      </Tooltip>
-
-      <div className="hidden lg:flex items-center gap-2">
-        <PremiumSubscription />
-        <GiftCards />
-      </div>
+      <ActionsMenu />
       
       <Tooltip>
         <TooltipTrigger asChild>
@@ -252,30 +147,22 @@ export default function NavigationBar({
         </TooltipContent>
       </Tooltip>
 
-      <div className="flex items-center gap-2">
-        <a href="/manager">
-          <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-neon-purple">
-            <Icon name="Users" size={18} />
-          </Button>
-        </a>
-        
-        <AdminPanel
-          adminPassword={adminPassword}
-          setAdminPassword={setAdminPassword}
-          isAdminAuth={isAdminAuth}
-          handleAdminLogin={handleAdminLogin}
-          games={games}
-          subscriptions={subscriptions}
-          editingGame={editingGame}
-          setEditingGame={setEditingGame}
-          editingSubscription={editingSubscription}
-          setEditingSubscription={setEditingSubscription}
-          handleSaveGame={handleSaveGame}
-          handleDeleteGame={handleDeleteGame}
-          handleSaveSubscription={handleSaveSubscription}
-          handleDeleteSubscription={handleDeleteSubscription}
-        />
-      </div>
+      <AdminPanel
+        adminPassword={adminPassword}
+        setAdminPassword={setAdminPassword}
+        isAdminAuth={isAdminAuth}
+        handleAdminLogin={handleAdminLogin}
+        games={games}
+        subscriptions={subscriptions}
+        editingGame={editingGame}
+        setEditingGame={setEditingGame}
+        editingSubscription={editingSubscription}
+        setEditingSubscription={setEditingSubscription}
+        handleSaveGame={handleSaveGame}
+        handleDeleteGame={handleDeleteGame}
+        handleSaveSubscription={handleSaveSubscription}
+        handleDeleteSubscription={handleDeleteSubscription}
+      />
     </nav>
   );
 }
