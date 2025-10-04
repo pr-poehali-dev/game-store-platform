@@ -3,6 +3,7 @@ import Hero from '@/components/Hero';
 import MainTabs from '@/components/MainTabs';
 import GameDialog from '@/components/GameDialog';
 import ChatWidget from '@/components/ChatWidget';
+import LiveChat from '@/components/LiveChat';
 import RecommendedGames from '@/components/RecommendedGames';
 import SteamTopup from '@/components/SteamTopup';
 import AccountsSection from '@/components/AccountsSection';
@@ -168,6 +169,8 @@ export default function Index() {
       />
 
       <Footer />
+
+      <LiveChat />
     </div>
   );
 }

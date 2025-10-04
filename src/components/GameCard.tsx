@@ -4,7 +4,11 @@ import { Badge } from '@/components/ui/badge';
 import Icon from '@/components/ui/icon';
 import { motion } from 'framer-motion';
 import { Game } from '@/types';
+import { useNavigate } from 'react-router-dom';
 import PriceComparison from './PriceComparison';
+import WishlistButton from './WishlistButton';
+import SaleCountdown from './SaleCountdown';
+import { useState, useEffect } from 'react';
 
 interface GameCardProps {
   game: Game;
@@ -15,21 +19,42 @@ interface GameCardProps {
 }
 
 export default function GameCard({ game, onBuy, isFavorite, onToggleFavorite, onView }: GameCardProps) {
+  const navigate = useNavigate();
   const isNew = new Date().getFullYear() - game.release_year <= 1;
   const isHot = game.rating >= 8.5;
+  const [coverUrl, setCoverUrl] = useState<string>(game.image_url);
+
+  useEffect(() => {
+    const fetchCover = async () => {
+      try {
+        const response = await fetch(`https://functions.poehali.dev/b62ecfcc-7a7b-4b8d-9754-8cbb3d69d754?game_name=${encodeURIComponent(game.title)}`);
+        const data = await response.json();
+        if (data.cover_url) {
+          setCoverUrl(data.cover_url);
+        }
+      } catch (error) {
+        console.error('Failed to fetch cover:', error);
+      }
+    };
+    fetchCover();
+  }, [game.title]);
+
+  const handleCardClick = () => {
+    navigate(`/game/${game.id}`);
+  };
 
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       whileHover={{ y: -8, transition: { duration: 0.2 } }}
-      onClick={() => onView(game)}
+      onClick={handleCardClick}
       className="cursor-pointer"
     >
       <Card className="h-full bg-gradient-to-br from-card/60 via-card/50 to-card/40 backdrop-blur-md border-border hover:border-neon-purple/60 hover:shadow-lg hover:shadow-neon-purple/20 transition-all duration-300 overflow-hidden group">
         <div className="relative overflow-hidden">
           <img 
-            src={game.image_url} 
+            src={coverUrl} 
             alt={game.title}
             className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500"
           />
@@ -37,7 +62,10 @@ export default function GameCard({ game, onBuy, isFavorite, onToggleFavorite, on
           
           <div className="absolute top-2 left-2 flex flex-wrap gap-1">
             {game.discount && game.discount > 0 && (
-              <Badge className="bg-red-600 text-white border-0">-{game.discount}%</Badge>
+              <>
+                <Badge className="bg-red-600 text-white border-0">-{game.discount}%</Badge>
+                <SaleCountdown endDate={new Date(Date.now() + 86400000 * 3).toISOString()} compact />
+              </>
             )}
             {isNew && (
               <Badge className="bg-neon-green text-background border-0">NEW</Badge>
@@ -47,21 +75,24 @@ export default function GameCard({ game, onBuy, isFavorite, onToggleFavorite, on
             )}
           </div>
 
-          <Button
-            variant="ghost"
-            size="icon"
-            className="absolute top-2 right-2 h-8 w-8 bg-background/80 hover:bg-background backdrop-blur-sm"
-            onClick={(e) => {
-              e.stopPropagation();
-              onToggleFavorite(game.id);
-            }}
-          >
-            <Icon 
-              name={isFavorite ? "Heart" : "Heart"} 
-              size={16} 
-              className={isFavorite ? "fill-red-500 text-red-500" : "text-muted-foreground"} 
-            />
-          </Button>
+          <div className="absolute top-2 right-2 flex gap-1">
+            <WishlistButton gameId={game.id} userId={1} compact />
+            <Button
+              variant="ghost"
+              size="icon"
+              className="h-8 w-8 bg-background/80 hover:bg-background backdrop-blur-sm"
+              onClick={(e) => {
+                e.stopPropagation();
+                onToggleFavorite(game.id);
+              }}
+            >
+              <Icon 
+                name={isFavorite ? "Heart" : "Heart"} 
+                size={16} 
+                className={isFavorite ? "fill-red-500 text-red-500" : "text-muted-foreground"} 
+              />
+            </Button>
+          </div>
 
           <div className="absolute bottom-2 left-2 right-2 flex items-center justify-between opacity-0 group-hover:opacity-100 transition-opacity duration-300">
             <div className="flex items-center gap-1 bg-background/95 backdrop-blur-md px-2.5 py-1 rounded-lg shadow-lg">
