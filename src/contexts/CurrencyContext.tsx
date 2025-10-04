@@ -1,8 +1,8 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { getExchangeRates, formatCurrency, convertFromRUB, type ExchangeRates } from '@/utils/currencyRates';
 
-export type Currency = 'RUB' | 'USD' | 'EUR' | 'GBP' | 'CNY' | 'JPY' | 'KZT' | 'BYN';
-export type Region = 'russia' | 'usa' | 'europe' | 'uk' | 'china' | 'japan' | 'kazakhstan' | 'belarus';
+export type Currency = 'RUB' | 'USD' | 'EUR' | 'CNY' | 'TRY' | 'UAH';
+export type Region = 'russia' | 'usa' | 'europe' | 'china' | 'turkey' | 'ukraine';
 
 interface CurrencyContextType {
   currency: Currency;
@@ -22,34 +22,28 @@ const currencySymbols: Record<Currency, string> = {
   RUB: '₽',
   USD: '$',
   EUR: '€',
-  GBP: '£',
   CNY: '¥',
-  JPY: '¥',
-  KZT: '₸',
-  BYN: 'Br'
+  TRY: '₺',
+  UAH: '₴'
 };
 
-// Региональные мультипликаторы (для Steam-подобного ценообразования)
+// Региональные мультипликаторы (как в Steam)
 const regionalMultipliers: Record<Region, number> = {
   russia: 1.0,      // Базовая цена
   usa: 1.2,         // +20% (премиум регион)
   europe: 1.15,     // +15%
-  uk: 1.25,         // +25%
   china: 0.6,       // -40% (дешевый регион)
-  japan: 1.1,       // +10%
-  kazakhstan: 0.7,  // -30%
-  belarus: 0.85,    // -15%
+  turkey: 0.5,      // -50% (самый дешевый)
+  ukraine: 0.65,    // -35%
 };
 
 const regionToCurrency: Record<Region, Currency> = {
   russia: 'RUB',
   usa: 'USD',
   europe: 'EUR',
-  uk: 'GBP',
   china: 'CNY',
-  japan: 'JPY',
-  kazakhstan: 'KZT',
-  belarus: 'BYN'
+  turkey: 'TRY',
+  ukraine: 'UAH'
 };
 
 export function CurrencyProvider({ children }: { children: ReactNode }) {

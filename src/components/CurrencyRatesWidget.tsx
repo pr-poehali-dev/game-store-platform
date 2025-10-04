@@ -39,8 +39,9 @@ export default function CurrencyRatesWidget() {
   const currencies: Array<{ code: keyof Omit<ExchangeRates, 'lastUpdated'>; name: string }> = [
     { code: 'USD', name: 'Доллар США' },
     { code: 'EUR', name: 'Евро' },
-    { code: 'GBP', name: 'Фунт стерлингов' },
     { code: 'CNY', name: 'Китайский юань' },
+    { code: 'TRY', name: 'Турецкая лира' },
+    { code: 'UAH', name: 'Украинская гривна' },
   ];
 
   const lastUpdateTime = new Date(rates.lastUpdated).toLocaleString('ru-RU', {

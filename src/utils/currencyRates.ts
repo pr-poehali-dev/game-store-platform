@@ -6,11 +6,9 @@
 export interface ExchangeRates {
   USD: number;
   EUR: number;
-  GBP: number;
   CNY: number;
-  JPY: number;
-  KZT: number;
-  BYN: number;
+  TRY: number;
+  UAH: number;
   lastUpdated: number;
 }
 
@@ -18,11 +16,9 @@ export interface ExchangeRates {
 const FALLBACK_RATES: ExchangeRates = {
   USD: 82.0,   // Доллар США
   EUR: 96.0,   // Евро
-  GBP: 108.0,  // Фунт стерлингов
   CNY: 11.5,   // Китайский юань
-  JPY: 0.55,   // Японская иена
-  KZT: 0.17,   // Казахстанский тенге
-  BYN: 25.0,   // Белорусский рубль
+  TRY: 2.48,   // Турецкая лира (1 TRY = 2.48 RUB)
+  UAH: 2.05,   // Украинская гривна (1 UAH = 2.05 RUB)
   lastUpdated: Date.now(),
 };
 
@@ -100,11 +96,9 @@ async function fetchExchangeRates(): Promise<ExchangeRates> {
   return {
     USD: valutes.USD?.Value || FALLBACK_RATES.USD,
     EUR: valutes.EUR?.Value || FALLBACK_RATES.EUR,
-    GBP: valutes.GBP?.Value || FALLBACK_RATES.GBP,
     CNY: valutes.CNY?.Value || FALLBACK_RATES.CNY,
-    JPY: (valutes.JPY?.Value || FALLBACK_RATES.JPY * 100) / 100, // ЦБ дает за 100 иен
-    KZT: valutes.KZT?.Value / 100 || FALLBACK_RATES.KZT, // ЦБ дает за 100 тенге
-    BYN: valutes.BYN?.Value || FALLBACK_RATES.BYN,
+    TRY: valutes.TRY?.Value / 10 || FALLBACK_RATES.TRY, // ЦБ дает за 10 лир
+    UAH: valutes.UAH?.Value / 10 || FALLBACK_RATES.UAH, // ЦБ дает за 10 гривен
     lastUpdated: Date.now(),
   };
 }
@@ -133,17 +127,15 @@ export function formatCurrency(amount: number, currency: string): string {
     RUB: '₽',
     USD: '$',
     EUR: '€',
-    GBP: '£',
     CNY: '¥',
-    JPY: '¥',
-    KZT: '₸',
-    BYN: 'Br',
+    TRY: '₺',
+    UAH: '₴',
   };
 
   const symbol = symbols[currency] || currency;
   
-  // Для рублей, тенге, белорусских рублей - символ после
-  if (['RUB', 'KZT', 'BYN'].includes(currency)) {
+  // Для рублей, гривны - символ после
+  if (['RUB', 'UAH'].includes(currency)) {
     return `${amount.toLocaleString('ru-RU')}${symbol}`;
   }
   
@@ -192,11 +184,9 @@ export function getCurrencyName(code: string): string {
     RUB: 'Российский рубль',
     USD: 'Доллар США',
     EUR: 'Евро',
-    GBP: 'Фунт стерлингов',
     CNY: 'Китайский юань',
-    JPY: 'Японская иена',
-    KZT: 'Казахстанский тенге',
-    BYN: 'Белорусский рубль',
+    TRY: 'Турецкая лира',
+    UAH: 'Украинская гривна',
   };
   
   return names[code] || code;
@@ -210,11 +200,9 @@ export function getCurrencyFlag(code: string): string {
     RUB: '🇷🇺',
     USD: '🇺🇸',
     EUR: '🇪🇺',
-    GBP: '🇬🇧',
     CNY: '🇨🇳',
-    JPY: '🇯🇵',
-    KZT: '🇰🇿',
-    BYN: '🇧🇾',
+    TRY: '🇹🇷',
+    UAH: '🇺🇦',
   };
   
   return flags[code] || '🌍';

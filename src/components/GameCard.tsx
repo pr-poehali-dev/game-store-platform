@@ -13,6 +13,8 @@ import LazyImage from './LazyImage';
 import { useCurrency } from '@/contexts/CurrencyContext';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { usePrefetch } from '@/hooks/usePrefetch';
+import PriceComparisonModal from './PriceComparisonModal';
+import { useState } from 'react';
 
 interface GameCardProps {
   game: Game;
@@ -26,6 +28,7 @@ export default function GameCard({ game, onBuy, isFavorite, onToggleFavorite, on
   const navigate = useNavigate();
   const { region, setRegion, getRegionalPrice, formatPrice } = useCurrency();
   const { prefetchGameDetails } = usePrefetch();
+  const [isPriceModalOpen, setIsPriceModalOpen] = useState(false);
   const isNew = new Date().getFullYear() - game.release_year <= 1;
   const isHot = game.rating >= 8.5;
 
@@ -147,11 +150,11 @@ export default function GameCard({ game, onBuy, isFavorite, onToggleFavorite, on
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="russia">🇷🇺 Россия</SelectItem>
-                <SelectItem value="turkey">🇹🇷 Турция (-65%)</SelectItem>
-                <SelectItem value="argentina">🇦🇷 Аргентина (-75%)</SelectItem>
-                <SelectItem value="ukraine">🇺🇦 Украина (-55%)</SelectItem>
-                <SelectItem value="kazakhstan">🇰🇿 Казахстан (-45%)</SelectItem>
-                <SelectItem value="usa">🇺🇸 USA (+20%)</SelectItem>
+                <SelectItem value="turkey">🇹🇷 Турция (-50%)</SelectItem>
+                <SelectItem value="ukraine">🇺🇦 Украина (-35%)</SelectItem>
+                <SelectItem value="china">🇨🇳 Китай (-40%)</SelectItem>
+                <SelectItem value="usa">🇺🇸 США (+20%)</SelectItem>
+                <SelectItem value="europe">🇪🇺 Европа (+15%)</SelectItem>
               </SelectContent>
             </Select>
           </div>
@@ -194,6 +197,23 @@ export default function GameCard({ game, onBuy, isFavorite, onToggleFavorite, on
               {game.category}
             </Badge>
           </div>
+
+          <motion.div 
+            key={`compare-${region}`}
+            initial={{ opacity: 0, y: 5 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3 }}
+            className="mt-3 pt-3 border-t border-border/50"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              onClick={() => setIsPriceModalOpen(true)}
+              className="w-full flex items-center justify-center gap-2 text-xs text-primary hover:text-primary/80 transition-colors"
+            >
+              <Icon name="Globe" size={14} />
+              <span>Сравнить цены по регионам</span>
+            </button>
+          </motion.div>
           
           {game.competitorPrices && game.competitorPrices.length > 0 && (
             <motion.div 
@@ -201,7 +221,7 @@ export default function GameCard({ game, onBuy, isFavorite, onToggleFavorite, on
               initial={{ opacity: 0, y: 5 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
-              className="mt-3 pt-3 border-t border-border/50"
+              className="mt-2 pt-2 border-t border-border/50"
             >
               <div className="flex items-center gap-2 text-xs text-muted-foreground mb-1">
                 <Icon name="TrendingDown" size={12} className="text-neon-green" />
@@ -228,6 +248,13 @@ export default function GameCard({ game, onBuy, isFavorite, onToggleFavorite, on
           </Button>
         </CardFooter>
       </Card>
+
+      <PriceComparisonModal
+        isOpen={isPriceModalOpen}
+        onClose={() => setIsPriceModalOpen(false)}
+        basePrice={game.price}
+        gameName={game.title}
+      />
     </motion.div>
   );
 }
