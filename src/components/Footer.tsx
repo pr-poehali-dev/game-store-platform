@@ -21,7 +21,7 @@ export default function Footer() {
               </div>
             </div>
             <p className="text-sm text-muted-foreground">
-              Официальный магазин консольных игр 2025. Более 50 хитов для PlayStation и Xbox, моментальная доставка, гарантия качества.
+              Официальный магазин консольных игр 2025. Более 125 хитов для PlayStation и Xbox, моментальная доставка, гарантия качества.
             </p>
           </div>
 

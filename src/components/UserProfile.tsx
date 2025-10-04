@@ -181,6 +181,20 @@ export default function UserProfile() {
               <Icon name="RefreshCw" size={16} className="mr-2" />
               Обновить
             </Button>
+            <Button 
+              variant="outline" 
+              className="border-red-500/50 text-red-500 hover:bg-red-500/10"
+              onClick={() => {
+                toast({
+                  title: 'Выход выполнен',
+                  description: 'До скорых встреч!',
+                });
+                setTimeout(() => window.location.href = '/', 1000);
+              }}
+            >
+              <Icon name="LogOut" size={16} className="mr-2" />
+              Выйти
+            </Button>
           </div>
         </div>
 
