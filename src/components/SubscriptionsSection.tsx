@@ -21,9 +21,14 @@ interface SubscriptionsSectionProps {
 
 export default function SubscriptionsSection({ filteredSubs, addToCart }: SubscriptionsSectionProps) {
   return (
-    <section id="subscriptions" className="py-16 bg-muted/30">
+    <section id="subscriptions" className="py-0 bg-background">
       <div className="container mx-auto px-4">
-        <h3 className="text-4xl font-bold mb-8">Подписки</h3>
+        <div className="mb-8">
+          <h3 className="text-4xl font-bold">Подписки</h3>
+          <p className="text-muted-foreground mt-1">
+            {filteredSubs.length} {filteredSubs.length === 1 ? 'подписка' : 'подписок'} доступно
+          </p>
+        </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredSubs.map((sub, idx) => (
             <motion.div

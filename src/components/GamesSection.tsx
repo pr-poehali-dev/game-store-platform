@@ -56,7 +56,7 @@ export default function GamesSection({
   const [onlyHot, setOnlyHot] = useState(false);
 
   return (
-    <section id="games" className="py-16 bg-background">
+    <section id="games" className="py-0 bg-background">
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-6">
           <div>

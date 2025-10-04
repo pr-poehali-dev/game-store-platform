@@ -193,4 +193,10 @@ export const initialGames: Game[] = [
   { id: 148, title: 'Farming Simulator 22', platform: 'Both', price: 1999, description: 'Фермерский симулятор', image_url: 'https://cdn.cloudflare.steamstatic.com/steam/apps/1248130/header.jpg', category: 'Simulation', rating: 8.3, release_year: 2021, discount: 50 },
   { id: 149, title: 'PowerWash Simulator', platform: 'Both', price: 1299, description: 'Расслабляющая мойка', image_url: 'https://cdn.cloudflare.steamstatic.com/steam/apps/1290000/header.jpg', category: 'Simulation', rating: 9.1, release_year: 2022, discount: 30 },
   { id: 150, title: 'House Flipper', platform: 'Both', price: 1199, description: 'Ремонт домов', image_url: 'https://cdn.cloudflare.steamstatic.com/steam/apps/613100/header.jpg', category: 'Simulation', rating: 8.7, release_year: 2018, discount: 75 },
+  
+  { id: 151, title: 'Assassins Creed Valhalla', platform: 'Both', price: 3299, description: 'Эпическая сага о викингах в Англии', image_url: '/img/8e4da586-a5bb-47e7-b5d6-1ed328a3335b.jpg', category: 'Action', rating: 8.5, release_year: 2020, discount: 40, isHot: true },
+  { id: 152, title: 'Assassins Creed Origins', platform: 'Both', price: 2499, description: 'Древний Египет и истоки Братства', image_url: '/img/294237e9-d4c8-4daf-ac07-eb6d61466301.jpg', category: 'Action', rating: 8.8, release_year: 2017, discount: 60 },
+  { id: 153, title: 'Assassins Creed Odyssey', platform: 'Both', price: 2799, description: 'Легендарная Древняя Греция', image_url: '/img/fc71f8d3-f8c4-4e77-b509-17094b7fc8de.jpg', category: 'Action', rating: 8.7, release_year: 2018, discount: 55 },
+  { id: 154, title: 'Assassins Creed IV Black Flag', platform: 'Both', price: 1999, description: 'Пиратские приключения в Карибском море', image_url: '/img/d6c5b2a2-c9ea-4ac6-b9a5-af501bdcdf23.jpg', category: 'Action', rating: 9.0, release_year: 2013, discount: 70 },
+  { id: 155, title: 'Assassins Creed Unity', platform: 'Both', price: 1799, description: 'Французская революция в Париже', image_url: '/img/87c9a24e-f459-4849-954d-8391307af5c7.jpg', category: 'Action', rating: 7.9, release_year: 2014, discount: 75 },
 ];

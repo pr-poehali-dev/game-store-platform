@@ -15,6 +15,7 @@ import { initialGames, type Game } from '@/data/games';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import Icon from '@/components/ui/icon';
 
 interface Subscription {
@@ -61,6 +62,7 @@ export default function Index() {
   const [favorites, setFavorites] = useState<number[]>([]);
   const [viewHistory, setViewHistory] = useState<number[]>([]);
   const [selectedGame, setSelectedGame] = useState<Game | null>(null);
+  const [activeTab, setActiveTab] = useState<string>('games');
   const { toast } = useToast();
 
   useEffect(() => {
@@ -290,24 +292,50 @@ export default function Index() {
 
       <Hero />
 
-      <GamesSection
-        filteredGames={filteredGames}
-        categories={categories}
-        platformFilter={platformFilter}
-        setPlatformFilter={setPlatformFilter}
-        categoryFilter={categoryFilter}
-        setCategoryFilter={setCategoryFilter}
-        searchQuery={searchQuery}
-        setSearchQuery={setSearchQuery}
-        sortBy={sortBy}
-        setSortBy={setSortBy}
-        priceRange={priceRange}
-        setPriceRange={setPriceRange}
-        addToCart={addToCart}
-        favorites={favorites}
-        onToggleFavorite={toggleFavorite}
-        onViewGame={handleViewGame}
-      />
+      <section className="py-8 bg-background">
+        <div className="container mx-auto px-4">
+          <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
+            <TabsList className="grid w-full max-w-md mx-auto grid-cols-2 mb-8 bg-muted h-12">
+              <TabsTrigger value="games" className="text-base data-[state=active]:bg-gradient-to-r data-[state=active]:from-neon-green data-[state=active]:to-neon-purple data-[state=active]:text-background">
+                <Icon name="Gamepad2" size={18} className="mr-2" />
+                Игры
+              </TabsTrigger>
+              <TabsTrigger value="subscriptions" className="text-base data-[state=active]:bg-gradient-to-r data-[state=active]:from-neon-pink data-[state=active]:to-neon-purple data-[state=active]:text-background">
+                <Icon name="Star" size={18} className="mr-2" />
+                Подписки
+              </TabsTrigger>
+            </TabsList>
+
+            <TabsContent value="games" className="mt-0">
+              <GamesSection
+                filteredGames={filteredGames}
+                categories={categories}
+                platformFilter={platformFilter}
+                setPlatformFilter={setPlatformFilter}
+                categoryFilter={categoryFilter}
+                setCategoryFilter={setCategoryFilter}
+                searchQuery={searchQuery}
+                setSearchQuery={setSearchQuery}
+                sortBy={sortBy}
+                setSortBy={setSortBy}
+                priceRange={priceRange}
+                setPriceRange={setPriceRange}
+                addToCart={addToCart}
+                favorites={favorites}
+                onToggleFavorite={toggleFavorite}
+                onViewGame={handleViewGame}
+              />
+            </TabsContent>
+
+            <TabsContent value="subscriptions" className="mt-0">
+              <SubscriptionsSection
+                filteredSubs={filteredSubs}
+                addToCart={addToCart}
+              />
+            </TabsContent>
+          </Tabs>
+        </div>
+      </section>
 
       <Dialog open={!!selectedGame} onOpenChange={(open) => !open && setSelectedGame(null)}>
         <DialogContent className="max-w-4xl bg-card border-border">
@@ -390,11 +418,6 @@ export default function Index() {
         onBuy={(game) => addToCart(game, 'game')}
         onToggleFavorite={toggleFavorite}
         onViewGame={handleViewGame}
-      />
-
-      <SubscriptionsSection
-        filteredSubs={filteredSubs}
-        addToCart={addToCart}
       />
 
       <SteamTopup onTopup={handleSteamTopup} />
