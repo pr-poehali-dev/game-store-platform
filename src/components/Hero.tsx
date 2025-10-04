@@ -39,7 +39,11 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
           >
-            <span className="bg-gradient-to-r from-neon-green via-neon-pink to-neon-purple bg-clip-text text-transparent animate-shimmer">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#5eea8f] via-[#ff66c4] to-[#a855f7]" style={{
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text'
+            }}>
               GodStoreGame
             </span>
           </motion.h2>
