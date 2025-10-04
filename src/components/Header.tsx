@@ -118,6 +118,39 @@ export default function Header({
               🏆 Турниры
             </a>
             
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button 
+                  onClick={() => (window as any).toggleVoiceSearch?.()}
+                  variant="ghost" 
+                  size="sm" 
+                  className="relative border border-purple-500/30 bg-gradient-to-r from-purple-500/10 to-pink-500/10"
+                >
+                  <Icon name="Mic" size={18} className="text-purple-500" />
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>Голосовой поиск</p>
+              </TooltipContent>
+            </Tooltip>
+
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button 
+                  onClick={() => (window as any).toggleNotifications?.()}
+                  variant="ghost" 
+                  size="sm" 
+                  className="relative border border-purple-500/30 bg-gradient-to-r from-green-500/10 to-purple-500/10"
+                >
+                  <Icon name="Bell" size={18} className="text-green-500" />
+                  <span className="absolute -top-1 -right-1 w-2 h-2 bg-red-500 rounded-full animate-pulse"></span>
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>Уведомления (4 новых)</p>
+              </TooltipContent>
+            </Tooltip>
+
             <ThemeToggle />
             
             <Tooltip>

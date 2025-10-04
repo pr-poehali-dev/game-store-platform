@@ -21,6 +21,7 @@ import GamerSocialNetwork from '@/components/GamerSocialNetwork';
 import CurrencyRegionSelector from '@/components/CurrencyRegionSelector';
 import GameStreamsTrailers from '@/components/GameStreamsTrailers';
 import AchievementsShowcase from '@/components/AchievementsShowcase';
+import DiscordAuth from '@/components/DiscordAuth';
 import StatsSection from '@/components/StatsSection';
 import InfoSection from '@/components/InfoSection';
 import FeaturesSection from '@/components/FeaturesSection';
@@ -205,10 +206,6 @@ export default function Index() {
 
       <RobloxStore />
 
-      <AccountsSection onBuyAccount={handleBuyAccount} />
-
-      <PSNCards onBuy={handleBuyPSNCard} />
-
       <TournamentsSection />
 
       <LootboxSection />
@@ -226,6 +223,8 @@ export default function Index() {
       />
 
       <Footer />
+
+      <DiscordAuth />
 
       <GameComparison 
         games={games} 
