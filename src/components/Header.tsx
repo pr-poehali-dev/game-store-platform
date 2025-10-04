@@ -15,6 +15,7 @@ import ThemeToggle from '@/components/ThemeToggle';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 import NotificationBadge from '@/components/NotificationBadge';
 import PendingPurchasesBadge from '@/components/PendingPurchasesBadge';
+import SyncStatusIndicator from '@/components/SyncStatusIndicator';
 
 interface CartItem {
   id: string;
@@ -208,6 +209,15 @@ export default function Header({
             </Tooltip>
 
             <PendingPurchasesBadge />
+
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <SyncStatusIndicator />
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>Статус синхронизации</p>
+              </TooltipContent>
+            </Tooltip>
 
             <ThemeToggle />
             

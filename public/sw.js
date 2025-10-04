@@ -352,3 +352,143 @@ async function syncPendingPurchases() {
 
   console.log(`Синхронизация завершена: ${success} успешно, ${failed} ошибок`);
 }
+
+self.addEventListener('periodicsync', (event) => {
+  console.log('Periodic Sync event:', event.tag);
+
+  if (event.tag === 'sync-games-catalog') {
+    event.waitUntil(syncGamesCatalog());
+  } else if (event.tag === 'sync-price-updates') {
+    event.waitUntil(syncPriceUpdates());
+  } else if (event.tag === 'sync-new-releases') {
+    event.waitUntil(syncNewReleases());
+  } else if (event.tag === 'sync-discounts') {
+    event.waitUntil(syncDiscounts());
+  }
+});
+
+async function syncGamesCatalog() {
+  console.log('🔄 [SW] Синхронизация каталога игр...');
+  
+  try {
+    const response = await fetch('/api/games?limit=1000');
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    
+    const games = await response.json();
+    
+    const clients = await self.clients.matchAll();
+    if (clients.length > 0) {
+      clients[0].postMessage({
+        type: 'CACHE_GAMES',
+        games: games,
+        timestamp: Date.now()
+      });
+    }
+    
+    console.log(`✅ [SW] Каталог обновлен: ${games.length} игр`);
+    
+  } catch (error) {
+    console.error('❌ [SW] Ошибка синхронизации каталога:', error);
+  }
+}
+
+async function syncPriceUpdates() {
+  console.log('💰 [SW] Синхронизация цен...');
+  
+  try {
+    const response = await fetch('/api/games/price-updates');
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    
+    const updates = await response.json();
+    
+    if (updates.length > 0) {
+      const clients = await self.clients.matchAll();
+      if (clients.length > 0) {
+        clients[0].postMessage({
+          type: 'PRICE_UPDATES',
+          updates: updates,
+          timestamp: Date.now()
+        });
+      }
+      
+      console.log(`✅ [SW] Обновлено цен: ${updates.length}`);
+    }
+    
+  } catch (error) {
+    console.error('❌ [SW] Ошибка синхронизации цен:', error);
+  }
+}
+
+async function syncNewReleases() {
+  console.log('🎮 [SW] Проверка новых релизов...');
+  
+  try {
+    const response = await fetch('/api/games/new-releases?days=7');
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    
+    const newGames = await response.json();
+    
+    if (newGames.length > 0) {
+      await self.registration.showNotification(`🎮 ${newGames.length} новых игр!`, {
+        body: newGames.slice(0, 3).map(g => g.name).join(', '),
+        icon: '/icon-192.png',
+        badge: '/icon-192.png',
+        tag: 'new-releases',
+        data: { type: 'new-releases', games: newGames },
+        requireInteraction: false,
+      });
+      
+      const clients = await self.clients.matchAll();
+      if (clients.length > 0) {
+        clients[0].postMessage({
+          type: 'NEW_RELEASES',
+          games: newGames,
+          timestamp: Date.now()
+        });
+      }
+      
+      console.log(`✅ [SW] Найдено новых игр: ${newGames.length}`);
+    }
+    
+  } catch (error) {
+    console.error('❌ [SW] Ошибка проверки новых релизов:', error);
+  }
+}
+
+async function syncDiscounts() {
+  console.log('🔥 [SW] Проверка новых скидок...');
+  
+  try {
+    const response = await fetch('/api/games/discounts?active=true');
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    
+    const discounts = await response.json();
+    
+    if (discounts.length > 0) {
+      const maxDiscount = Math.max(...discounts.map(d => d.discount_percent || 0));
+      
+      await self.registration.showNotification('💰 Новые скидки на игры!', {
+        body: `${discounts.length} игр со скидкой до ${maxDiscount}%`,
+        icon: '/icon-192.png',
+        badge: '/icon-192.png',
+        tag: 'discounts-update',
+        data: { type: 'discounts', discounts: discounts },
+        requireInteraction: false,
+      });
+      
+      const clients = await self.clients.matchAll();
+      if (clients.length > 0) {
+        clients[0].postMessage({
+          type: 'DISCOUNTS_UPDATE',
+          discounts: discounts,
+          timestamp: Date.now()
+        });
+      }
+      
+      console.log(`✅ [SW] Найдено скидок: ${discounts.length}`);
+    }
+    
+  } catch (error) {
+    console.error('❌ [SW] Ошибка проверки скидок:', error);
+  }
+}

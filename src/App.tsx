@@ -21,8 +21,10 @@ import OfflineIndicator from "@/components/OfflineIndicator";
 import NotificationPermissionBanner from "@/components/NotificationPermissionBanner";
 import PendingPurchasesBadge from "@/components/PendingPurchasesBadge";
 import OfflinePurchaseHandler from "@/components/OfflinePurchaseHandler";
+import SyncNotifications from "@/components/SyncNotifications";
 import { registerServiceWorker } from "@/utils/registerServiceWorker";
 import { initBackgroundSync } from "@/utils/backgroundSync";
+import { initPeriodicSync } from "@/utils/periodicSync";
 
 const queryClient = new QueryClient();
 
@@ -30,6 +32,7 @@ const App = () => {
   useEffect(() => {
     registerServiceWorker();
     initBackgroundSync();
+    initPeriodicSync();
   }, []);
 
   return (
@@ -42,6 +45,7 @@ const App = () => {
           <OfflineIndicator />
           <NotificationPermissionBanner />
           <OfflinePurchaseHandler />
+          <SyncNotifications />
           <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
             <Routes>
               <Route path="/" element={<Index />} />
