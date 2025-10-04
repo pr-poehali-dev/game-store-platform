@@ -8,7 +8,6 @@ import { useNavigate } from 'react-router-dom';
 import PriceComparison from './PriceComparison';
 import WishlistButton from './WishlistButton';
 import SaleCountdown from './SaleCountdown';
-import { useState, useEffect } from 'react';
 
 interface GameCardProps {
   game: Game;
@@ -22,22 +21,6 @@ export default function GameCard({ game, onBuy, isFavorite, onToggleFavorite, on
   const navigate = useNavigate();
   const isNew = new Date().getFullYear() - game.release_year <= 1;
   const isHot = game.rating >= 8.5;
-  const [coverUrl, setCoverUrl] = useState<string>(game.image_url);
-
-  useEffect(() => {
-    const fetchCover = async () => {
-      try {
-        const response = await fetch(`https://functions.poehali.dev/b62ecfcc-7a7b-4b8d-9754-8cbb3d69d754?game_name=${encodeURIComponent(game.title)}`);
-        const data = await response.json();
-        if (data.cover_url) {
-          setCoverUrl(data.cover_url);
-        }
-      } catch (error) {
-        // Silently fail, keep original image
-      }
-    };
-    fetchCover();
-  }, [game.title]);
 
   const handleCardClick = () => {
     // Store games in localStorage for GameDetail page
@@ -66,7 +49,7 @@ export default function GameCard({ game, onBuy, isFavorite, onToggleFavorite, on
       <Card className="h-full bg-gradient-to-br from-card/80 via-card/60 to-card/40 backdrop-blur-xl border-2 border-border/50 hover:border-primary/80 hover:shadow-2xl hover:shadow-primary/30 transition-all duration-500 overflow-hidden group relative">
         <div className="relative overflow-hidden">
           <img 
-            src={coverUrl} 
+            src={game.image_url} 
             alt={game.title}
             className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500"
           />

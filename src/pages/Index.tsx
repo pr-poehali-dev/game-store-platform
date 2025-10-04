@@ -16,6 +16,7 @@ import FeaturesSection from '@/components/FeaturesSection';
 import PriceTracker from '@/components/PriceTracker';
 import TournamentReminder from '@/components/TournamentReminder';
 import GameComparison from '@/components/GameComparison';
+import FortuneWheel from '@/components/FortuneWheel';
 import Footer from '@/components/Footer';
 import { useIndexState } from '@/hooks/useIndexState';
 import { useState } from 'react';
@@ -81,10 +82,11 @@ export default function Index() {
   } = useIndexState();
 
   const [showComparison, setShowComparison] = useState(false);
+  const [showWheel, setShowWheel] = useState(false);
 
   return (
     <div className="min-h-screen bg-background dark">
-      <div className="fixed bottom-4 left-4 z-30">
+      <div className="fixed bottom-4 left-4 z-30 flex gap-3">
         <Button
           onClick={() => setShowComparison(true)}
           className="bg-gradient-to-r from-accent to-primary shadow-lg"
@@ -92,6 +94,14 @@ export default function Index() {
         >
           <Icon name="Scale" size={20} className="mr-2" />
           Сравнить игры
+        </Button>
+        <Button
+          onClick={() => setShowWheel(true)}
+          className="bg-gradient-to-r from-orange-500 to-red-500 shadow-lg animate-pulse"
+          size="lg"
+        >
+          <Icon name="CircleDot" size={20} className="mr-2" />
+          Колесо фортуны
         </Button>
       </div>
       <Header
@@ -206,6 +216,11 @@ export default function Index() {
         games={games} 
         isOpen={showComparison} 
         onClose={() => setShowComparison(false)} 
+      />
+
+      <FortuneWheel 
+        isOpen={showWheel} 
+        onClose={() => setShowWheel(false)} 
       />
     </div>
   );
