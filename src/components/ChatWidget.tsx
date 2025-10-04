@@ -136,7 +136,7 @@ export default function ChatWidget() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
             transition={{ duration: 0.2 }}
-            className="fixed bottom-24 right-4 md:right-8 w-[95vw] md:w-96 h-[600px] z-50"
+            className="fixed bottom-24 right-4 md:right-8 w-[95vw] md:w-96 h-[600px] z-30"
           >
             <Card className="h-full flex flex-col bg-background/95 backdrop-blur-xl border-neon-purple/30 shadow-2xl shadow-neon-purple/20">
               <div className="flex items-center justify-between p-4 border-b border-border bg-gradient-to-r from-neon-purple/20 to-neon-pink/20">
@@ -293,7 +293,7 @@ export default function ChatWidget() {
       <motion.div
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
-        className="fixed bottom-4 right-4 md:right-8 z-50"
+        className="fixed bottom-4 right-4 md:right-8 z-30"
       >
         <Button
           onClick={() => setIsOpen(!isOpen)}

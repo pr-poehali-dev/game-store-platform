@@ -28,10 +28,10 @@ export default function Footer() {
           <div>
             <h4 className="font-semibold mb-4 text-neon-green">Полезные ссылки</h4>
             <ul className="space-y-2 text-sm text-muted-foreground">
-              <li><a href="#games" className="hover:text-neon-green transition-colors">Каталог игр</a></li>
-              <li><a href="#subscriptions" className="hover:text-neon-green transition-colors">Подписки</a></li>
-              <li><a href="#" className="hover:text-neon-green transition-colors">Способы оплаты</a></li>
-              <li><a href="#" className="hover:text-neon-green transition-colors">Гарантии</a></li>
+              <li><a href="/" className="hover:text-neon-green transition-colors">Каталог игр</a></li>
+              <li><a href="/" className="hover:text-neon-green transition-colors">Подписки</a></li>
+              <li><a href="/" className="hover:text-neon-green transition-colors">Аккаунты</a></li>
+              <li><a href="/" className="hover:text-neon-green transition-colors">Карты PSN</a></li>
             </ul>
           </div>
 
@@ -60,9 +60,9 @@ export default function Footer() {
         <div className="border-t border-border pt-6 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
           <p>© 2025 GodStoreGame. Все права защищены.</p>
           <div className="flex gap-4 items-center">
-            <a href="#" className="hover:text-neon-green transition-colors">Политика конфиденциальности</a>
-            <a href="#" className="hover:text-neon-pink transition-colors">Условия использования</a>
-            <a href="/manager" className="flex items-center gap-1 text-xs text-muted-foreground/50 hover:text-neon-purple transition-colors">
+            <a href="/privacy" className="hover:text-neon-green transition-colors">Политика конфиденциальности</a>
+            <a href="/terms" className="hover:text-neon-pink transition-colors">Условия использования</a>
+            <a href="/manager" className="flex items-center gap-1 text-xs text-muted-foreground/50 hover:text-neon-purple transition-colors z-40 relative">
               <Icon name="Lock" size={12} />
               Для менеджеров
             </a>

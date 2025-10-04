@@ -64,7 +64,7 @@ export default function PriceTracker({ favorites, games, onBuy }: PriceTrackerPr
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="fixed bottom-6 right-6 z-50 max-w-md"
+      className="fixed bottom-24 left-6 z-30 max-w-md"
     >
       <Card className="bg-card/95 backdrop-blur-xl border-neon-green/30 shadow-2xl shadow-neon-green/10">
         <CardHeader className="pb-3">

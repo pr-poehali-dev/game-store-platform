@@ -55,7 +55,7 @@ export default function InfoSection() {
               </CardHeader>
               <CardContent>
                 <CardDescription>
-                  Любым удобным способом: карта РФ, СБП, криптовалюта, электронные кошельки
+                  Банковские карты РФ (Visa, Mastercard, МИР) или Система быстрых платежей (СБП)
                 </CardDescription>
               </CardContent>
             </Card>

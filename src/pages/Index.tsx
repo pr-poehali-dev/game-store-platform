@@ -17,6 +17,7 @@ import PriceComparison from '@/components/PriceComparison';
 import PriceTracker from '@/components/PriceTracker';
 import GameVersionSelector from '@/components/GameVersionSelector';
 import AccountsSection from '@/components/AccountsSection';
+import PSNCards from '@/components/PSNCards';
 import { initialGames, type Game } from '@/data/games';
 import type { GameVersion } from '@/types';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
@@ -37,8 +38,8 @@ interface Subscription {
 
 interface CartItem {
   id: string;
-  type: 'game' | 'subscription' | 'steam-topup' | 'account';
-  item: Game | Subscription | { id: number; price: number; title: string };
+  type: 'game' | 'subscription' | 'steam-topup' | 'account' | 'psn-card';
+  item: Game | Subscription | { id: number; price: number; title: string; value?: number; region?: string };
   quantity: number;
   selectedVersion?: GameVersion;
 }
@@ -325,6 +326,34 @@ export default function Index() {
     });
   };
 
+  const handleBuyPSNCard = (card: any) => {
+    const discount = card.discount || 0;
+    const finalPrice = discount > 0 ? Math.round(card.price * (1 - discount / 100)) : card.price;
+    
+    const cardItem = {
+      id: Date.now(),
+      title: `Карта PSN ${card.value}₽ (${card.region})`,
+      price: finalPrice,
+      value: card.value,
+      region: card.region
+    };
+    
+    setCart([...cart, { 
+      id: `psn-card-${Date.now()}`, 
+      type: 'psn-card' as const, 
+      item: cardItem, 
+      quantity: 1 
+    }]);
+    
+    setIsCartOpen(true);
+    
+    toast({ 
+      title: 'Карта PSN добавлена в корзину', 
+      description: cardItem.title,
+      duration: 3000
+    });
+  };
+
   return (
     <div className="min-h-screen bg-background dark">
       <Header
@@ -526,6 +555,8 @@ export default function Index() {
       <SteamTopup onTopup={handleSteamTopup} />
 
       <AccountsSection onBuyAccount={handleBuyAccount} />
+
+      <PSNCards onBuy={handleBuyPSNCard} />
 
       <StatsSection />
 
