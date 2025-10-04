@@ -10,6 +10,7 @@ import { useToast } from '@/hooks/use-toast';
 import ReferralProgram from '@/components/ReferralProgram';
 import UserLevel from '@/components/UserLevel';
 import CashbackDisplay from '@/components/CashbackDisplay';
+import NotificationSettings from '@/components/NotificationSettings';
 
 interface UserData {
   user: {
@@ -285,7 +286,7 @@ export default function UserProfile() {
         </Card>
 
         <Tabs defaultValue="orders" className="w-full">
-          <TabsList className="grid w-full grid-cols-4">
+          <TabsList className="grid w-full grid-cols-5">
             <TabsTrigger value="orders">
               <Icon name="ShoppingBag" size={16} className="mr-2" />
               История покупок
@@ -301,6 +302,10 @@ export default function UserProfile() {
             <TabsTrigger value="referrals">
               <Icon name="Users" size={16} className="mr-2" />
               Рефералы
+            </TabsTrigger>
+            <TabsTrigger value="settings">
+              <Icon name="Settings" size={16} className="mr-2" />
+              Настройки
             </TabsTrigger>
           </TabsList>
 
@@ -464,6 +469,10 @@ export default function UserProfile() {
 
           <TabsContent value="referrals" className="space-y-4">
             <ReferralProgram userId={1} />
+          </TabsContent>
+          
+          <TabsContent value="settings" className="space-y-4">
+            <NotificationSettings />
           </TabsContent>
         </Tabs>
       </div>

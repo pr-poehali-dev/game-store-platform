@@ -185,3 +185,73 @@ self.addEventListener('message', (event) => {
     );
   }
 });
+
+self.addEventListener('push', (event) => {
+  if (!event.data) {
+    return;
+  }
+
+  let notificationData;
+  try {
+    notificationData = event.data.json();
+  } catch (e) {
+    notificationData = {
+      title: 'Новое уведомление',
+      body: event.data.text(),
+    };
+  }
+
+  const title = notificationData.title || 'GodStoreGame';
+  const options = {
+    body: notificationData.body || '',
+    icon: notificationData.icon || '/icon-192.png',
+    badge: notificationData.badge || '/icon-192.png',
+    image: notificationData.image,
+    data: notificationData.data || {},
+    tag: notificationData.tag || 'default',
+    requireInteraction: notificationData.requireInteraction || false,
+    actions: notificationData.actions || [],
+    vibrate: notificationData.vibrate || [200, 100, 200],
+  };
+
+  event.waitUntil(
+    self.registration.showNotification(title, options)
+  );
+});
+
+self.addEventListener('notificationclick', (event) => {
+  event.notification.close();
+
+  const action = event.action;
+  const data = event.notification.data || {};
+
+  let urlToOpen = '/';
+
+  if (action === 'view' && data.url) {
+    urlToOpen = data.url;
+  } else if (action === 'buy' && data.url) {
+    urlToOpen = data.url;
+  } else if (data.url) {
+    urlToOpen = data.url;
+  }
+
+  event.waitUntil(
+    clients.matchAll({ type: 'window', includeUncontrolled: true }).then((clientList) => {
+      for (let i = 0; i < clientList.length; i++) {
+        const client = clientList[i];
+        if (client.url.includes(self.location.origin) && 'focus' in client) {
+          client.focus();
+          client.navigate(urlToOpen);
+          return;
+        }
+      }
+      if (clients.openWindow) {
+        return clients.openWindow(urlToOpen);
+      }
+    })
+  );
+});
+
+self.addEventListener('notificationclose', (event) => {
+  console.log('Notification closed:', event.notification.tag);
+});

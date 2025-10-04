@@ -18,6 +18,7 @@ import WishlistPage from "./pages/WishlistPage";
 import AdminEnrichment from "./pages/AdminEnrichment";
 import Tournaments from "./pages/Tournaments";
 import OfflineIndicator from "@/components/OfflineIndicator";
+import NotificationPermissionBanner from "@/components/NotificationPermissionBanner";
 import { registerServiceWorker } from "@/utils/registerServiceWorker";
 
 const queryClient = new QueryClient();
@@ -35,6 +36,7 @@ const App = () => {
           <Toaster />
           <Sonner />
           <OfflineIndicator />
+          <NotificationPermissionBanner />
           <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
             <Routes>
               <Route path="/" element={<Index />} />
