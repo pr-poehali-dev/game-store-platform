@@ -21,7 +21,7 @@ export default function Footer() {
               </div>
             </div>
             <p className="text-sm text-muted-foreground">
-              Официальный магазин консольных игр. 72 игры для PlayStation и Xbox, моментальная доставка, гарантия качества.
+              Официальный магазин консольных игр 2025. Более 50 хитов для PlayStation и Xbox, моментальная доставка, гарантия качества.
             </p>
           </div>
 
@@ -58,7 +58,7 @@ export default function Footer() {
         </div>
 
         <div className="border-t border-border pt-6 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
-          <p>© 2024 GodStoreGame. Все права защищены.</p>
+          <p>© 2025 GodStoreGame. Все права защищены.</p>
           <div className="flex gap-4 items-center">
             <a href="#" className="hover:text-neon-green transition-colors">Политика конфиденциальности</a>
             <a href="#" className="hover:text-neon-pink transition-colors">Условия использования</a>

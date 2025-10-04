@@ -53,7 +53,7 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.5 }}
           >
-            72 консольных игры для PlayStation и Xbox 🎮
+            50+ хитов 2024-2025 для PlayStation и Xbox 🎮
           </motion.p>
           <motion.p 
             className="text-base md:text-lg text-muted-foreground max-w-xl mx-auto"
@@ -61,7 +61,7 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
           >
-            Call of Duty • Battlefield • GTA • Spider-Man • God of War • Halo и многое другое
+            Elden Ring • Cyberpunk 2077 • Baldur's Gate 3 • Spider-Man 2 • Hogwarts Legacy • Silent Hill 2 и многое другое
           </motion.p>
           <motion.div
             className="flex flex-wrap gap-2 justify-center text-sm text-muted-foreground mt-4"

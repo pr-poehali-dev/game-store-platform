@@ -34,7 +34,7 @@ export default function InfoSection() {
               </CardHeader>
               <CardContent>
                 <CardDescription>
-                  Из каталога 150+ игр для Xbox, PlayStation и PC. Скидки до 90%!
+                  Из каталога 50+ актуальных хитов 2024-2025 для Xbox и PlayStation. Скидки до 80%!
                 </CardDescription>
               </CardContent>
             </Card>

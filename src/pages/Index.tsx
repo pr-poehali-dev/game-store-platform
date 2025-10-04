@@ -7,6 +7,7 @@ import SubscriptionsSection from '@/components/SubscriptionsSection';
 import SteamTopup from '@/components/SteamTopup';
 import InfoSection from '@/components/InfoSection';
 import FeaturesSection from '@/components/FeaturesSection';
+import StatsSection from '@/components/StatsSection';
 import Footer from '@/components/Footer';
 import GameForm from '@/components/GameForm';
 import ChatWidget from '@/components/ChatWidget';
@@ -471,6 +472,8 @@ export default function Index() {
       />
 
       <SteamTopup onTopup={handleSteamTopup} />
+
+      <StatsSection />
 
       <InfoSection />
 
