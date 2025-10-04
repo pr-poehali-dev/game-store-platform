@@ -11,6 +11,7 @@ import Footer from '@/components/Footer';
 import GameForm from '@/components/GameForm';
 import ChatWidget from '@/components/ChatWidget';
 import RecommendedGames from '@/components/RecommendedGames';
+import GameReviews from '@/components/GameReviews';
 import { initialGames, type Game } from '@/data/games';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { Badge } from '@/components/ui/badge';
@@ -384,35 +385,55 @@ export default function Index() {
                   alt={selectedGame.title}
                   className="w-full h-64 object-cover rounded-lg"
                 />
-                <p className="text-muted-foreground">{selectedGame.description}</p>
-                <div className="flex items-center justify-between pt-4 border-t">
-                  <div>
-                    {selectedGame.discount && selectedGame.discount > 0 ? (
-                      <div className="flex items-center gap-3">
-                        <span className="text-3xl font-bold text-neon-green">
-                          {Math.round(selectedGame.price * (1 - selectedGame.discount / 100))}₽
-                        </span>
-                        <span className="text-xl text-muted-foreground line-through">
-                          {selectedGame.price}₽
-                        </span>
-                        <Badge className="bg-red-600 text-white">-{selectedGame.discount}%</Badge>
-                      </div>
-                    ) : (
-                      <span className="text-3xl font-bold text-neon-green">{selectedGame.price}₽</span>
+                <Tabs defaultValue="details" className="w-full">
+                  <TabsList className="grid w-full grid-cols-2">
+                    <TabsTrigger value="details">Описание</TabsTrigger>
+                    <TabsTrigger value="reviews">Отзывы</TabsTrigger>
+                  </TabsList>
+                  <TabsContent value="details" className="space-y-4">
+                    <p className="text-muted-foreground">{selectedGame.description}</p>
+                    {selectedGame.fullDescription && (
+                      <p className="text-sm text-foreground/80 leading-relaxed">{selectedGame.fullDescription}</p>
                     )}
-                  </div>
-                  <Button 
-                    size="lg"
-                    className="bg-gradient-to-r from-neon-purple to-neon-pink"
-                    onClick={() => {
-                      addToCart(selectedGame, 'game');
-                      setSelectedGame(null);
-                    }}
-                  >
-                    <Icon name="ShoppingCart" size={20} className="mr-2" />
-                    Купить сейчас
-                  </Button>
-                </div>
+                    {selectedGame.consoleModels && (
+                      <div className="flex items-center gap-2">
+                        <Icon name="Gamepad2" size={16} className="text-primary" />
+                        <span className="text-sm text-muted-foreground">Платформы: {selectedGame.consoleModels}</span>
+                      </div>
+                    )}
+                    <div className="flex items-center justify-between pt-4 border-t">
+                      <div>
+                        {selectedGame.discount && selectedGame.discount > 0 ? (
+                          <div className="flex items-center gap-3">
+                            <span className="text-3xl font-bold text-neon-green">
+                              {Math.round(selectedGame.price * (1 - selectedGame.discount / 100))}₽
+                            </span>
+                            <span className="text-xl text-muted-foreground line-through">
+                              {selectedGame.price}₽
+                            </span>
+                            <Badge className="bg-red-600 text-white">-{selectedGame.discount}%</Badge>
+                          </div>
+                        ) : (
+                          <span className="text-3xl font-bold text-neon-green">{selectedGame.price}₽</span>
+                        )}
+                      </div>
+                      <Button 
+                        size="lg"
+                        className="bg-gradient-to-r from-neon-purple to-neon-pink"
+                        onClick={() => {
+                          addToCart(selectedGame, 'game');
+                          setSelectedGame(null);
+                        }}
+                      >
+                        <Icon name="ShoppingCart" size={20} className="mr-2" />
+                        Купить сейчас
+                      </Button>
+                    </div>
+                  </TabsContent>
+                  <TabsContent value="reviews">
+                    <GameReviews gameId={selectedGame.id} gameTitle={selectedGame.title} />
+                  </TabsContent>
+                </Tabs>
               </div>
             </>
           )}

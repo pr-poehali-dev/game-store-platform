@@ -27,17 +27,19 @@ const GROK_API_URL = 'https://functions.poehali.dev/c25a9f0d-aae2-47db-ab57-9583
 
 export default function ChatWidget() {
   const [isOpen, setIsOpen] = useState(false);
+  const [userName, setUserName] = useState('');
+  const [showNameInput, setShowNameInput] = useState(true);
   const [messages, setMessages] = useState<Message[]>([
     {
       id: '0',
-      text: 'Привет! 👋 Я AI-консультант магазина консольных игр. Помогу выбрать игру для PlayStation или Xbox! Спрашивайте что угодно 🎮',
+      text: 'Привет! 👋 Я AI-консультант магазина консольных игр. Помогу выбрать игру для PlayStation или Xbox! Как вас зовут?',
       sender: 'bot',
       timestamp: new Date(),
     },
   ]);
   const [inputValue, setInputValue] = useState('');
   const [isTyping, setIsTyping] = useState(false);
-  const [showQuickReplies, setShowQuickReplies] = useState(true);
+  const [showQuickReplies, setShowQuickReplies] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -45,6 +47,31 @@ export default function ChatWidget() {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
     }
   }, [messages]);
+
+  const handleSetName = () => {
+    if (!inputValue.trim()) return;
+    
+    setUserName(inputValue);
+    setShowNameInput(false);
+    
+    const userMessage: Message = {
+      id: Date.now().toString(),
+      text: inputValue,
+      sender: 'user',
+      timestamp: new Date(),
+    };
+    
+    const botMessage: Message = {
+      id: (Date.now() + 1).toString(),
+      text: `Приятно познакомиться, ${inputValue}! 🎮 Чем могу помочь? Задайте любой вопрос об играх или выберите быстрый ответ ниже.`,
+      sender: 'bot',
+      timestamp: new Date(),
+    };
+    
+    setMessages(prev => [...prev, userMessage, botMessage]);
+    setInputValue('');
+    setShowQuickReplies(true);
+  };
 
   const handleSendMessage = async (text: string) => {
     if (!text.trim()) return;
@@ -211,27 +238,52 @@ export default function ChatWidget() {
               )}
 
               <div className="p-4 border-t border-border">
-                <form
-                  onSubmit={(e) => {
-                    e.preventDefault();
-                    handleSendMessage(inputValue);
-                  }}
-                  className="flex gap-2"
-                >
-                  <Input
-                    value={inputValue}
-                    onChange={(e) => setInputValue(e.target.value)}
-                    placeholder="Напишите сообщение..."
-                    className="flex-1"
-                  />
-                  <Button
-                    type="submit"
-                    size="icon"
-                    className="bg-gradient-to-r from-neon-purple to-neon-pink hover:opacity-90"
+                {showNameInput ? (
+                  <form
+                    onSubmit={(e) => {
+                      e.preventDefault();
+                      handleSetName();
+                    }}
+                    className="flex gap-2"
                   >
-                    <Icon name="Send" size={18} />
-                  </Button>
-                </form>
+                    <Input
+                      value={inputValue}
+                      onChange={(e) => setInputValue(e.target.value)}
+                      placeholder="Введите ваше имя..."
+                      className="flex-1"
+                      autoFocus
+                    />
+                    <Button
+                      type="submit"
+                      size="icon"
+                      className="bg-gradient-to-r from-neon-purple to-neon-pink hover:opacity-90"
+                    >
+                      <Icon name="Check" size={18} />
+                    </Button>
+                  </form>
+                ) : (
+                  <form
+                    onSubmit={(e) => {
+                      e.preventDefault();
+                      handleSendMessage(inputValue);
+                    }}
+                    className="flex gap-2"
+                  >
+                    <Input
+                      value={inputValue}
+                      onChange={(e) => setInputValue(e.target.value)}
+                      placeholder={`Сообщение от ${userName}...`}
+                      className="flex-1"
+                    />
+                    <Button
+                      type="submit"
+                      size="icon"
+                      className="bg-gradient-to-r from-neon-purple to-neon-pink hover:opacity-90"
+                    >
+                      <Icon name="Send" size={18} />
+                    </Button>
+                  </form>
+                )}
               </div>
             </Card>
           </motion.div>

@@ -1,0 +1,36 @@
+{
+  "tests": [
+    {
+      "name": "Get all reviews",
+      "method": "GET",
+      "path": "/",
+      "expectedStatus": 200,
+      "expectedBody": [],
+      "bodyMatcher": "type"
+    },
+    {
+      "name": "Add review",
+      "method": "POST",
+      "path": "/",
+      "body": {
+        "game_id": 1,
+        "user_name": "Иван",
+        "rating": 5,
+        "comment": "Отличная игра!"
+      },
+      "expectedStatus": 201,
+      "expectedBody": {
+        "id": 1,
+        "message": "Review added successfully"
+      }
+    },
+    {
+      "name": "Get reviews by game_id",
+      "method": "GET",
+      "path": "/?game_id=1",
+      "expectedStatus": 200,
+      "expectedBody": [],
+      "bodyMatcher": "type"
+    }
+  ]
+}

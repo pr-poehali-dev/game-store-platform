@@ -21,7 +21,7 @@ export default function Footer() {
               </div>
             </div>
             <p className="text-sm text-muted-foreground">
-              Официальный магазин игр и подписок. 155+ игр в каталоге, моментальная доставка, гарантия качества.
+              Официальный магазин консольных игр. 72 игры для PlayStation и Xbox, моментальная доставка, гарантия качества.
             </p>
           </div>
 
@@ -38,21 +38,20 @@ export default function Footer() {
           <div>
             <h4 className="font-semibold mb-4 text-neon-pink">Связь с нами</h4>
             <div className="flex flex-col gap-3">
-              <a href="#" className="flex items-center gap-2 text-sm text-muted-foreground hover:text-neon-pink transition-colors">
+              <a href="mailto:support@godstore.game" className="flex items-center gap-2 text-sm text-muted-foreground hover:text-neon-pink transition-colors">
                 <Icon name="Mail" size={16} />
                 support@godstore.game
               </a>
-              <a href="#" className="flex items-center gap-2 text-sm text-muted-foreground hover:text-neon-pink transition-colors">
-                <Icon name="MessageCircle" size={16} />
-                Telegram
-              </a>
-              <a href="#" className="flex items-center gap-2 text-sm text-muted-foreground hover:text-neon-pink transition-colors">
+              <a href="https://t.me/GodStoreGame" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-sm text-muted-foreground hover:text-[#0088cc] transition-colors">
                 <Icon name="Send" size={16} />
-                WhatsApp
+                @GodStoreGame
               </a>
-              <div className="flex gap-2 mt-2">
-                <Badge variant="outline" className="border-neon-green/30 text-neon-green">24/7</Badge>
-                <Badge variant="outline" className="border-neon-purple/30 text-neon-purple">Быстрый ответ</Badge>
+              <div className="flex flex-col gap-1 mt-1">
+                <p className="text-xs text-muted-foreground/70">Поддержка и консультации</p>
+                <div className="flex gap-2">
+                  <Badge variant="outline" className="border-neon-green/30 text-neon-green text-xs">24/7</Badge>
+                  <Badge variant="outline" className="border-neon-purple/30 text-neon-purple text-xs">Быстрый ответ</Badge>
+                </div>
               </div>
             </div>
           </div>

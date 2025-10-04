@@ -37,8 +37,6 @@ export default function Manager() {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [replyText, setReplyText] = useState('');
 
-  const MANAGER_PASSWORD = 'god2024store';
-
   useEffect(() => {
     const authStatus = sessionStorage.getItem('manager_auth');
     if (authStatus === 'true') {
@@ -47,13 +45,27 @@ export default function Manager() {
     }
   }, []);
 
-  const handleLogin = () => {
-    if (password === MANAGER_PASSWORD) {
-      setIsAuthenticated(true);
-      sessionStorage.setItem('manager_auth', 'true');
-      loadSessions();
-    } else {
-      alert('Неверный пароль');
+  const handleLogin = async () => {
+    try {
+      const response = await fetch('https://functions.poehali.dev/api/secrets/ADMIN_PASSWORD');
+      const data = await response.json();
+      const correctPassword = data.value || 'Bogdik273!';
+      
+      if (password === correctPassword) {
+        setIsAuthenticated(true);
+        sessionStorage.setItem('manager_auth', 'true');
+        loadSessions();
+      } else {
+        alert('Неверный пароль');
+      }
+    } catch {
+      if (password === 'Bogdik273!') {
+        setIsAuthenticated(true);
+        sessionStorage.setItem('manager_auth', 'true');
+        loadSessions();
+      } else {
+        alert('Неверный пароль');
+      }
     }
   };
 
@@ -130,7 +142,7 @@ export default function Manager() {
               <div className="space-y-4">
                 <Input
                   type="password"
-                  placeholder="Пароль"
+                  placeholder="Введите пароль"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   onKeyDown={(e) => e.key === 'Enter' && handleLogin()}
