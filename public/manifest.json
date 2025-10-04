@@ -1,0 +1,58 @@
+{
+  "name": "Game Store - Магазин игр",
+  "short_name": "GameStore",
+  "description": "Онлайн магазин игр для Xbox и PlayStation с лучшими ценами",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0a0a",
+  "theme_color": "#8b5cf6",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["games", "shopping", "entertainment"],
+  "screenshots": [
+    {
+      "src": "/screenshot-1.png",
+      "sizes": "1280x720",
+      "type": "image/png"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Каталог игр",
+      "short_name": "Каталог",
+      "description": "Открыть каталог игр",
+      "url": "/#games",
+      "icons": [
+        {
+          "src": "/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Избранное",
+      "short_name": "Избранное",
+      "description": "Открыть избранные игры",
+      "url": "/wishlist",
+      "icons": [
+        {
+          "src": "/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    }
+  ]
+}
