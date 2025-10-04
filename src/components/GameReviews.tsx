@@ -16,6 +16,8 @@ interface Review {
   comment: string;
   created_at: string;
   is_verified: boolean;
+  likes: number;
+  platform: string;
 }
 
 interface GameReviewsProps {
@@ -243,7 +245,21 @@ export default function GameReviews({ gameId, gameTitle }: GameReviewsProps) {
                         ))}
                       </div>
                     </div>
-                    <p className="text-sm text-foreground/90 leading-relaxed">{review.comment}</p>
+                    <p className="text-sm text-foreground/90 leading-relaxed mb-3">{review.comment}</p>
+                    <div className="flex items-center justify-between pt-3 border-t border-border/50">
+                      <div className="flex items-center gap-4">
+                        <button className="flex items-center gap-1 text-xs text-muted-foreground hover:text-primary transition-colors">
+                          <Icon name="ThumbsUp" size={14} />
+                          <span>{review.likes || 0}</span>
+                        </button>
+                        {review.platform && (
+                          <Badge variant="outline" className="text-xs">
+                            <Icon name="Gamepad2" size={12} className="mr-1" />
+                            {review.platform}
+                          </Badge>
+                        )}
+                      </div>
+                    </div>
                   </CardContent>
                 </Card>
               </motion.div>
