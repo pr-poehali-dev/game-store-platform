@@ -11,6 +11,7 @@ import ReferralProgram from '@/components/ReferralProgram';
 import UserLevel from '@/components/UserLevel';
 import CashbackDisplay from '@/components/CashbackDisplay';
 import NotificationSettings from '@/components/NotificationSettings';
+import CurrencyRatesWidget from '@/components/CurrencyRatesWidget';
 
 interface UserData {
   user: {
@@ -245,8 +246,9 @@ export default function UserProfile() {
             <CashbackDisplay userId={1} />
           </div>
 
-          <div>
+          <div className="space-y-6">
             <UserLevel userId={1} />
+            <CurrencyRatesWidget />
           </div>
         </div>
 

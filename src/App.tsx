@@ -22,9 +22,11 @@ import NotificationPermissionBanner from "@/components/NotificationPermissionBan
 import PendingPurchasesBadge from "@/components/PendingPurchasesBadge";
 import OfflinePurchaseHandler from "@/components/OfflinePurchaseHandler";
 import SyncNotifications from "@/components/SyncNotifications";
+import InstallPWAPrompt from "@/components/InstallPWAPrompt";
 import { registerServiceWorker } from "@/utils/registerServiceWorker";
 import { initBackgroundSync } from "@/utils/backgroundSync";
 import { initPeriodicSync } from "@/utils/periodicSync";
+import { initExchangeRates } from "@/utils/currencyRates";
 
 const queryClient = new QueryClient();
 
@@ -33,6 +35,7 @@ const App = () => {
     registerServiceWorker();
     initBackgroundSync();
     initPeriodicSync();
+    initExchangeRates();
   }, []);
 
   return (
@@ -46,6 +49,7 @@ const App = () => {
           <NotificationPermissionBanner />
           <OfflinePurchaseHandler />
           <SyncNotifications />
+          <InstallPWAPrompt />
           <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
             <Routes>
               <Route path="/" element={<Index />} />

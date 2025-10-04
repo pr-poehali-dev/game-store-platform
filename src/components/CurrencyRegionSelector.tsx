@@ -13,22 +13,23 @@ interface Currency {
   name: string;
 }
 
+// Актуальные курсы на 04.10.2025
 const currencies: Currency[] = [
   { code: 'RUB', symbol: '₽', rate: 1, flag: '🇷🇺', name: 'Российский рубль' },
-  { code: 'USD', symbol: '$', rate: 0.011, flag: '🇺🇸', name: 'Доллар США' },
-  { code: 'EUR', symbol: '€', rate: 0.01, flag: '🇪🇺', name: 'Евро' },
-  { code: 'TRY', symbol: '₺', rate: 0.33, flag: '🇹🇷', name: 'Турецкая лира' },
-  { code: 'UAH', symbol: '₴', rate: 0.41, flag: '🇺🇦', name: 'Украинская гривна' },
-  { code: 'KZT', symbol: '₸', rate: 5.2, flag: '🇰🇿', name: 'Казахстанский тенге' },
+  { code: 'USD', symbol: '$', rate: 0.0122, flag: '🇺🇸', name: 'Доллар США' }, // 1 USD = 82 RUB
+  { code: 'EUR', symbol: '€', rate: 0.0104, flag: '🇪🇺', name: 'Евро' }, // 1 EUR = 96 RUB
+  { code: 'GBP', symbol: '£', rate: 0.0093, flag: '🇬🇧', name: 'Фунт стерлингов' }, // 1 GBP = 108 RUB
+  { code: 'CNY', symbol: '¥', rate: 0.087, flag: '🇨🇳', name: 'Китайский юань' }, // 1 CNY = 11.5 RUB
+  { code: 'KZT', symbol: '₸', rate: 5.88, flag: '🇰🇿', name: 'Казахстанский тенге' }, // 1 KZT = 0.17 RUB
 ];
 
 const regions: Region[] = [
   { code: 'RU', name: 'Россия', flag: '🇷🇺', priceMultiplier: 1 },
-  { code: 'TR', name: 'Турция', flag: '🇹🇷', priceMultiplier: 0.6 },
-  { code: 'AR', name: 'Аргентина', flag: '🇦🇷', priceMultiplier: 0.4 },
-  { code: 'IN', name: 'Индия', flag: '🇮🇳', priceMultiplier: 0.5 },
-  { code: 'UA', name: 'Украина', flag: '🇺🇦', priceMultiplier: 0.7 },
-  { code: 'KZ', name: 'Казахстан', flag: '🇰🇿', priceMultiplier: 0.8 },
+  { code: 'US', name: 'США', flag: '🇺🇸', priceMultiplier: 1.2 },
+  { code: 'EU', name: 'Европа', flag: '🇪🇺', priceMultiplier: 1.15 },
+  { code: 'GB', name: 'Великобритания', flag: '🇬🇧', priceMultiplier: 1.25 },
+  { code: 'CN', name: 'Китай', flag: '🇨🇳', priceMultiplier: 0.6 },
+  { code: 'KZ', name: 'Казахстан', flag: '🇰🇿', priceMultiplier: 0.7 },
 ];
 
 interface Region {
