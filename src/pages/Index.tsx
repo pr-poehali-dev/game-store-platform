@@ -10,6 +10,7 @@ import FeaturesSection from '@/components/FeaturesSection';
 import Footer from '@/components/Footer';
 import GameForm from '@/components/GameForm';
 import ChatWidget from '@/components/ChatWidget';
+import RecommendedGames from '@/components/RecommendedGames';
 import { initialGames, type Game } from '@/data/games';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { Badge } from '@/components/ui/badge';
@@ -381,6 +382,15 @@ export default function Index() {
       </Dialog>
 
       <ChatWidget />
+
+      <RecommendedGames
+        games={games}
+        favorites={favorites}
+        viewHistory={viewHistory}
+        onBuy={(game) => addToCart(game, 'game')}
+        onToggleFavorite={toggleFavorite}
+        onViewGame={handleViewGame}
+      />
 
       <SubscriptionsSection
         filteredSubs={filteredSubs}

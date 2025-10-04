@@ -78,13 +78,18 @@ export default function Header({
     <header className="border-b border-border bg-card/80 backdrop-blur-md sticky top-0 z-50">
       <div className="container mx-auto px-4 py-3">
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-4">
-            <Icon name="Gamepad2" className="h-12 w-12 text-neon-green" />
+          <div className="flex items-center gap-3">
+            <div className="relative">
+              <div className="absolute inset-0 bg-gradient-to-r from-neon-green to-neon-purple rounded-full blur-lg opacity-50"></div>
+              <div className="relative bg-gradient-to-br from-neon-green via-neon-pink to-neon-purple p-2 rounded-xl">
+                <Icon name="Gamepad2" className="h-8 w-8 text-background" />
+              </div>
+            </div>
             <div>
-              <h1 className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-neon-green via-neon-pink to-neon-purple bg-clip-text text-transparent">
-                GODSTOREGAME
+              <h1 className="text-xl md:text-2xl font-bold bg-gradient-to-r from-neon-green via-neon-pink to-neon-purple bg-clip-text text-transparent">
+                GodStoreGame
               </h1>
-              <p className="text-xs text-muted-foreground hidden md:block">Божественный магазин игр</p>
+              <p className="text-xs text-muted-foreground hidden md:block">Магазин игр премиум класса</p>
             </div>
           </div>
           
