@@ -235,7 +235,7 @@ export default function GameDetail() {
 
                 <div className="grid grid-cols-2 gap-2">
                   <WishlistButton gameId={game.id} userId={1} />
-                  <GiftGameDialog gameId={game.id} gameTitle={game.title} gamePrice={finalPrice} />
+                  <GiftGameDialog game={game} userId={1} />
                 </div>
 
                 <div className="pt-4 border-t space-y-3">
