@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import { imageCache } from '@/utils/imageCache';
 
 interface LazyImageProps {
   src: string;
@@ -6,6 +7,24 @@ interface LazyImageProps {
   className?: string;
   placeholder?: string;
 }
+
+const getConnectionSpeed = (): 'slow' | 'fast' => {
+  if (typeof navigator === 'undefined') return 'fast';
+  
+  const connection = (navigator as any).connection || (navigator as any).mozConnection || (navigator as any).webkitConnection;
+  
+  if (!connection) return 'fast';
+  
+  if (connection.effectiveType === '4g' || connection.effectiveType === 'wifi') {
+    return 'fast';
+  }
+  
+  if (connection.saveData || connection.effectiveType === 'slow-2g' || connection.effectiveType === '2g' || connection.effectiveType === '3g') {
+    return 'slow';
+  }
+  
+  return 'fast';
+};
 
 const supportsWebP = (): boolean => {
   if (typeof window === 'undefined') return false;
@@ -16,16 +35,18 @@ const supportsWebP = (): boolean => {
   return false;
 };
 
-const getOptimizedSrc = (src: string, isWebP: boolean): string => {
-  if (isWebP) {
-    return src.replace(/\.(jpg|jpeg|png)$/i, '.webp');
+const getOptimizedSrc = (src: string, isWebP: boolean, quality: 'low' | 'high'): string => {
+  let optimized = src;
+  
+  if (isWebP && quality === 'high') {
+    optimized = src.replace(/\.(jpg|jpeg|png)$/i, '.webp');
   }
-  return src;
-};
-
-const createLowQualityPlaceholder = (src: string, isWebP: boolean): string => {
-  const optimized = getOptimizedSrc(src, isWebP);
-  return optimized.replace(/\.(jpg|jpeg|png|webp)$/i, '_thumb.$1');
+  
+  if (quality === 'low') {
+    optimized = optimized.replace(/\.(jpg|jpeg|png|webp)$/i, '_thumb.$1');
+  }
+  
+  return optimized;
 };
 
 const loadImage = (src: string): Promise<void> => {
@@ -42,6 +63,7 @@ export default function LazyImage({ src, alt, className, placeholder }: LazyImag
   const [isHdLoaded, setIsHdLoaded] = useState(false);
   const [isInView, setIsInView] = useState(false);
   const [webpSupported] = useState(supportsWebP());
+  const [connectionSpeed] = useState(getConnectionSpeed());
   const imgRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -67,26 +89,48 @@ export default function LazyImage({ src, alt, className, placeholder }: LazyImag
   useEffect(() => {
     if (!isInView) return;
 
-    const lqSrc = createLowQualityPlaceholder(src, webpSupported);
-    const hdSrc = getOptimizedSrc(src, webpSupported);
+    const cached = imageCache.get(src);
+    if (cached) {
+      setCurrentSrc(cached);
+      setIsHdLoaded(true);
+      return;
+    }
+
+    const quality = connectionSpeed === 'slow' ? 'low' : 'high';
+    const lqSrc = getOptimizedSrc(src, false, 'low');
+    const hdSrc = getOptimizedSrc(src, webpSupported, quality);
     
-    loadImage(lqSrc)
-      .then(() => {
-        setCurrentSrc(lqSrc);
-        return loadImage(hdSrc);
-      })
-      .catch(() => {
-        setCurrentSrc(src);
-        return loadImage(src);
-      })
-      .then(() => {
-        setCurrentSrc(hdSrc);
-        setIsHdLoaded(true);
-      })
-      .catch(() => {
-        setIsHdLoaded(true);
-      });
-  }, [isInView, src, webpSupported]);
+    if (connectionSpeed === 'slow') {
+      loadImage(lqSrc)
+        .then(() => {
+          setCurrentSrc(lqSrc);
+          setIsHdLoaded(true);
+          imageCache.cacheImage(lqSrc);
+        })
+        .catch(() => {
+          setCurrentSrc(src);
+          setIsHdLoaded(true);
+        });
+    } else {
+      loadImage(lqSrc)
+        .then(() => {
+          setCurrentSrc(lqSrc);
+          return loadImage(hdSrc);
+        })
+        .catch(() => {
+          setCurrentSrc(src);
+          return loadImage(src);
+        })
+        .then(() => {
+          setCurrentSrc(hdSrc);
+          setIsHdLoaded(true);
+          imageCache.cacheImage(hdSrc);
+        })
+        .catch(() => {
+          setIsHdLoaded(true);
+        });
+    }
+  }, [isInView, src, webpSupported, connectionSpeed]);
 
   return (
     <div ref={imgRef} className={`relative overflow-hidden ${className}`}>

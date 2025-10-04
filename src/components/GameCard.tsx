@@ -12,6 +12,7 @@ import GameImage from './GameImage';
 import LazyImage from './LazyImage';
 import { useCurrency } from '@/contexts/CurrencyContext';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { usePrefetch } from '@/hooks/usePrefetch';
 
 interface GameCardProps {
   game: Game;
@@ -24,6 +25,7 @@ interface GameCardProps {
 export default function GameCard({ game, onBuy, isFavorite, onToggleFavorite, onView }: GameCardProps) {
   const navigate = useNavigate();
   const { region, setRegion, getRegionalPrice, formatPrice } = useCurrency();
+  const { prefetchGameDetails } = usePrefetch();
   const isNew = new Date().getFullYear() - game.release_year <= 1;
   const isHot = game.rating >= 8.5;
 
@@ -31,8 +33,11 @@ export default function GameCard({ game, onBuy, isFavorite, onToggleFavorite, on
   const discountedPrice = game.discount ? Math.round(regionalPrice * (1 - game.discount / 100)) : regionalPrice;
   const savingsAmount = regionalPrice - discountedPrice;
 
+  const handleMouseEnter = () => {
+    prefetchGameDetails(game);
+  };
+
   const handleCardClick = () => {
-    // Store games in localStorage for GameDetail page
     const storedGames = localStorage.getItem('games');
     if (!storedGames) {
       localStorage.setItem('games', JSON.stringify([game]));
@@ -54,6 +59,7 @@ export default function GameCard({ game, onBuy, isFavorite, onToggleFavorite, on
       whileHover={{ y: -4, scale: 1.01, transition: { duration: 0.2 } }}
       whileTap={{ scale: 0.98 }}
       onClick={handleCardClick}
+      onMouseEnter={handleMouseEnter}
       className="cursor-pointer touch-manipulation"
     >
       <Card className="h-full bg-gradient-to-br from-card/80 via-card/60 to-card/40 backdrop-blur-xl border-2 border-border/50 hover:border-primary/80 active:border-primary hover:shadow-2xl hover:shadow-primary/30 transition-all duration-300 overflow-hidden group relative">
