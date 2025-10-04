@@ -15,6 +15,11 @@ export interface Game {
   franchise?: string;
   fullDescription?: string;
   consoleModels?: string;
+  competitorPrices?: {
+    store: string;
+    price: number;
+    url?: string;
+  }[];
 }
 
 export interface Subscription {

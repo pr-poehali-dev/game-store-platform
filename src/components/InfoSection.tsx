@@ -141,8 +141,8 @@ export default function InfoSection() {
                   <p className="text-sm text-muted-foreground">
                     • Все игры лицензионные<br/>
                     • Техподдержка 24/7<br/>
-                    • Возврат если игра не подошла<br/>
-                    • Проверенный продавец
+                    • Проверенный продавец<br/>
+                    • Быстрая доставка
                   </p>
                 </div>
               </div>

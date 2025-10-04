@@ -18,7 +18,11 @@ export interface Game {
 }
 
 export const initialGames: Game[] = [
-  { id: 1, title: 'Call of Duty: Modern Warfare III', platform: 'Both', price: 4299, description: 'Легендарный шутер возвращается', image_url: '/img/a0b7d964-bec6-4f1d-b165-f7cf0b2ed7e0.jpg', category: 'Shooter', rating: 8.7, release_year: 2023, isHot: true, isNew: true, franchise: 'Call of Duty', fullDescription: 'Погрузитесь в новую захватывающую кампанию и многопользовательский режим. Знакомые герои, новые угрозы и эпические сражения в легендарной серии шутеров.', consoleModels: 'PS4, PS5, Xbox One, Xbox Series X/S' },
+  { id: 1, title: 'Call of Duty: Modern Warfare III', platform: 'Both', price: 4299, description: 'Легендарный шутер возвращается', image_url: '/img/a0b7d964-bec6-4f1d-b165-f7cf0b2ed7e0.jpg', category: 'Shooter', rating: 8.7, release_year: 2023, isHot: true, isNew: true, franchise: 'Call of Duty', fullDescription: 'Погрузитесь в новую захватывающую кампанию и многопользовательский режим. Знакомые герои, новые угрозы и эпические сражения в легендарной серии шутеров.', consoleModels: 'PS4, PS5, Xbox One, Xbox Series X/S', competitorPrices: [
+    { store: 'Steam', price: 4999 },
+    { store: 'Battle.net', price: 4899 },
+    { store: 'Plati.ru', price: 4700 }
+  ] },
   { id: 2, title: 'Call of Duty: Black Ops Cold War', platform: 'Both', price: 3999, description: 'Холодная война шпионов', image_url: 'https://cdn.cloudflare.steamstatic.com/steam/apps/1985810/header.jpg', category: 'Shooter', rating: 8.5, release_year: 2020, discount: 35, franchise: 'Call of Duty', fullDescription: 'Шпионский триллер времен холодной войны. Секретные операции, интриги и динамичный мультиплеер с режимом зомби.', consoleModels: 'PS4, PS5, Xbox One, Xbox Series X/S' },
   { id: 3, title: 'Call of Duty: Warzone', platform: 'Both', price: 0, description: 'Battle Royale от Activision', image_url: 'https://cdn.cloudflare.steamstatic.com/steam/apps/1938090/header.jpg', category: 'Shooter', rating: 8.3, release_year: 2020, franchise: 'Call of Duty', fullDescription: 'Бесплатная королевская битва на 150 игроков. Стройте команду, выживайте и станьте последними на поле боя.', consoleModels: 'PS4, PS5, Xbox One, Xbox Series X/S' },
   { id: 4, title: 'Call of Duty: Vanguard', platform: 'Both', price: 3599, description: 'Вторая мировая война', image_url: 'https://cdn.cloudflare.steamstatic.com/steam/apps/1962663/header.jpg', category: 'Shooter', rating: 7.9, release_year: 2021, discount: 50, franchise: 'Call of Duty', consoleModels: 'PS4, PS5, Xbox One, Xbox Series X/S' },
@@ -43,7 +47,11 @@ export const initialGames: Game[] = [
   { id: 18, title: 'God of War Ragnarök', platform: 'PlayStation', price: 4299, description: 'Эпический финал скандинавской саги', image_url: 'https://cdn.cloudflare.steamstatic.com/steam/apps/2322010/header.jpg', category: 'Action', rating: 9.6, release_year: 2022, region: 'TR/IN/UA', isHot: true, isNew: true, franchise: 'God of War', fullDescription: 'Кратос и Атрей против богов Асгарда. Рагнарёк близок, и только вы можете изменить судьбу миров.', consoleModels: 'PS4, PS5' },
   { id: 19, title: 'God of War (2018)', platform: 'PlayStation', price: 3499, description: 'Перерождение легендарной серии', image_url: 'https://cdn.cloudflare.steamstatic.com/steam/apps/1593500/header.jpg', category: 'Action', rating: 9.5, release_year: 2018, discount: 30, region: 'TR/IN/UA', franchise: 'God of War', consoleModels: 'PS4, PS5' },
 
-  { id: 20, title: 'Spider-Man 2', platform: 'PlayStation', price: 4499, description: 'Два Человека-паука в одной игре', image_url: '/img/3c2d6349-3e60-45f2-b2f8-50451618885f.jpg', category: 'Action', rating: 9.4, release_year: 2023, region: 'TR/IN/UA', isNew: true, isHot: true, franchise: 'Spider-Man', fullDescription: 'Питер Паркер и Майлз Моралес объединяются против Венома. Новые способности, враги и невероятный Нью-Йорк.', consoleModels: 'PS5' },
+  { id: 20, title: 'Spider-Man 2', platform: 'PlayStation', price: 4499, description: 'Два Человека-паука в одной игре', image_url: '/img/3c2d6349-3e60-45f2-b2f8-50451618885f.jpg', category: 'Action', rating: 9.4, release_year: 2023, region: 'TR/IN/UA', isNew: true, isHot: true, franchise: 'Spider-Man', fullDescription: 'Питер Паркер и Майлз Моралес объединяются против Венома. Новые способности, враги и невероятный Нью-Йорк.', consoleModels: 'PS5', competitorPrices: [
+    { store: 'PlayStation Store', price: 4999 },
+    { store: 'Plati.ru', price: 4700 },
+    { store: 'Gabes.ru', price: 4600 }
+  ] },
   { id: 21, title: 'Spider-Man: Miles Morales', platform: 'PlayStation', price: 3299, description: 'Новый герой Нью-Йорка', image_url: 'https://cdn.cloudflare.steamstatic.com/steam/apps/1817190/header.jpg', category: 'Action', rating: 9.0, release_year: 2020, discount: 35, region: 'TR/IN/UA', franchise: 'Spider-Man', consoleModels: 'PS4, PS5' },
   { id: 22, title: 'Spider-Man Remastered', platform: 'PlayStation', price: 3499, description: 'Классика с улучшенной графикой', image_url: 'https://cdn.cloudflare.steamstatic.com/steam/apps/1817070/header.jpg', category: 'Action', rating: 9.2, release_year: 2018, discount: 30, region: 'TR/IN/UA', franchise: 'Spider-Man', consoleModels: 'PS5' },
 
@@ -61,10 +69,18 @@ export const initialGames: Game[] = [
 
   { id: 30, title: 'Demons Souls Remake', platform: 'PlayStation', price: 3999, description: 'Легенда FromSoftware возрождается', image_url: 'https://cdn.cloudflare.steamstatic.com/steam/apps/2207040/header.jpg', category: 'RPG', rating: 9.3, release_year: 2020, discount: 35, region: 'TR/IN/UA', fullDescription: 'Полностью переработанная классика. Сложные боссы, мрачный мир и потрясающая графика PS5.', consoleModels: 'PS5' },
 
-  { id: 31, title: 'Final Fantasy XVI', platform: 'PlayStation', price: 4299, description: 'Эпическая JRPG с драконами', image_url: 'https://cdn.cloudflare.steamstatic.com/steam/apps/2515020/header.jpg', category: 'RPG', rating: 9.0, release_year: 2023, region: 'TR/IN/UA', isNew: true, franchise: 'Final Fantasy', consoleModels: 'PS5' },
+  { id: 31, title: 'Final Fantasy XVI', platform: 'PlayStation', price: 4299, description: 'Эпическая JRPG с драконами', image_url: 'https://cdn.cloudflare.steamstatic.com/steam/apps/2515020/header.jpg', category: 'RPG', rating: 9.0, release_year: 2023, region: 'TR/IN/UA', isNew: true, franchise: 'Final Fantasy', consoleModels: 'PS5', competitorPrices: [
+    { store: 'PlayStation Store', price: 4999 },
+    { store: 'Plati.ru', price: 4700 },
+    { store: 'GameKeys', price: 4600 }
+  ] },
   { id: 32, title: 'Final Fantasy VII Remake', platform: 'PlayStation', price: 3799, description: 'Ремейк легендарной RPG', image_url: 'https://cdn.cloudflare.steamstatic.com/steam/apps/1462040/header.jpg', category: 'RPG', rating: 8.9, release_year: 2020, discount: 40, region: 'TR/IN/UA', franchise: 'Final Fantasy', consoleModels: 'PS4, PS5' },
 
-  { id: 33, title: 'Resident Evil 4 Remake', platform: 'Both', price: 3599, description: 'Ремейк хоррора 2023', image_url: 'https://cdn.cloudflare.steamstatic.com/steam/apps/2050650/header.jpg', category: 'Horror', rating: 9.5, release_year: 2023, discount: 25, franchise: 'Resident Evil', consoleModels: 'PS4, PS5, Xbox Series X/S' },
+  { id: 33, title: 'Resident Evil 4 Remake', platform: 'Both', price: 3599, description: 'Ремейк хоррора 2023', image_url: 'https://cdn.cloudflare.steamstatic.com/steam/apps/2050650/header.jpg', category: 'Horror', rating: 9.5, release_year: 2023, discount: 25, franchise: 'Resident Evil', consoleModels: 'PS4, PS5, Xbox Series X/S', competitorPrices: [
+    { store: 'Steam', price: 2999 },
+    { store: 'Epic Games', price: 2899 },
+    { store: 'Plati.ru', price: 2800 }
+  ] },
   { id: 34, title: 'Resident Evil Village', platform: 'Both', price: 2999, description: 'Хоррор в румынской деревне', image_url: 'https://cdn.cloudflare.steamstatic.com/steam/apps/1196590/header.jpg', category: 'Horror', rating: 8.9, release_year: 2021, discount: 45, franchise: 'Resident Evil', consoleModels: 'PS4, PS5, Xbox One, Xbox Series X/S' },
   { id: 35, title: 'Resident Evil 2 Remake', platform: 'Both', price: 2499, description: 'Зомби в Раккун-Сити', image_url: 'https://cdn.cloudflare.steamstatic.com/steam/apps/883710/header.jpg', category: 'Horror', rating: 9.4, release_year: 2019, discount: 60, franchise: 'Resident Evil', consoleModels: 'PS4, Xbox One' },
 
@@ -73,11 +89,19 @@ export const initialGames: Game[] = [
   { id: 38, title: 'Assassins Creed Odyssey', platform: 'Both', price: 2799, description: 'Древняя Греция и мифы', image_url: '/img/0508de41-e4fb-485b-a21c-a74a80a93e02.jpg', category: 'Action', rating: 8.7, release_year: 2018, discount: 60, franchise: 'Assassins Creed', consoleModels: 'PS4, Xbox One' },
   { id: 39, title: 'Assassins Creed Mirage', platform: 'Both', price: 3199, description: 'Возвращение к истокам серии', image_url: 'https://cdn.cloudflare.steamstatic.com/steam/apps/2608970/header.jpg', category: 'Action', rating: 8.5, release_year: 2023, discount: 30, isNew: true, franchise: 'Assassins Creed', consoleModels: 'PS4, PS5, Xbox One, Xbox Series X/S' },
 
-  { id: 40, title: 'Elden Ring', platform: 'Both', price: 3799, description: 'Шедевр FromSoftware', image_url: 'https://cdn.cloudflare.steamstatic.com/steam/apps/1245620/header.jpg', category: 'RPG', rating: 9.7, release_year: 2022, discount: 30, isHot: true, consoleModels: 'PS4, PS5, Xbox One, Xbox Series X/S' },
+  { id: 40, title: 'Elden Ring', platform: 'Both', price: 3799, description: 'Шедевр FromSoftware', image_url: 'https://cdn.cloudflare.steamstatic.com/steam/apps/1245620/header.jpg', category: 'RPG', rating: 9.7, release_year: 2022, discount: 30, isHot: true, consoleModels: 'PS4, PS5, Xbox One, Xbox Series X/S', competitorPrices: [
+    { store: 'Steam', price: 4999 },
+    { store: 'Epic Games', price: 4799 },
+    { store: 'Plati.ru', price: 4500 }
+  ] },
   { id: 41, title: 'Dark Souls III', platform: 'Both', price: 2499, description: 'Темное фэнтези', image_url: 'https://cdn.cloudflare.steamstatic.com/steam/apps/374320/header.jpg', category: 'RPG', rating: 9.5, release_year: 2016, discount: 70, franchise: 'Dark Souls', consoleModels: 'PS4, Xbox One' },
   { id: 42, title: 'Sekiro: Shadows Die Twice', platform: 'Both', price: 2999, description: 'Самурайский экшен', image_url: 'https://cdn.cloudflare.steamstatic.com/steam/apps/814380/header.jpg', category: 'Action', rating: 9.6, release_year: 2019, discount: 55, consoleModels: 'PS4, Xbox One' },
 
-  { id: 43, title: 'Cyberpunk 2077', platform: 'Both', price: 2999, description: 'Найт-Сити ждет вас', image_url: 'https://cdn.cloudflare.steamstatic.com/steam/apps/1091500/header.jpg', category: 'RPG', rating: 8.8, release_year: 2020, discount: 40, consoleModels: 'PS4, PS5, Xbox One, Xbox Series X/S' },
+  { id: 43, title: 'Cyberpunk 2077', platform: 'Both', price: 2999, description: 'Найт-Сити ждет вас', image_url: 'https://cdn.cloudflare.steamstatic.com/steam/apps/1091500/header.jpg', category: 'RPG', rating: 8.8, release_year: 2020, discount: 40, consoleModels: 'PS4, PS5, Xbox One, Xbox Series X/S', competitorPrices: [
+    { store: 'PlayStation Store', price: 3999 },
+    { store: 'Plati.ru', price: 3700 },
+    { store: 'Gabes.ru', price: 3600 }
+  ] },
   { id: 44, title: 'The Witcher 3', platform: 'Both', price: 1999, description: 'Эпическая RPG о ведьмаке', image_url: 'https://cdn.cloudflare.steamstatic.com/steam/apps/292030/header.jpg', category: 'RPG', rating: 9.8, release_year: 2015, discount: 60, franchise: 'The Witcher', consoleModels: 'PS4, PS5, Xbox One, Xbox Series X/S' },
 
   { id: 45, title: 'Forza Horizon 5', platform: 'Xbox', price: 2999, description: 'Гоночный симулятор в Мексике', image_url: 'https://cdn.cloudflare.steamstatic.com/steam/apps/1551360/header.jpg', category: 'Racing', rating: 9.2, release_year: 2021, discount: 35, franchise: 'Forza', consoleModels: 'Xbox One, Xbox Series X/S' },
@@ -90,11 +114,23 @@ export const initialGames: Game[] = [
   { id: 49, title: 'Gran Turismo 7', platform: 'PlayStation', price: 3999, description: 'Гоночный симулятор для PS', image_url: 'https://cdn.cloudflare.steamstatic.com/steam/apps/2918430/header.jpg', category: 'Racing', rating: 8.9, release_year: 2022, region: 'TR/IN/UA', franchise: 'Gran Turismo', consoleModels: 'PS4, PS5' },
 
   { id: 50, title: 'Mortal Kombat 11', platform: 'Both', price: 2999, description: 'Брутальный файтинг', image_url: 'https://cdn.cloudflare.steamstatic.com/steam/apps/976310/header.jpg', category: 'Fighting', rating: 8.8, release_year: 2019, discount: 65, franchise: 'Mortal Kombat', consoleModels: 'PS4, Xbox One' },
-  { id: 51, title: 'Mortal Kombat 1', platform: 'Both', price: 3599, description: 'Перезапуск серии', image_url: 'https://cdn.cloudflare.steamstatic.com/steam/apps/1971870/header.jpg', category: 'Fighting', rating: 8.6, release_year: 2023, discount: 30, isNew: true, franchise: 'Mortal Kombat', consoleModels: 'PS5, Xbox Series X/S' },
+  { id: 51, title: 'Mortal Kombat 1', platform: 'Both', price: 3599, description: 'Перезапуск серии', image_url: 'https://cdn.cloudflare.steamstatic.com/steam/apps/1971870/header.jpg', category: 'Fighting', rating: 8.6, release_year: 2023, discount: 30, isNew: true, franchise: 'Mortal Kombat', consoleModels: 'PS5, Xbox Series X/S', competitorPrices: [
+    { store: 'Steam', price: 4499 },
+    { store: 'PlayStation Store', price: 4399 },
+    { store: 'Plati.ru', price: 4200 }
+  ] },
 
-  { id: 52, title: 'Street Fighter 6', platform: 'Both', price: 3499, description: 'Легендарный файтинг', image_url: 'https://cdn.cloudflare.steamstatic.com/steam/apps/1364780/header.jpg', category: 'Fighting', rating: 9.1, release_year: 2023, discount: 25, franchise: 'Street Fighter', consoleModels: 'PS4, PS5, Xbox Series X/S' },
+  { id: 52, title: 'Street Fighter 6', platform: 'Both', price: 3499, description: 'Легендарный файтинг', image_url: 'https://cdn.cloudflare.steamstatic.com/steam/apps/1364780/header.jpg', category: 'Fighting', rating: 9.1, release_year: 2023, discount: 25, franchise: 'Street Fighter', consoleModels: 'PS4, PS5, Xbox Series X/S', competitorPrices: [
+    { store: 'Steam', price: 3999 },
+    { store: 'PlayStation Store', price: 3899 },
+    { store: 'Plati.ru', price: 3700 }
+  ] },
 
-  { id: 53, title: 'Tekken 8', platform: 'Both', price: 3999, description: 'Новая глава легенды', image_url: 'https://cdn.cloudflare.steamstatic.com/steam/apps/1778820/header.jpg', category: 'Fighting', rating: 9.2, release_year: 2024, isNew: true, isHot: true, franchise: 'Tekken', consoleModels: 'PS5, Xbox Series X/S' },
+  { id: 53, title: 'Tekken 8', platform: 'Both', price: 3999, description: 'Новая глава легенды', image_url: 'https://cdn.cloudflare.steamstatic.com/steam/apps/1778820/header.jpg', category: 'Fighting', rating: 9.2, release_year: 2024, isNew: true, isHot: true, franchise: 'Tekken', consoleModels: 'PS5, Xbox Series X/S', competitorPrices: [
+    { store: 'Steam', price: 4999 },
+    { store: 'Plati.ru', price: 4800 },
+    { store: 'GameKeys', price: 4700 }
+  ] },
 
   { id: 54, title: 'NBA 2K25', platform: 'Both', price: 3499, description: 'Баскетбольный симулятор', image_url: 'https://cdn.cloudflare.steamstatic.com/steam/apps/2338770/header.jpg', category: 'Sports', rating: 7.9, release_year: 2024, discount: 20, isNew: true, franchise: 'NBA 2K', consoleModels: 'PS4, PS5, Xbox One, Xbox Series X/S' },
 
@@ -104,15 +140,35 @@ export const initialGames: Game[] = [
 
   { id: 57, title: 'It Takes Two', platform: 'Both', price: 2299, description: 'Кооперативное приключение', image_url: 'https://cdn.cloudflare.steamstatic.com/steam/apps/1426210/header.jpg', category: 'Adventure', rating: 9.6, release_year: 2021, discount: 45, consoleModels: 'PS4, PS5, Xbox One, Xbox Series X/S' },
 
-  { id: 58, title: 'Diablo IV', platform: 'Both', price: 3999, description: 'Легендарная ARPG', image_url: 'https://cdn.cloudflare.steamstatic.com/steam/apps/2344520/header.jpg', category: 'RPG', rating: 8.9, release_year: 2023, discount: 25, franchise: 'Diablo', consoleModels: 'PS4, PS5, Xbox One, Xbox Series X/S' },
+  { id: 58, title: 'Diablo IV', platform: 'Both', price: 3999, description: 'Легендарная ARPG', image_url: 'https://cdn.cloudflare.steamstatic.com/steam/apps/2344520/header.jpg', category: 'RPG', rating: 8.9, release_year: 2023, discount: 25, franchise: 'Diablo', consoleModels: 'PS4, PS5, Xbox One, Xbox Series X/S', competitorPrices: [
+    { store: 'Battle.net', price: 3999 },
+    { store: 'Plati.ru', price: 3800 },
+    { store: 'Steam', price: 3900 }
+  ] },
 
-  { id: 59, title: 'Hogwarts Legacy', platform: 'Both', price: 3499, description: 'Магический мир Гарри Поттера', image_url: 'https://cdn.cloudflare.steamstatic.com/steam/apps/990080/header.jpg', category: 'RPG', rating: 8.9, release_year: 2023, discount: 30, consoleModels: 'PS4, PS5, Xbox One, Xbox Series X/S' },
+  { id: 59, title: 'Hogwarts Legacy', platform: 'Both', price: 3499, description: 'Магический мир Гарри Поттера', image_url: 'https://cdn.cloudflare.steamstatic.com/steam/apps/990080/header.jpg', category: 'RPG', rating: 8.9, release_year: 2023, discount: 30, consoleModels: 'PS4, PS5, Xbox One, Xbox Series X/S', competitorPrices: [
+    { store: 'Steam', price: 3999 },
+    { store: 'Instant Gaming', price: 3800 },
+    { store: 'Plati.ru', price: 3650 }
+  ] },
 
-  { id: 60, title: 'Baldurs Gate 3', platform: 'Both', price: 3999, description: 'Эпическая RPG по D&D', image_url: 'https://cdn.cloudflare.steamstatic.com/steam/apps/1086940/header.jpg', category: 'RPG', rating: 9.8, release_year: 2023, isHot: true, franchise: 'Baldurs Gate', consoleModels: 'PS5, Xbox Series X/S' },
+  { id: 60, title: 'Baldurs Gate 3', platform: 'Both', price: 3999, description: 'Эпическая RPG по D&D', image_url: 'https://cdn.cloudflare.steamstatic.com/steam/apps/1086940/header.jpg', category: 'RPG', rating: 9.8, release_year: 2023, isHot: true, franchise: 'Baldurs Gate', consoleModels: 'PS5, Xbox Series X/S', competitorPrices: [
+    { store: 'PlayStation Store', price: 4499 },
+    { store: 'Plati.ru', price: 4200 },
+    { store: 'Gabes.ru', price: 4100 }
+  ] },
 
-  { id: 61, title: 'Alan Wake 2', platform: 'Both', price: 3799, description: 'Психологический хоррор', image_url: 'https://cdn.cloudflare.steamstatic.com/steam/apps/1282730/header.jpg', category: 'Horror', rating: 9.3, release_year: 2023, isNew: true, franchise: 'Alan Wake', consoleModels: 'PS5, Xbox Series X/S' },
+  { id: 61, title: 'Alan Wake 2', platform: 'Both', price: 3799, description: 'Психологический хоррор', image_url: 'https://cdn.cloudflare.steamstatic.com/steam/apps/1282730/header.jpg', category: 'Horror', rating: 9.3, release_year: 2023, isNew: true, franchise: 'Alan Wake', consoleModels: 'PS5, Xbox Series X/S', competitorPrices: [
+    { store: 'Steam', price: 3499 },
+    { store: 'Epic Games', price: 3399 },
+    { store: 'Plati.ru', price: 3200 }
+  ] },
 
-  { id: 62, title: 'Dead Space Remake', platform: 'Both', price: 3299, description: 'Космический хоррор', image_url: 'https://cdn.cloudflare.steamstatic.com/steam/apps/1693980/header.jpg', category: 'Horror', rating: 9.3, release_year: 2023, discount: 35, franchise: 'Dead Space', consoleModels: 'PS5, Xbox Series X/S' },
+  { id: 62, title: 'Dead Space Remake', platform: 'Both', price: 3299, description: 'Космический хоррор', image_url: 'https://cdn.cloudflare.steamstatic.com/steam/apps/1693980/header.jpg', category: 'Horror', rating: 9.3, release_year: 2023, discount: 35, franchise: 'Dead Space', consoleModels: 'PS5, Xbox Series X/S', competitorPrices: [
+    { store: 'Steam', price: 3499 },
+    { store: 'Epic Games', price: 3399 },
+    { store: 'Plati.ru', price: 3200 }
+  ] },
 
   { id: 63, title: 'Silent Hill 2 Remake', platform: 'Both', price: 3999, description: 'Ремейк классического хоррора', image_url: 'https://cdn.cloudflare.steamstatic.com/steam/apps/2124490/header.jpg', category: 'Horror', rating: 9.5, release_year: 2024, isNew: true, isHot: true, franchise: 'Silent Hill', consoleModels: 'PS5, Xbox Series X/S' },
 

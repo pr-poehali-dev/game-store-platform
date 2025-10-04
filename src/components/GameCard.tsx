@@ -4,6 +4,7 @@ import { Badge } from '@/components/ui/badge';
 import Icon from '@/components/ui/icon';
 import { motion } from 'framer-motion';
 import { Game } from '@/types';
+import PriceComparison from './PriceComparison';
 
 interface GameCardProps {
   game: Game;
@@ -106,6 +107,19 @@ export default function GameCard({ game, onBuy, isFavorite, onToggleFavorite, on
               {game.category}
             </Badge>
           </div>
+          
+          {game.competitorPrices && game.competitorPrices.length > 0 && (
+            <div className="mt-3 pt-3 border-t border-border/50">
+              <div className="flex items-center gap-2 text-xs text-muted-foreground mb-1">
+                <Icon name="TrendingDown" size={12} className="text-neon-green" />
+                <span>Выгоднее на {Math.round(game.competitorPrices[0].price - (game.discount ? Math.round(game.price * (1 - game.discount / 100)) : game.price))}₽</span>
+              </div>
+              <div className="flex items-center gap-1 text-xs opacity-60">
+                <Icon name="Store" size={10} />
+                <span>чем в {game.competitorPrices[0].store}</span>
+              </div>
+            </div>
+          )}
         </CardContent>
 
         <CardFooter className="pt-0">

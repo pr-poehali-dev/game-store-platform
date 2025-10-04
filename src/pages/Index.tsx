@@ -13,6 +13,7 @@ import GameForm from '@/components/GameForm';
 import ChatWidget from '@/components/ChatWidget';
 import RecommendedGames from '@/components/RecommendedGames';
 import GameReviews from '@/components/GameReviews';
+import PriceComparison from '@/components/PriceComparison';
 import { initialGames, type Game } from '@/data/games';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { Badge } from '@/components/ui/badge';
@@ -421,6 +422,13 @@ export default function Index() {
                         <span className="text-sm text-muted-foreground">Платформы: {selectedGame.consoleModels}</span>
                       </div>
                     )}
+                    
+                    <PriceComparison 
+                      ourPrice={selectedGame.price}
+                      competitorPrices={selectedGame.competitorPrices}
+                      discount={selectedGame.discount}
+                    />
+                    
                     <div className="flex items-center justify-between pt-4 border-t">
                       <div>
                         {selectedGame.discount && selectedGame.discount > 0 ? (
