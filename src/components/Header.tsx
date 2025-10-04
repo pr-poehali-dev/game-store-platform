@@ -13,6 +13,7 @@ import AdminPanel from '@/components/AdminPanel';
 import PromoCodeInput from '@/components/PromoCodeInput';
 import ThemeToggle from '@/components/ThemeToggle';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
+import NotificationBadge from '@/components/NotificationBadge';
 
 interface CartItem {
   id: string;
@@ -136,15 +137,7 @@ export default function Header({
 
             <Tooltip>
               <TooltipTrigger asChild>
-                <Button 
-                  onClick={() => (window as any).toggleNotifications?.()}
-                  variant="ghost" 
-                  size="sm" 
-                  className="relative border border-purple-500/30 bg-gradient-to-r from-green-500/10 to-purple-500/10"
-                >
-                  <Icon name="Bell" size={18} className="text-green-500" />
-                  <span className="absolute -top-1 -right-1 w-2 h-2 bg-red-500 rounded-full animate-pulse"></span>
-                </Button>
+                <NotificationBadge />
               </TooltipTrigger>
               <TooltipContent>
                 <p>Уведомления (4 новых)</p>

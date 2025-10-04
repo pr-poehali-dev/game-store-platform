@@ -76,6 +76,19 @@ export default function VoiceSearch() {
     };
   }, [toast]);
 
+  const toggleListening = () => {
+    if (isListening) {
+      (window as any).voiceSearchStop?.();
+    } else {
+      (window as any).voiceSearchStart?.();
+    }
+  };
+
+  // Сделаем функцию доступной глобально
+  useEffect(() => {
+    (window as any).toggleVoiceSearch = toggleListening;
+  }, [isListening]);
+
   const handleVoiceCommand = (command: string) => {
     const lowerCommand = command.toLowerCase();
 
@@ -141,14 +154,6 @@ export default function VoiceSearch() {
         description: `Вы сказали: "${command}"`,
         variant: 'destructive'
       });
-    }
-  };
-
-  const toggleListening = () => {
-    if (isListening) {
-      (window as any).voiceSearchStop?.();
-    } else {
-      (window as any).voiceSearchStart?.();
     }
   };
 

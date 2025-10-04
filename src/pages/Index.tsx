@@ -10,8 +10,6 @@ import AIRecommendations from '@/components/AIRecommendations';
 import GamingNews from '@/components/GamingNews';
 import BonusClickerGame from '@/components/BonusClickerGame';
 import Leaderboard from '@/components/Leaderboard';
-import QuickAccessPanel from '@/components/QuickAccessPanel';
-import NotificationSystem from '@/components/NotificationSystem';
 import VoiceSearch from '@/components/VoiceSearch';
 import SteamTopup from '@/components/SteamTopup';
 import RobloxStore from '@/components/RobloxStore';
@@ -100,8 +98,6 @@ export default function Index() {
 
   return (
     <div className="min-h-screen bg-background dark">
-      <QuickAccessPanel />
-      <NotificationSystem />
       <VoiceSearch />
       <CurrencyRegionSelector />
       <Header
