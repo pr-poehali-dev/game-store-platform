@@ -17,6 +17,10 @@ interface Game {
   category: string;
   rating: number;
   release_year: number;
+  discount?: number;
+  isHot?: boolean;
+  isNew?: boolean;
+  region?: string;
 }
 
 interface GamesSectionProps {
@@ -123,7 +127,24 @@ export default function GamesSection({
                   alt={game.title}
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                 />
-                <div className="absolute top-2 right-2">
+                {game.discount && (
+                  <div className="absolute top-2 left-2">
+                    <Badge className="bg-red-600 text-white font-bold text-sm px-3 py-1 animate-pulse">
+                      -{game.discount}%
+                    </Badge>
+                  </div>
+                )}
+                <div className="absolute top-2 right-2 flex flex-col gap-1">
+                  {game.isNew && (
+                    <Badge className="bg-neon-pink text-white font-semibold">
+                      NEW
+                    </Badge>
+                  )}
+                  {game.isHot && (
+                    <Badge className="bg-orange-500 text-white font-semibold">
+                      🔥 ХИТ
+                    </Badge>
+                  )}
                   <Badge 
                     className={
                       game.platform === 'Xbox' 
@@ -136,19 +157,41 @@ export default function GamesSection({
                     {game.platform}
                   </Badge>
                 </div>
-                <div className="absolute top-2 left-2">
-                  <Badge className="bg-background/90 text-neon-green border-neon-green">
-                    <Icon name="Star" size={12} className="mr-1" />
-                    {game.rating}
-                  </Badge>
-                </div>
+                {game.rating > 0 && (
+                  <div className="absolute bottom-2 left-2">
+                    <Badge className="bg-background/90 text-neon-green border-neon-green">
+                      <Icon name="Star" size={12} className="mr-1" />
+                      {game.rating}
+                    </Badge>
+                  </div>
+                )}
+                {game.region && (
+                  <div className="absolute bottom-2 right-2">
+                    <Badge className="bg-blue-600 text-white text-xs">
+                      {game.region}
+                    </Badge>
+                  </div>
+                )}
               </div>
               <CardHeader className="pb-3">
                 <CardTitle className="text-lg line-clamp-1">{game.title}</CardTitle>
                 <CardDescription className="line-clamp-2 text-xs">{game.description}</CardDescription>
               </CardHeader>
               <CardFooter className="flex items-center justify-between pt-0">
-                <div className="text-xl font-bold text-neon-green">{game.price}₽</div>
+                <div className="flex flex-col">
+                  {game.discount ? (
+                    <>
+                      <div className="text-sm text-muted-foreground line-through">{game.price}₽</div>
+                      <div className="text-xl font-bold text-neon-green">
+                        {Math.round(game.price * (1 - game.discount / 100))}₽
+                      </div>
+                    </>
+                  ) : (
+                    <div className="text-xl font-bold text-neon-green">
+                      {game.price === 0 ? 'FREE' : `${game.price}₽`}
+                    </div>
+                  )}
+                </div>
                 <Button 
                   size="sm"
                   className="bg-neon-pink text-white hover:bg-neon-pink/90"

@@ -5,6 +5,7 @@ import Hero from '@/components/Hero';
 import GamesSection from '@/components/GamesSection';
 import SubscriptionsSection from '@/components/SubscriptionsSection';
 import SteamTopup from '@/components/SteamTopup';
+import InfoSection from '@/components/InfoSection';
 import FeaturesSection from '@/components/FeaturesSection';
 import Footer from '@/components/Footer';
 import GameForm from '@/components/GameForm';
@@ -263,6 +264,8 @@ export default function Index() {
       />
 
       <SteamTopup onTopup={handleSteamTopup} />
+
+      <InfoSection />
 
       <FeaturesSection />
 
