@@ -8,8 +8,9 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import Icon from '@/components/ui/icon';
 import { motion } from 'framer-motion';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import GameCard from './GameCard';
+import GameCardSkeleton from './GameCardSkeleton';
 import { Game } from '@/types';
 
 interface GamesSectionProps {
@@ -62,6 +63,13 @@ export default function GamesSection({
   const [onlyHot, setOnlyHot] = useState(false);
   const [onlyWithReviews, setOnlyWithReviews] = useState(false);
   const [minRating, setMinRating] = useState<number>(0);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    setIsLoading(true);
+    const timer = setTimeout(() => setIsLoading(false), 800);
+    return () => clearTimeout(timer);
+  }, [platformFilter, categoryFilter, franchiseFilter, searchQuery, sortBy, priceRange]);
 
   return (
     <section id="games" className="py-0 bg-background">
@@ -223,32 +231,38 @@ export default function GamesSection({
         </Tabs>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4 md:gap-6">
-          {filteredGames
-            .filter(game => {
-              if (onlyDiscounts && !game.discount) return false;
-              if (onlyNew && !game.isNew) return false;
-              if (onlyHot && !game.isHot) return false;
-              if (onlyWithReviews && (!game.reviewCount || game.reviewCount === 0)) return false;
-              if (minRating > 0 && game.rating < minRating) return false;
-              return true;
-            })
-            .map((game, idx) => (
-            <motion.div
-              key={game.id}
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.5, delay: idx * 0.05 }}
-            >
-              <GameCard 
-                game={game}
-                onBuy={(g) => addToCart(g, 'game')}
-                isFavorite={favorites.includes(game.id)}
-                onToggleFavorite={onToggleFavorite}
-                onView={onViewGame}
-              />
-            </motion.div>
-          ))}
+          {isLoading ? (
+            Array.from({ length: 8 }).map((_, idx) => (
+              <GameCardSkeleton key={idx} />
+            ))
+          ) : (
+            filteredGames
+              .filter(game => {
+                if (onlyDiscounts && !game.discount) return false;
+                if (onlyNew && !game.isNew) return false;
+                if (onlyHot && !game.isHot) return false;
+                if (onlyWithReviews && (!game.reviewCount || game.reviewCount === 0)) return false;
+                if (minRating > 0 && game.rating < minRating) return false;
+                return true;
+              })
+              .map((game, idx) => (
+              <motion.div
+                key={game.id}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ duration: 0.5, delay: idx * 0.05 }}
+              >
+                <GameCard 
+                  game={game}
+                  onBuy={(g) => addToCart(g, 'game')}
+                  isFavorite={favorites.includes(game.id)}
+                  onToggleFavorite={onToggleFavorite}
+                  onView={onViewGame}
+                />
+              </motion.div>
+            ))
+          )}
         </div>
 
         {filteredGames
