@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -87,6 +88,7 @@ const mockTournaments: Tournament[] = [
 ];
 
 export default function Tournaments() {
+  const navigate = useNavigate();
   const [filter, setFilter] = useState<'all' | 'upcoming' | 'active' | 'finished'>('all');
   const [selectedTournament, setSelectedTournament] = useState<Tournament | null>(null);
   const [isFormOpen, setIsFormOpen] = useState(false);
@@ -141,6 +143,15 @@ export default function Tournaments() {
   return (
     <div className="min-h-screen pt-20 pb-12 px-4">
       <div className="max-w-7xl mx-auto space-y-8">
+        <Button
+          onClick={() => navigate('/')}
+          variant="ghost"
+          className="mb-4"
+        >
+          <Icon name="ArrowLeft" size={18} className="mr-2" />
+          На главную
+        </Button>
+
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}

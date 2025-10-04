@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import UserProfile from '@/components/UserProfile';
 import AchievementsSystem from '@/components/AchievementsSystem';
 import DailyQuests from '@/components/DailyQuests';
@@ -19,6 +20,7 @@ import { useToast } from '@/hooks/use-toast';
 import { initialGames } from '@/data/games';
 
 export default function Profile() {
+  const navigate = useNavigate();
   const { toast } = useToast();
   const [showAchievements, setShowAchievements] = useState(false);
   const [showQuests, setShowQuests] = useState(false);
@@ -192,6 +194,13 @@ export default function Profile() {
       </div>
       
       <div className="container mx-auto px-4 py-8 space-y-8">
+        <Button
+          onClick={() => navigate('/')}
+          variant="ghost"
+        >
+          <Icon name="ArrowLeft" size={18} className="mr-2" />
+          На главную
+        </Button>
         <Tabs defaultValue="profile" className="w-full">
           <TabsList className="grid w-full grid-cols-6">
             <TabsTrigger value="profile">Профиль</TabsTrigger>

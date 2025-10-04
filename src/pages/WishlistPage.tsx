@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -8,6 +9,7 @@ import { toast } from 'sonner';
 import { motion } from 'framer-motion';
 
 export default function WishlistPage() {
+  const navigate = useNavigate();
   const [wishlist, setWishlist] = useState<WishlistItem[]>([]);
   const [loading, setLoading] = useState(true);
   const userId = 1;
@@ -60,6 +62,15 @@ export default function WishlistPage() {
   return (
     <div className="min-h-screen bg-background pt-24 pb-16">
       <div className="container mx-auto px-4">
+        <Button
+          onClick={() => navigate('/')}
+          variant="ghost"
+          className="mb-4"
+        >
+          <Icon name="ArrowLeft" size={18} className="mr-2" />
+          На главную
+        </Button>
+
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -85,8 +96,8 @@ export default function WishlistPage() {
               <p className="text-muted-foreground mb-4">
                 Добавляйте игры в список желаний, чтобы следить за скидками
               </p>
-              <Button onClick={() => window.location.href = '/'}>
-                <Icon name="Home" size={16} />
+              <Button onClick={() => navigate('/')}>
+                <Icon name="Home" size={16} className="mr-2" />
                 К каталогу игр
               </Button>
             </CardContent>
