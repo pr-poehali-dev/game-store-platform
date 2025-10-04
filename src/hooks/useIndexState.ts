@@ -43,10 +43,7 @@ const initialSubscriptions: Subscription[] = [
   { id: 15, name: 'EA Play', platform: 'Both', price: 849, duration: '3 месяца', description: 'EA Play на 3 месяца', features: ['50+ игр EA', 'Ранний доступ', 'Скидки 10%', 'Эксклюзивный контент'] },
   { id: 16, name: 'EA Play Pro', platform: 'Both', price: 999, duration: '1 месяц', description: 'Премиум EA Play для хардкорных фанатов', features: ['Все игры EA в день релиза', 'Unlimited доступ', 'Все DLC и дополнения', 'Скидки 10%'] },
   
-  { id: 17, name: 'Nintendo Switch Online', platform: 'Nintendo', price: 249, duration: '1 месяц', description: 'Онлайн-подписка для Nintendo Switch', features: ['Онлайн-мультиплеер', 'Классические NES/SNES игры', 'Облачные сохранения', 'Эксклюзивные предложения'] },
-  { id: 18, name: 'Nintendo Switch Online', platform: 'Nintendo', price: 1199, duration: '12 месяцев', description: 'Switch Online на год', features: ['Онлайн-мультиплеер', 'NES/SNES игры', 'Облачные сохранения', 'Эксклюзивные предложения'] },
-  { id: 19, name: 'Nintendo Switch Online + DLC', platform: 'Nintendo', price: 499, duration: '1 месяц', description: 'Расширенная подписка Switch', features: ['Все из базовой', 'Игры N64 и SEGA Genesis', 'DLC для Animal Crossing, Splatoon', 'Mario Kart 8 треки'] },
-  { id: 20, name: 'Nintendo Switch Online + DLC', platform: 'Nintendo', price: 3999, duration: '12 месяцев', description: 'Расширенная на год', features: ['Все из базовой', 'N64 и SEGA игры', 'DLC для топ-игр', 'Mario Kart 8 треки'] }
+
 ];
 
 export function useIndexState() {

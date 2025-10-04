@@ -40,7 +40,7 @@ interface LootboxHistory {
 const API_URL = "https://functions.poehali.dev/a3bb1dad-0650-4df9-a95d-5104678c176e";
 
 // Fetch lootboxes
-const fetchLootboxes = async (): Promise<Lootbox[]> => {
+const fetchLootboxes = async (): Promise<{ lootboxes: Lootbox[], history: LootboxHistory[] }> => {
   const response = await fetch(API_URL, {
     headers: {
       "X-User-Id": "1",
@@ -51,7 +51,8 @@ const fetchLootboxes = async (): Promise<Lootbox[]> => {
     throw new Error("Failed to fetch lootboxes");
   }
   
-  return response.json();
+  const data = await response.json();
+  return data || { lootboxes: [], history: [] };
 };
 
 // Open lootbox
@@ -110,36 +111,38 @@ const LootboxSection = () => {
   const queryClient = useQueryClient();
   
   // Fetch lootboxes query
-  const { data: lootboxes, isLoading } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: ["lootboxes"],
     queryFn: fetchLootboxes,
     refetchInterval: 30000, // Refetch every 30 seconds to update cooldowns
   });
   
+  const lootboxes = data?.lootboxes || [];
+  
   // Open lootbox mutation
   const openMutation = useMutation({
     mutationFn: openLootbox,
-    onSuccess: (data, lootboxId) => {
+    onSuccess: (responseData, lootboxId) => {
       const lootbox = lootboxes?.find(lb => lb.id === lootboxId);
       
       // Add to history
       const newHistoryItem: LootboxHistory = {
         id: Date.now(),
         lootbox_name: lootbox?.name || "Unknown",
-        reward_type: data.type,
-        reward_name: data.name,
-        reward_value: data.value,
+        reward_type: responseData.type,
+        reward_name: responseData.name,
+        reward_value: responseData.value,
         opened_at: new Date().toISOString(),
       };
       
       setHistory(prev => [newHistoryItem, ...prev.slice(0, 9)]);
-      setReward(data);
+      setReward(responseData);
       
       // Invalidate lootboxes to refresh cooldowns
       queryClient.invalidateQueries({ queryKey: ["lootboxes"] });
       
       toast.success("Lootbox opened!", {
-        description: `You received: ${data.name}`,
+        description: `You received: ${responseData.name}`,
       });
     },
     onError: (error: Error) => {

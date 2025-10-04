@@ -25,14 +25,21 @@ export default function GameDetail() {
     const loadGame = async () => {
       setIsLoading(true);
       try {
-        const response = await fetch(`https://functions.poehali.dev/368c55f6-e1ab-410d-aa1d-64a0532bcae5?game_id=${gameId}`);
-        const data = await response.json();
-        setGame(data);
-
-        const coverResponse = await fetch(`https://functions.poehali.dev/b62ecfcc-7a7b-4b8d-9754-8cbb3d69d754?game_name=${encodeURIComponent(data.title)}`);
-        const coverData = await coverResponse.json();
-        if (coverData.cover_url) {
-          setCoverUrl(coverData.cover_url);
+        const storedGames = localStorage.getItem('games');
+        if (storedGames) {
+          const games = JSON.parse(storedGames);
+          const foundGame = games.find((g: any) => g.id === parseInt(gameId || '0'));
+          
+          if (foundGame) {
+            setGame(foundGame);
+            setCoverUrl(foundGame.image_url);
+          } else {
+            toast({
+              title: 'Игра не найдена',
+              description: 'Вернитесь в каталог',
+              variant: 'destructive',
+            });
+          }
         }
       } catch (error) {
         toast({

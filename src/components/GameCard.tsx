@@ -33,13 +33,25 @@ export default function GameCard({ game, onBuy, isFavorite, onToggleFavorite, on
           setCoverUrl(data.cover_url);
         }
       } catch (error) {
-        console.error('Failed to fetch cover:', error);
+        // Silently fail, keep original image
       }
     };
     fetchCover();
   }, [game.title]);
 
   const handleCardClick = () => {
+    // Store games in localStorage for GameDetail page
+    const storedGames = localStorage.getItem('games');
+    if (!storedGames) {
+      localStorage.setItem('games', JSON.stringify([game]));
+    } else {
+      const games = JSON.parse(storedGames);
+      const exists = games.find((g: Game) => g.id === game.id);
+      if (!exists) {
+        games.push(game);
+        localStorage.setItem('games', JSON.stringify(games));
+      }
+    }
     navigate(`/game/${game.id}`);
   };
 
