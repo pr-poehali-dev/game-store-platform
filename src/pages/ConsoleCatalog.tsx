@@ -253,12 +253,21 @@ export default function ConsoleCatalog() {
                 </div>
                 <div className="flex items-center justify-between pt-2">
                   <div>
-                    <div className="text-xs text-muted-foreground">от</div>
-                    <span className="text-2xl font-bold">{game.priceRub.toLocaleString('ru-RU')} ₽</span>
+                    {game.priceOnRequest ? (
+                      <div>
+                        <span className="text-lg font-bold text-primary">Цены уточняйте</span>
+                        <div className="text-xs text-muted-foreground">у менеджера</div>
+                      </div>
+                    ) : (
+                      <div>
+                        <div className="text-xs text-muted-foreground">от</div>
+                        <span className="text-2xl font-bold">{game.priceRub.toLocaleString('ru-RU')} ₽</span>
+                      </div>
+                    )}
                   </div>
                   <Button size="sm" className="hover:scale-105 transition-transform">
-                    <Icon name="ShoppingCart" className="h-4 w-4 mr-2" />
-                    Купить
+                    <Icon name={game.priceOnRequest ? "MessageCircle" : "ShoppingCart"} className="h-4 w-4 mr-2" />
+                    {game.priceOnRequest ? "Написать" : "Купить"}
                   </Button>
                 </div>
               </CardContent>
