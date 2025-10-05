@@ -16,6 +16,7 @@ interface Stream {
   thumbnail: string;
   isLive: boolean;
   platform: 'Twitch' | 'YouTube';
+  url: string;
 }
 
 interface Trailer {
@@ -26,6 +27,7 @@ interface Trailer {
   duration: string;
   views: number;
   date: string;
+  url: string;
 }
 
 const mockStreams: Stream[] = [
@@ -38,7 +40,8 @@ const mockStreams: Stream[] = [
     title: 'Ranked gameplay | Road to TOP 500 🔥',
     thumbnail: 'https://image.api.playstation.com/vulcan/ap/rnd/202310/1007/63b481e92a45146f79a54a57e5b5e7f7676d5d48b7c48e2d.png',
     isLive: true,
-    platform: 'Twitch'
+    platform: 'Twitch',
+    url: 'https://www.twitch.tv/directory/game/Call%20of%20Duty'
   },
   {
     id: 2,
@@ -49,7 +52,8 @@ const mockStreams: Stream[] = [
     title: 'Первое прохождение | Реакции',
     thumbnail: 'https://image.api.playstation.com/vulcan/ap/rnd/202108/0410/E4bTJbVi0i9fYsqPQMg2yD5j.png',
     isLive: true,
-    platform: 'Twitch'
+    platform: 'Twitch',
+    url: 'https://www.twitch.tv/directory/game/Elden%20Ring'
   },
   {
     id: 3,
@@ -60,7 +64,8 @@ const mockStreams: Stream[] = [
     title: 'Грабим казино с подписчиками',
     thumbnail: 'https://image.api.playstation.com/vulcan/ap/rnd/202202/2815/KkbQU7a2SZaWILqpAaVqqHkV.png',
     isLive: true,
-    platform: 'YouTube'
+    platform: 'YouTube',
+    url: 'https://www.youtube.com/results?search_query=GTA+V+online+live'
   }
 ];
 
@@ -72,25 +77,28 @@ const mockTrailers: Trailer[] = [
     thumbnail: 'https://image.api.playstation.com/vulcan/ap/rnd/202202/2815/KkbQU7a2SZaWILqpAaVqqHkV.png',
     duration: '1:30',
     views: 45000000,
-    date: '2 дня назад'
+    date: '2 дня назад',
+    url: 'https://www.youtube.com/watch?v=QdBZY2fkU-0'
   },
   {
     id: 2,
-    game: 'The Last of Us Part III',
-    title: 'Анонс на The Game Awards 2024',
-    thumbnail: 'https://image.api.playstation.com/vulcan/ap/rnd/202205/2523/MeF6ZJYdpqB9ZSuWrPVdXBqC.png',
-    duration: '2:15',
-    views: 12000000,
-    date: '1 неделю назад'
-  },
-  {
-    id: 3,
     game: 'God of War Ragnarök',
     title: 'Геймплей трейлер - Valhalla DLC',
     thumbnail: 'https://image.api.playstation.com/vulcan/ap/rnd/202207/1210/4xJ8XB3bi888QTLZYdl7Oi0s.png',
     duration: '3:42',
     views: 8500000,
-    date: '3 дня назад'
+    date: '3 дня назад',
+    url: 'https://www.youtube.com/watch?v=qJZT7b9FY5Q'
+  },
+  {
+    id: 3,
+    game: 'Elden Ring',
+    title: 'Официальный трейлер',
+    thumbnail: 'https://image.api.playstation.com/vulcan/ap/rnd/202108/0410/E4bTJbVi0i9fYsqPQMg2yD5j.png',
+    duration: '2:48',
+    views: 25000000,
+    date: '2 месяца назад',
+    url: 'https://www.youtube.com/watch?v=E3Huy2cdih0'
   }
 ];
 
@@ -135,7 +143,10 @@ export default function GameStreamsTrailers() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
               >
-                <Card className="group cursor-pointer hover:shadow-2xl transition-all overflow-hidden">
+                <Card 
+                  className="group cursor-pointer hover:shadow-2xl transition-all overflow-hidden"
+                  onClick={() => window.open(stream.url, '_blank')}
+                >
                   <div className="relative">
                     <img
                       src={stream.thumbnail}
@@ -203,7 +214,10 @@ export default function GameStreamsTrailers() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
               >
-                <Card className="group cursor-pointer hover:shadow-2xl transition-all overflow-hidden">
+                <Card 
+                  className="group cursor-pointer hover:shadow-2xl transition-all overflow-hidden"
+                  onClick={() => window.open(trailer.url, '_blank')}
+                >
                   <div className="relative">
                     <img
                       src={trailer.thumbnail}

@@ -107,7 +107,7 @@ export default function MainDashboard() {
         
         <div className="max-w-6xl mx-auto text-center relative z-10">
           <h1 className="text-6xl md:text-7xl font-bold mb-2 animate-fade-in-up">
-            GAMEHUB
+            <span className="bg-gradient-to-r from-green-400 via-blue-500 to-purple-600 bg-clip-text text-transparent">Game</span><span className="bg-gradient-to-r from-purple-600 via-pink-500 to-red-500 bg-clip-text text-transparent">Store</span><span className="bg-gradient-to-r from-yellow-400 via-orange-500 to-red-600 bg-clip-text text-transparent">Game</span>
           </h1>
           <p className="text-xl md:text-2xl mb-4 opacity-80 animate-fade-in-up animation-delay-200">
             Игровая платформа
@@ -141,7 +141,13 @@ export default function MainDashboard() {
                 key={index}
                 className="p-6 hover:shadow-xl hover:scale-105 hover:-translate-y-1 transition-all duration-300 cursor-pointer group animate-fade-in-up"
                 style={{ animationDelay: `${index * 50}ms` }}
-                onClick={() => feature.link ? window.location.href = feature.link : feature.action?.()}
+                onClick={() => {
+                  if (feature.link) {
+                    window.location.href = feature.link;
+                  } else if (feature.action) {
+                    feature.action();
+                  }
+                }}
               >
                 <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300">
                   <Icon name={feature.icon as any} size={24} className="text-primary" />

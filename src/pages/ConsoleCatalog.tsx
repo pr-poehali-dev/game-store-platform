@@ -13,7 +13,12 @@ import { useIndexState } from '@/hooks/useIndexState';
 export default function ConsoleCatalog() {
   const [searchQuery, setSearchQuery] = useState('');
   const [platformFilter, setPlatformFilter] = useState<string>('all');
+  const [genreFilter, setGenreFilter] = useState<string>('all');
+  const [minPrice, setMinPrice] = useState<number>(0);
+  const [maxPrice, setMaxPrice] = useState<number>(10000);
   const [sortBy, setSortBy] = useState<string>('title');
+
+  const allGenres = Array.from(new Set(consoleGamesRu.flatMap(game => game.genre)));
 
   const {
     cart,
@@ -48,7 +53,9 @@ export default function ConsoleCatalog() {
         game.developer.toLowerCase().includes(searchQuery.toLowerCase()) ||
         game.publisher.toLowerCase().includes(searchQuery.toLowerCase());
       const matchesPlatform = platformFilter === 'all' || game.platform === platformFilter;
-      return matchesSearch && matchesPlatform;
+      const matchesGenre = genreFilter === 'all' || game.genre.includes(genreFilter);
+      const matchesPrice = game.priceRub >= minPrice && game.priceRub <= maxPrice;
+      return matchesSearch && matchesPlatform && matchesGenre && matchesPrice;
     })
     .sort((a, b) => {
       if (sortBy === 'title') return a.title.localeCompare(b.title);
@@ -94,42 +101,94 @@ export default function ConsoleCatalog() {
           <p className="text-xl text-muted-foreground">Откройте для себя эксклюзивные тайтлы для PlayStation и Xbox</p>
         </div>
 
-        <div className="flex flex-col md:flex-row gap-4">
-          <div className="flex-1">
-            <div className="relative">
-              <Icon name="Search" className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-              <Input
-                placeholder="Поиск игр, разработчиков, издателей..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-10"
-              />
+        <div className="space-y-4">
+          <div className="flex flex-col md:flex-row gap-4">
+            <div className="flex-1">
+              <div className="relative">
+                <Icon name="Search" className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                <Input
+                  placeholder="Поиск игр, разработчиков, издателей..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="pl-10"
+                />
+              </div>
             </div>
+            <Select value={platformFilter} onValueChange={setPlatformFilter}>
+              <SelectTrigger className="w-full md:w-[200px]">
+                <SelectValue placeholder="Платформа" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">Все платформы</SelectItem>
+                <SelectItem value="PS5">PlayStation 5</SelectItem>
+                <SelectItem value="PS4">PlayStation 4</SelectItem>
+                <SelectItem value="Xbox Series X|S">Xbox Series X|S</SelectItem>
+                <SelectItem value="Xbox One">Xbox One</SelectItem>
+              </SelectContent>
+            </Select>
+            <Select value={sortBy} onValueChange={setSortBy}>
+              <SelectTrigger className="w-full md:w-[200px]">
+                <SelectValue placeholder="Сортировка" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="title">Название (A-Z)</SelectItem>
+                <SelectItem value="price-low">Цена (по возр.)</SelectItem>
+                <SelectItem value="price-high">Цена (по убыв.)</SelectItem>
+                <SelectItem value="rating">Рейтинг</SelectItem>
+                <SelectItem value="release">Дата выхода</SelectItem>
+              </SelectContent>
+            </Select>
           </div>
-          <Select value={platformFilter} onValueChange={setPlatformFilter}>
-            <SelectTrigger className="w-full md:w-[200px]">
-              <SelectValue placeholder="Платформа" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="all">Все платформы</SelectItem>
-              <SelectItem value="PS5">PlayStation 5</SelectItem>
-              <SelectItem value="PS4">PlayStation 4</SelectItem>
-              <SelectItem value="Xbox Series X|S">Xbox Series X|S</SelectItem>
-              <SelectItem value="Xbox One">Xbox One</SelectItem>
-            </SelectContent>
-          </Select>
-          <Select value={sortBy} onValueChange={setSortBy}>
-            <SelectTrigger className="w-full md:w-[200px]">
-              <SelectValue placeholder="Сортировка" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="title">Название (A-Z)</SelectItem>
-              <SelectItem value="price-low">Цена (по возр.)</SelectItem>
-              <SelectItem value="price-high">Цена (по убыв.)</SelectItem>
-              <SelectItem value="rating">Рейтинг</SelectItem>
-              <SelectItem value="release">Дата выхода</SelectItem>
-            </SelectContent>
-          </Select>
+
+          <div className="flex flex-col md:flex-row gap-4">
+            <Select value={genreFilter} onValueChange={setGenreFilter}>
+              <SelectTrigger className="w-full md:w-[200px]">
+                <SelectValue placeholder="Жанр" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">Все жанры</SelectItem>
+                {allGenres.sort().map(genre => (
+                  <SelectItem key={genre} value={genre}>{genre}</SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+
+            <div className="flex gap-2 flex-1">
+              <div className="flex-1">
+                <Input
+                  type="number"
+                  placeholder="Мин. цена"
+                  value={minPrice}
+                  onChange={(e) => setMinPrice(Number(e.target.value))}
+                  min={0}
+                />
+              </div>
+              <div className="flex-1">
+                <Input
+                  type="number"
+                  placeholder="Макс. цена"
+                  value={maxPrice}
+                  onChange={(e) => setMaxPrice(Number(e.target.value))}
+                  min={0}
+                />
+              </div>
+            </div>
+
+            <Button
+              variant="outline"
+              onClick={() => {
+                setSearchQuery('');
+                setPlatformFilter('all');
+                setGenreFilter('all');
+                setMinPrice(0);
+                setMaxPrice(10000);
+                setSortBy('title');
+              }}
+            >
+              <Icon name="X" className="h-4 w-4 mr-2" />
+              Сбросить фильтры
+            </Button>
+          </div>
         </div>
 
         <div className="flex items-center justify-between text-sm text-muted-foreground">
