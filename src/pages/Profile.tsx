@@ -14,8 +14,16 @@ import { FriendsList } from '@/components/FriendsList';
 import { TeamCard } from '@/components/TeamCard';
 import PriceTrackerEnhanced from '@/components/PriceTrackerEnhanced';
 import GamerStats from '@/components/GamerStats';
+import NotificationCenter from '@/components/NotificationCenter';
+import ActivityFeed from '@/components/ActivityFeed';
+import MessagingCenter from '@/components/MessagingCenter';
+import StatusSelector from '@/components/StatusSelector';
+import StreamsGallery from '@/components/StreamsGallery';
+import TeamChat from '@/components/TeamChat';
+import DiscoverGamers from '@/components/DiscoverGamers';
 import { Currency, Transaction, DailyReward, CoinShop as CoinShopItem } from '@/types/economy';
 import { GamerProfile, Friend, FriendRequest, Team } from '@/types/social';
+import { Notification, ActivityFeedItem, ChatConversation, Stream } from '@/types/notifications';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useToast } from '@/hooks/use-toast';
 import { initialGames } from '@/data/games';
@@ -175,9 +183,95 @@ export default function Profile() {
     toast({ title: '🎮 Приглашение отправлено!' });
   };
 
+  const [notifications, setNotifications] = useState<Notification[]>([
+    {
+      id: '1',
+      type: 'friend_request',
+      title: 'Новая заявка в друзья',
+      message: 'EpicGamer777 хочет добавить вас в друзья',
+      timestamp: Date.now() - 300000,
+      read: false,
+      priority: 'high',
+    },
+    {
+      id: '2',
+      type: 'game_discount',
+      title: 'Скидка 50% на Cyberpunk 2077',
+      message: 'Успейте купить игру со скидкой!',
+      image: initialGames[0]?.image,
+      timestamp: Date.now() - 3600000,
+      read: false,
+      priority: 'medium',
+    },
+  ]);
+
+  const [activities, setActivities] = useState<ActivityFeedItem[]>([
+    {
+      id: '1',
+      userId: 2,
+      username: 'ShadowNinja',
+      avatar: '/api/placeholder/48/48',
+      type: 'achievement',
+      title: 'Получил достижение',
+      description: 'Разблокировал достижение "Мастер снайпер" в Valorant',
+      timestamp: Date.now() - 1800000,
+      gameId: 1,
+      gameName: 'Valorant',
+      gameImage: initialGames[1]?.image,
+      likes: 15,
+      comments: 3,
+    },
+  ]);
+
+  const [conversations, setConversations] = useState<ChatConversation[]>([
+    {
+      id: '1',
+      participantId: 2,
+      participantName: 'ShadowNinja',
+      participantAvatar: '/api/placeholder/48/48',
+      participantStatus: 'online',
+      lastMessage: 'Поиграем в Valorant?',
+      lastMessageTime: Date.now() - 900000,
+      unreadCount: 2,
+      isPinned: false,
+    },
+  ]);
+
+  const [streams, setStreams] = useState<Stream[]>([
+    {
+      id: '1',
+      streamerId: 3,
+      streamerName: 'FireMage99',
+      streamerAvatar: '/api/placeholder/48/48',
+      title: 'Прохождение Elden Ring - Битва с боссом!',
+      gameId: 2,
+      gameName: 'Elden Ring',
+      gameImage: initialGames[2]?.image || '',
+      viewers: 1234,
+      thumbnail: initialGames[2]?.image || '',
+      startedAt: Date.now() - 7200000,
+      tags: ['RPG', 'Souls-like', 'Прохождение'],
+      isLive: true,
+    },
+  ]);
+
+  const [currentConversationId, setCurrentConversationId] = useState<string>();
+  const [userStatus, setUserStatus] = useState<'online' | 'in-game' | 'away' | 'offline'>('online');
+
   return (
     <>
       <div className="fixed top-24 right-4 z-30 flex gap-3">
+        <NotificationCenter
+          notifications={notifications}
+          onMarkAsRead={(id) => setNotifications(notifications.map(n => n.id === id ? {...n, read: true} : n))}
+          onMarkAllAsRead={() => setNotifications(notifications.map(n => ({...n, read: true})))}
+          onClearAll={() => setNotifications([])}
+        />
+        <StatusSelector
+          currentStatus={userStatus}
+          currentGame={mockProfile.currentGame}
+          onStatusChange={setUserStatus}
+        />
         <Button
           onClick={() => setShowAchievements(true)}
           className="bg-gradient-to-r from-primary to-secondary shadow-lg"
@@ -203,9 +297,13 @@ export default function Profile() {
           На главную
         </Button>
         <Tabs defaultValue="profile" className="w-full">
-          <TabsList className="grid w-full grid-cols-6">
+          <TabsList className="grid w-full grid-cols-10">
             <TabsTrigger value="profile">Профиль</TabsTrigger>
             <TabsTrigger value="economy">Экономика</TabsTrigger>
+            <TabsTrigger value="social">Соцсеть</TabsTrigger>
+            <TabsTrigger value="messages">Сообщения</TabsTrigger>
+            <TabsTrigger value="discover">Найти</TabsTrigger>
+            <TabsTrigger value="streams">Стримы</TabsTrigger>
             <TabsTrigger value="friends">Друзья</TabsTrigger>
             <TabsTrigger value="teams">Команды</TabsTrigger>
             <TabsTrigger value="tracker">Трекер цен</TabsTrigger>
@@ -234,6 +332,39 @@ export default function Profile() {
             )}
           </TabsContent>
 
+          <TabsContent value="social" className="mt-6">
+            <ActivityFeed
+              activities={activities}
+              onLike={(id) => toast({ title: '❤️ Понравилось!' })}
+              onComment={(id) => toast({ title: '💬 Открываю комментарии...' })}
+              onShare={(id) => toast({ title: '🔗 Ссылка скопирована!' })}
+            />
+          </TabsContent>
+
+          <TabsContent value="messages" className="mt-6">
+            <MessagingCenter
+              conversations={conversations}
+              currentConversationId={currentConversationId}
+              onSelectConversation={setCurrentConversationId}
+              onSendMessage={(convId, msg) => toast({ title: '✉️ Сообщение отправлено!' })}
+            />
+          </TabsContent>
+
+          <TabsContent value="discover" className="mt-6">
+            <DiscoverGamers
+              onAddFriend={(userId) => toast({ title: '✅ Заявка отправлена!' })}
+              onSendMessage={(userId) => toast({ title: '💬 Открываю чат...' })}
+              onViewProfile={(userId) => toast({ title: '👤 Открываю профиль...' })}
+            />
+          </TabsContent>
+
+          <TabsContent value="streams" className="mt-6">
+            <StreamsGallery
+              streams={streams}
+              onStreamClick={(id) => toast({ title: '📺 Открываю стрим...' })}
+            />
+          </TabsContent>
+
           <TabsContent value="friends" className="mt-6">
             <FriendsList
               friends={mockFriends}
@@ -246,7 +377,7 @@ export default function Profile() {
             />
           </TabsContent>
 
-          <TabsContent value="teams" className="mt-6">
+          <TabsContent value="teams" className="mt-6 space-y-6">
             <div className="space-y-6">
               <div className="flex items-center justify-between">
                 <h2 className="text-3xl font-bold">Мои команды</h2>
@@ -268,6 +399,25 @@ export default function Profile() {
                 ))}
               </div>
             </div>
+
+            <TeamChat
+              teamId="team-1"
+              teamName="EliteCybers"
+              members={[
+                { id: 1, name: 'GamerPro2024', avatar: '/api/placeholder/48/48', role: 'owner', status: 'online' },
+                { id: 2, name: 'ShadowNinja', avatar: '/api/placeholder/48/48', role: 'admin', status: 'voice' },
+                { id: 3, name: 'FireMage99', avatar: '/api/placeholder/48/48', role: 'member', status: 'in-game' },
+                { id: 4, name: 'TankMaster', avatar: '/api/placeholder/48/48', role: 'member', status: 'online' },
+              ]}
+              channels={[
+                { id: 'general', name: 'общий', description: 'Общение команды', type: 'text' },
+                { id: 'strategy', name: 'стратегия', description: 'Обсуждение тактики', type: 'text' },
+                { id: 'voice-1', name: 'Голосовой чат', description: '', type: 'voice' },
+              ]}
+              currentChannelId="general"
+              onChannelChange={(id) => toast({ title: `Переключено на канал` })}
+              onSendMessage={(channelId, msg) => toast({ title: '✉️ Сообщение отправлено!' })}
+            />
           </TabsContent>
 
           <TabsContent value="tracker" className="mt-6">
