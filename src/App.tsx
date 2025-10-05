@@ -30,6 +30,9 @@ import CasinoSystem from "@/components/CasinoSystem";
 import Marketplace from "@/components/Marketplace";
 import AdminDashboard from "@/components/AdminDashboard";
 import GamerSocialNetwork from "@/components/GamerSocialNetwork";
+import Predictions from "./pages/Predictions";
+import Streams from "./pages/Streams";
+import Clans from "./pages/Clans";
 import OfflineIndicator from "@/components/OfflineIndicator";
 import NotificationPermissionBanner from "@/components/NotificationPermissionBanner";
 import PendingPurchasesBadge from "@/components/PendingPurchasesBadge";
@@ -88,6 +91,9 @@ const App = () => {
               <Route path="/marketplace" element={<Marketplace listings={[]} onBuyItem={() => {}} onViewItem={() => {}} />} />
               <Route path="/admin" element={<AdminDashboard />} />
               <Route path="/social" element={<GamerSocialNetwork />} />
+              <Route path="/predictions" element={<Predictions />} />
+              <Route path="/streams" element={<Streams />} />
+              <Route path="/clans" element={<Clans />} />
               
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />

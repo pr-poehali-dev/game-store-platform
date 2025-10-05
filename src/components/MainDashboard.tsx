@@ -104,6 +104,12 @@ export default function MainDashboard() {
       description: 'Создавай кланы и воюй с другими',
       link: '/clans',
     },
+    {
+      icon: 'Brain',
+      title: 'ИИ Прогнозы',
+      description: 'Нейросеть предсказывает матчи',
+      link: '/predictions',
+    },
   ];
 
   const filteredGames = games.filter(game =>
