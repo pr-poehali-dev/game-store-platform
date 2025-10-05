@@ -114,7 +114,16 @@ export default function CasinoSystem() {
   return (
     <div className="space-y-6">
       <div className="text-center mb-8">
-        <h1 className="text-4xl font-bold mb-2">🎰 Казино</h1>
+        <div className="flex items-center justify-center gap-3 mb-2">
+          <Button variant="ghost" size="icon" onClick={() => window.history.back()}>
+            <Icon name="ArrowLeft" size={24} />
+          </Button>
+          <h1 className="text-4xl font-bold">🎰 Казино</h1>
+          <Button variant="outline" size="sm" onClick={() => window.location.href = '/'} className="ml-auto">
+            <Icon name="Home" size={16} className="mr-2" />
+            На главную
+          </Button>
+        </div>
         <p className="text-muted-foreground">Испытай удачу и выиграй!</p>
       </div>
 

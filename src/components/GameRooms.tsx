@@ -63,14 +63,25 @@ export default function GameRooms() {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-3xl font-bold mb-2">🎮 Игровые комнаты</h1>
-          <p className="text-muted-foreground">Создавай лобби и играй с друзьями</p>
+        <div className="flex items-center gap-3">
+          <Button variant="ghost" size="icon" onClick={() => window.history.back()}>
+            <Icon name="ArrowLeft" size={24} />
+          </Button>
+          <div>
+            <h1 className="text-3xl font-bold mb-2">🎮 Игровые комнаты</h1>
+            <p className="text-muted-foreground">Создавай лобби и играй с друзьями</p>
+          </div>
         </div>
-        <Button onClick={() => setShowCreateModal(true)} size="lg">
-          <Icon name="Plus" size={20} className="mr-2" />
-          Создать комнату
-        </Button>
+        <div className="flex gap-2">
+          <Button variant="outline" size="sm" onClick={() => window.location.href = '/'}>
+            <Icon name="Home" size={16} className="mr-2" />
+            На главную
+          </Button>
+          <Button onClick={() => setShowCreateModal(true)} size="lg">
+            <Icon name="Plus" size={20} className="mr-2" />
+            Создать комнату
+          </Button>
+        </div>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">

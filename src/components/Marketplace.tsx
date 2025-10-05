@@ -65,14 +65,28 @@ export default function Marketplace({ listings, onBuyItem, onViewItem }: Marketp
       return b.createdAt - a.createdAt;
     });
 
+  const handleBack = () => window.history.back();
+  const handleHome = () => window.location.href = '/';
+
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <h2 className="text-2xl font-bold">Маркетплейс предметов</h2>
-        <Button>
-          <Icon name="Package" size={16} className="mr-2" />
-          Продать предмет
-        </Button>
+        <div className="flex items-center gap-3">
+          <Button variant="ghost" size="icon" onClick={handleBack}>
+            <Icon name="ArrowLeft" size={24} />
+          </Button>
+          <h2 className="text-2xl font-bold">Маркетплейс предметов</h2>
+        </div>
+        <div className="flex gap-2">
+          <Button variant="outline" size="sm" onClick={handleHome}>
+            <Icon name="Home" size={16} className="mr-2" />
+            На главную
+          </Button>
+          <Button>
+            <Icon name="Package" size={16} className="mr-2" />
+            Продать предмет
+          </Button>
+        </div>
       </div>
 
       <Card className="p-4">

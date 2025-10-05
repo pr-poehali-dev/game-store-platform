@@ -104,10 +104,22 @@ export default function CraftingSystem() {
     return `${mins}м ${secs}с`;
   };
 
+  const handleBack = () => window.history.back();
+  const handleHome = () => window.location.href = '/';
+
   return (
     <div className="space-y-6">
       <div className="text-center mb-8">
-        <h1 className="text-4xl font-bold mb-2">⚒️ Система крафта</h1>
+        <div className="flex items-center justify-center gap-3 mb-2">
+          <Button variant="ghost" size="icon" onClick={handleBack}>
+            <Icon name="ArrowLeft" size={24} />
+          </Button>
+          <h1 className="text-4xl font-bold">⚒️ Система крафта</h1>
+          <Button variant="outline" size="sm" onClick={handleHome} className="ml-auto">
+            <Icon name="Home" size={16} className="mr-2" />
+            На главную
+          </Button>
+        </div>
         <p className="text-muted-foreground">Создавай легендарные предметы из материалов!</p>
       </div>
 

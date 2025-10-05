@@ -89,14 +89,22 @@ export default function GameDetail() {
   return (
     <div className="min-h-screen bg-background dark">
       <div className="container mx-auto px-4 py-8 max-w-7xl">
-        <Button 
-          variant="ghost" 
-          className="mb-6"
-          onClick={() => navigate('/')}
-        >
-          <Icon name="ArrowLeft" size={16} className="mr-2" />
-          Назад в каталог
-        </Button>
+        <div className="flex gap-2 mb-6">
+          <Button 
+            variant="ghost" 
+            onClick={() => window.history.back()}
+          >
+            <Icon name="ArrowLeft" size={16} className="mr-2" />
+            Назад
+          </Button>
+          <Button 
+            variant="outline" 
+            onClick={() => navigate('/')}
+          >
+            <Icon name="Home" size={16} className="mr-2" />
+            На главную
+          </Button>
+        </div>
 
         <div className="grid lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2">

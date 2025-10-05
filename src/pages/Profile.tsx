@@ -258,8 +258,20 @@ export default function Profile() {
   const [currentConversationId, setCurrentConversationId] = useState<string>();
   const [userStatus, setUserStatus] = useState<'online' | 'in-game' | 'away' | 'offline'>('online');
 
+  const handleBack = () => window.history.back();
+  const handleHome = () => window.location.href = '/';
+
   return (
     <>
+      <div className="fixed top-4 left-4 z-30 flex gap-2">
+        <Button variant="ghost" size="icon" onClick={handleBack}>
+          <Icon name="ArrowLeft" size={24} />
+        </Button>
+        <Button variant="outline" size="sm" onClick={handleHome}>
+          <Icon name="Home" size={16} className="mr-2" />
+          На главную
+        </Button>
+      </div>
       <div className="fixed top-24 right-4 z-30 flex gap-3">
         <NotificationCenter
           notifications={notifications}

@@ -23,6 +23,9 @@ export default function AdminDashboard() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
+          <Button variant="ghost" size="icon" onClick={() => window.history.back()}>
+            <Icon name="ArrowLeft" size={24} />
+          </Button>
           <div className="w-12 h-12 bg-gradient-to-r from-primary to-secondary rounded-lg flex items-center justify-center">
             <Icon name="Shield" size={24} className="text-white" />
           </div>
@@ -31,7 +34,13 @@ export default function AdminDashboard() {
             <p className="text-muted-foreground">Полный контроль над платформой</p>
           </div>
         </div>
-        <Badge className="bg-red-500 text-white">SUPER ADMIN</Badge>
+        <div className="flex gap-2">
+          <Button variant="outline" size="sm" onClick={() => window.location.href = '/'}>
+            <Icon name="Home" size={16} className="mr-2" />
+            На главную
+          </Button>
+          <Badge className="bg-red-500 text-white">SUPER ADMIN</Badge>
+        </div>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-4">

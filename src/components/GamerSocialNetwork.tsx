@@ -122,12 +122,24 @@ export default function GamerSocialNetwork() {
     }
   };
 
+  const handleBack = () => window.history.back();
+  const handleHome = () => window.location.href = '/';
+
   return (
     <div className="container mx-auto px-4 py-12" data-section="social">
       <div className="mb-8">
-        <h2 className="text-4xl font-bold bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent mb-2">
-          👥 Социальная сеть геймеров
-        </h2>
+        <div className="flex items-center gap-3 mb-4">
+          <Button variant="ghost" size="icon" onClick={handleBack}>
+            <Icon name="ArrowLeft" size={24} />
+          </Button>
+          <h2 className="text-4xl font-bold bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
+            👥 Социальная сеть геймеров
+          </h2>
+          <Button variant="outline" size="sm" onClick={handleHome} className="ml-auto">
+            <Icon name="Home" size={16} className="mr-2" />
+            На главную
+          </Button>
+        </div>
         <p className="text-muted-foreground">
           Общайтесь, делитесь достижениями и находите друзей для игр
         </p>

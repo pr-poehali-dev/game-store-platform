@@ -90,8 +90,8 @@ export default function NavigationBar({
     <nav className="flex items-center gap-2 md:gap-3">
       <MobileMenu isOpen={isMobileMenuOpen} setIsOpen={setIsMobileMenuOpen} />
 
-      <a href="/#games" className="text-sm md:text-base text-foreground hover:text-primary transition-colors hidden md:block">
-        Каталог
+      <a href="/" className="text-sm md:text-base text-foreground hover:text-primary transition-colors hidden md:block">
+        Главная
       </a>
       <a href="/console-catalog" className="text-sm md:text-base text-foreground hover:text-secondary transition-colors hidden md:block">
         PS/Xbox

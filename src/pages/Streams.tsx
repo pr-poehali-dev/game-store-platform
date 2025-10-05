@@ -23,6 +23,9 @@ export default function Streams() {
   const [searchQuery, setSearchQuery] = useState('');
   const [activeCategory, setActiveCategory] = useState('all');
 
+  const handleBack = () => window.history.back();
+  const handleHome = () => window.location.href = '/';
+
   const streams: Stream[] = [
     {
       id: 1,
@@ -100,8 +103,15 @@ export default function Streams() {
       <div className="max-w-7xl mx-auto">
         <div className="mb-8">
           <div className="flex items-center gap-3 mb-2">
+            <Button variant="ghost" size="icon" onClick={handleBack} className="mr-2">
+              <Icon name="ArrowLeft" size={24} />
+            </Button>
             <Icon name="Video" size={40} className="text-primary" />
             <h1 className="text-4xl font-bold">Стримы</h1>
+            <Button variant="outline" size="sm" onClick={handleHome} className="ml-auto">
+              <Icon name="Home" size={16} className="mr-2" />
+              На главную
+            </Button>
           </div>
           <p className="text-muted-foreground">
             Смотри топовых стримеров или запусти свой стрим
