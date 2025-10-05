@@ -32,22 +32,30 @@ export default function MobileMenu({ isOpen, setIsOpen }: MobileMenuProps) {
             className="flex items-center gap-3 p-3 rounded-lg hover:bg-primary/10 transition-colors"
           >
             <Icon name="Gamepad2" size={20} className="text-primary" />
-            <span className="font-medium">Игры</span>
+            <span className="font-medium">Каталог PC игр</span>
           </a>
           <a 
-            href="/#subscriptions" 
+            href="/console-catalog" 
             onClick={() => setIsOpen(false)}
             className="flex items-center gap-3 p-3 rounded-lg hover:bg-secondary/10 transition-colors"
           >
-            <Icon name="Star" size={20} className="text-secondary" />
-            <span className="font-medium">Подписки</span>
+            <Icon name="Joystick" size={20} className="text-secondary" />
+            <span className="font-medium">PS / Xbox</span>
+          </a>
+          <a 
+            href="/dashboard" 
+            onClick={() => setIsOpen(false)}
+            className="flex items-center gap-3 p-3 rounded-lg hover:bg-accent/10 transition-colors"
+          >
+            <Icon name="LayoutDashboard" size={20} className="text-accent" />
+            <span className="font-medium">Личный кабинет</span>
           </a>
           <a 
             href="/tournaments" 
             onClick={() => setIsOpen(false)}
-            className="flex items-center gap-3 p-3 rounded-lg hover:bg-accent/10 transition-colors"
+            className="flex items-center gap-3 p-3 rounded-lg hover:bg-yellow-500/10 transition-colors"
           >
-            <Icon name="Trophy" size={20} className="text-accent" />
+            <Icon name="Trophy" size={20} className="text-yellow-500" />
             <span className="font-medium">Турниры</span>
           </a>
           <a 

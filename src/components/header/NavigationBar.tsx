@@ -91,10 +91,13 @@ export default function NavigationBar({
       <MobileMenu isOpen={isMobileMenuOpen} setIsOpen={setIsMobileMenuOpen} />
 
       <a href="/#games" className="text-sm md:text-base text-foreground hover:text-primary transition-colors hidden md:block">
-        Игры
+        Каталог
       </a>
-      <a href="/#subscriptions" className="text-sm md:text-base text-foreground hover:text-secondary transition-colors hidden md:block">
-        Подписки
+      <a href="/console-catalog" className="text-sm md:text-base text-foreground hover:text-secondary transition-colors hidden md:block">
+        PS/Xbox
+      </a>
+      <a href="/dashboard" className="text-sm md:text-base text-foreground hover:text-accent transition-colors hidden md:block">
+        Личный кабинет
       </a>
 
       <Tooltip>

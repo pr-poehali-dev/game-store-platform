@@ -1,0 +1,297 @@
+export interface ConsoleGame {
+  id: number;
+  title: string;
+  platform: 'PS5' | 'PS4' | 'Xbox Series X|S' | 'Xbox One';
+  developer: string;
+  publisher: string;
+  releaseDate: string;
+  genre: string[];
+  description: string;
+  price: number;
+  rating: number;
+  image: string;
+  exclusive?: boolean;
+}
+
+export const consoleGames: ConsoleGame[] = [
+  {
+    id: 1001,
+    title: "God of War Ragnarök",
+    platform: "PS5",
+    developer: "Santa Monica Studio",
+    publisher: "Sony Interactive Entertainment",
+    releaseDate: "2022-11-09",
+    genre: ["Action", "Adventure"],
+    description: "Kratos and Atreus embark on a mythic journey for answers before Ragnarök arrives",
+    price: 69.99,
+    rating: 9.4,
+    image: "https://picsum.photos/seed/gow/400/500",
+    exclusive: true
+  },
+  {
+    id: 1002,
+    title: "Horizon Forbidden West",
+    platform: "PS5",
+    developer: "Guerrilla Games",
+    publisher: "Sony Interactive Entertainment",
+    releaseDate: "2022-02-18",
+    genre: ["Action", "RPG"],
+    description: "Join Aloy as she braves the Forbidden West, a deadly frontier that conceals mysterious new threats",
+    price: 69.99,
+    rating: 8.8,
+    image: "https://picsum.photos/seed/horizon/400/500",
+    exclusive: true
+  },
+  {
+    id: 1003,
+    title: "Spider-Man 2",
+    platform: "PS5",
+    developer: "Insomniac Games",
+    publisher: "Sony Interactive Entertainment",
+    releaseDate: "2023-10-20",
+    genre: ["Action", "Adventure"],
+    description: "Peter Parker and Miles Morales struggle to navigate the next steps in their personal lives",
+    price: 69.99,
+    rating: 9.0,
+    image: "https://picsum.photos/seed/spiderman/400/500",
+    exclusive: true
+  },
+  {
+    id: 1004,
+    title: "The Last of Us Part II Remastered",
+    platform: "PS5",
+    developer: "Naughty Dog",
+    publisher: "Sony Interactive Entertainment",
+    releaseDate: "2024-01-19",
+    genre: ["Action", "Survival"],
+    description: "Experience Ellie's journey of revenge in stunning detail with enhanced graphics and new features",
+    price: 49.99,
+    rating: 9.3,
+    image: "https://picsum.photos/seed/tlou2/400/500",
+    exclusive: true
+  },
+  {
+    id: 1005,
+    title: "Ratchet & Clank: Rift Apart",
+    platform: "PS5",
+    developer: "Insomniac Games",
+    publisher: "Sony Interactive Entertainment",
+    releaseDate: "2021-06-11",
+    genre: ["Action", "Platformer"],
+    description: "Go dimension-hopping with Ratchet and Clank as they take on an evil emperor from another reality",
+    price: 69.99,
+    rating: 8.9,
+    image: "https://picsum.photos/seed/ratchet/400/500",
+    exclusive: true
+  },
+  {
+    id: 1006,
+    title: "Returnal",
+    platform: "PS5",
+    developer: "Housemarque",
+    publisher: "Sony Interactive Entertainment",
+    releaseDate: "2021-04-30",
+    genre: ["Action", "Roguelike"],
+    description: "Break the cycle of chaos on an alien planet in this third-person shooter",
+    price: 69.99,
+    rating: 8.5,
+    image: "https://picsum.photos/seed/returnal/400/500",
+    exclusive: true
+  },
+  {
+    id: 1007,
+    title: "Demon's Souls",
+    platform: "PS5",
+    developer: "Bluepoint Games",
+    publisher: "Sony Interactive Entertainment",
+    releaseDate: "2020-11-12",
+    genre: ["Action", "RPG"],
+    description: "Experience the original brutal challenge, completely remade from the ground up",
+    price: 69.99,
+    rating: 9.2,
+    image: "https://picsum.photos/seed/demons/400/500",
+    exclusive: true
+  },
+  {
+    id: 1008,
+    title: "Gran Turismo 7",
+    platform: "PS5",
+    developer: "Polyphony Digital",
+    publisher: "Sony Interactive Entertainment",
+    releaseDate: "2022-03-04",
+    genre: ["Racing", "Simulation"],
+    description: "Experience the complete Gran Turismo experience with over 400 cars and 90+ track routes",
+    price: 69.99,
+    rating: 8.7,
+    image: "https://picsum.photos/seed/gt7/400/500",
+    exclusive: true
+  },
+  {
+    id: 1009,
+    title: "Halo Infinite",
+    platform: "Xbox Series X|S",
+    developer: "343 Industries",
+    publisher: "Xbox Game Studios",
+    releaseDate: "2021-12-08",
+    genre: ["Shooter", "Action"],
+    description: "The Master Chief returns in the most expansive Master Chief story yet",
+    price: 59.99,
+    rating: 8.3,
+    image: "https://picsum.photos/seed/halo/400/500",
+    exclusive: true
+  },
+  {
+    id: 1010,
+    title: "Forza Horizon 5",
+    platform: "Xbox Series X|S",
+    developer: "Playground Games",
+    publisher: "Xbox Game Studios",
+    releaseDate: "2021-11-09",
+    genre: ["Racing", "Open World"],
+    description: "Explore the vibrant and ever-evolving open world landscapes of Mexico",
+    price: 59.99,
+    rating: 9.1,
+    image: "https://picsum.photos/seed/forza5/400/500",
+    exclusive: true
+  },
+  {
+    id: 1011,
+    title: "Starfield",
+    platform: "Xbox Series X|S",
+    developer: "Bethesda Game Studios",
+    publisher: "Bethesda Softworks",
+    releaseDate: "2023-09-06",
+    genre: ["RPG", "Sci-Fi"],
+    description: "In this next generation role-playing game set amongst the stars, create any character you want",
+    price: 69.99,
+    rating: 8.6,
+    image: "https://picsum.photos/seed/starfield/400/500",
+    exclusive: true
+  },
+  {
+    id: 1012,
+    title: "Gears 5",
+    platform: "Xbox Series X|S",
+    developer: "The Coalition",
+    publisher: "Xbox Game Studios",
+    releaseDate: "2019-09-10",
+    genre: ["Shooter", "Action"],
+    description: "Kait Diaz breaks away to uncover her connection to the enemy and discovers the true danger to Sera",
+    price: 39.99,
+    rating: 8.4,
+    image: "https://picsum.photos/seed/gears5/400/500",
+    exclusive: true
+  },
+  {
+    id: 1013,
+    title: "Fable",
+    platform: "Xbox Series X|S",
+    developer: "Playground Games",
+    publisher: "Xbox Game Studios",
+    releaseDate: "2025-TBA",
+    genre: ["RPG", "Adventure"],
+    description: "A new beginning for the legendary Fable franchise",
+    price: 69.99,
+    rating: 0,
+    image: "https://picsum.photos/seed/fable/400/500",
+    exclusive: true
+  },
+  {
+    id: 1014,
+    title: "Perfect Dark",
+    platform: "Xbox Series X|S",
+    developer: "The Initiative",
+    publisher: "Xbox Game Studios",
+    releaseDate: "2025-TBA",
+    genre: ["Shooter", "Action"],
+    description: "Agent Joanna Dark returns in this first-person secret agent thriller",
+    price: 69.99,
+    rating: 0,
+    image: "https://picsum.photos/seed/perfectdark/400/500",
+    exclusive: true
+  },
+  {
+    id: 1015,
+    title: "Ghost of Tsushima Director's Cut",
+    platform: "PS5",
+    developer: "Sucker Punch Productions",
+    publisher: "Sony Interactive Entertainment",
+    releaseDate: "2021-08-20",
+    genre: ["Action", "Adventure"],
+    description: "A storm is coming. Venture beyond the battlefield to experience feudal Japan like never before",
+    price: 69.99,
+    rating: 9.0,
+    image: "https://picsum.photos/seed/ghost/400/500",
+    exclusive: true
+  },
+  {
+    id: 1016,
+    title: "Bloodborne",
+    platform: "PS4",
+    developer: "FromSoftware",
+    publisher: "Sony Interactive Entertainment",
+    releaseDate: "2015-03-24",
+    genre: ["Action", "RPG"],
+    description: "Hunt your nightmares as you search for answers in the ancient city of Yharnam",
+    price: 19.99,
+    rating: 9.1,
+    image: "https://picsum.photos/seed/bloodborne/400/500",
+    exclusive: true
+  },
+  {
+    id: 1017,
+    title: "Uncharted: Legacy of Thieves Collection",
+    platform: "PS5",
+    developer: "Naughty Dog",
+    publisher: "Sony Interactive Entertainment",
+    releaseDate: "2022-01-28",
+    genre: ["Action", "Adventure"],
+    description: "Seek fortune and uncover the truth in Uncharted 4 and Uncharted: The Lost Legacy",
+    price: 49.99,
+    rating: 8.8,
+    image: "https://picsum.photos/seed/uncharted/400/500",
+    exclusive: true
+  },
+  {
+    id: 1018,
+    title: "Sackboy: A Big Adventure",
+    platform: "PS5",
+    developer: "Sumo Digital",
+    publisher: "Sony Interactive Entertainment",
+    releaseDate: "2020-11-12",
+    genre: ["Platformer", "Adventure"],
+    description: "Go on an epic 3D platforming adventure with Sackboy",
+    price: 59.99,
+    rating: 8.2,
+    image: "https://picsum.photos/seed/sackboy/400/500",
+    exclusive: true
+  },
+  {
+    id: 1019,
+    title: "Helldivers 2",
+    platform: "PS5",
+    developer: "Arrowhead Game Studios",
+    publisher: "Sony Interactive Entertainment",
+    releaseDate: "2024-02-08",
+    genre: ["Shooter", "Co-op"],
+    description: "Join the Helldivers and fight for freedom across a hostile galaxy",
+    price: 39.99,
+    rating: 8.6,
+    image: "https://picsum.photos/seed/helldivers/400/500",
+    exclusive: true
+  },
+  {
+    id: 1020,
+    title: "Sea of Thieves",
+    platform: "Xbox Series X|S",
+    developer: "Rare",
+    publisher: "Xbox Game Studios",
+    releaseDate: "2018-03-20",
+    genre: ["Adventure", "Multiplayer"],
+    description: "Be the pirate you want in this shared-world adventure",
+    price: 39.99,
+    rating: 8.1,
+    image: "https://picsum.photos/seed/seaofthieves/400/500",
+    exclusive: true
+  }
+];
