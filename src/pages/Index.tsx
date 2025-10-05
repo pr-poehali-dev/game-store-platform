@@ -138,31 +138,6 @@ export default function Index() {
         />
       </Suspense>
 
-      <MainTabs
-        activeTab={activeTab}
-        onTabChange={setActiveTab}
-        filteredGames={filteredGames}
-        filteredSubs={filteredSubs}
-        categories={categories}
-        franchises={franchises}
-        platformFilter={platformFilter}
-        setPlatformFilter={setPlatformFilter}
-        categoryFilter={categoryFilter}
-        setCategoryFilter={setCategoryFilter}
-        franchiseFilter={franchiseFilter}
-        setFranchiseFilter={setFranchiseFilter}
-        searchQuery={searchQuery}
-        setSearchQuery={setSearchQuery}
-        sortBy={sortBy}
-        setSortBy={setSortBy}
-        priceRange={priceRange}
-        setPriceRange={setPriceRange}
-        favorites={favorites}
-        onToggleFavorite={toggleFavorite}
-        onViewGame={handleViewGame}
-        onAddToCart={addToCart}
-      />
-
       <GameDialog
         selectedGame={selectedGame}
         selectedVersion={selectedVersion}
