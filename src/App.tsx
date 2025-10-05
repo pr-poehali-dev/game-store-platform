@@ -18,6 +18,18 @@ import GameDetail from "./pages/GameDetail";
 import WishlistPage from "./pages/WishlistPage";
 import AdminEnrichment from "./pages/AdminEnrichment";
 import Tournaments from "./pages/Tournaments";
+import BattlePass from "@/components/BattlePass";
+import LootboxSystem from "@/components/LootboxSystem";
+import AchievementSystem from "@/components/AchievementSystem";
+import PlayerStats from "@/components/PlayerStats";
+import DailyRewardsSystem from "@/components/DailyRewardsSystem";
+import GameRooms from "@/components/GameRooms";
+import ReferralSystem from "@/components/ReferralSystem";
+import CraftingSystem from "@/components/CraftingSystem";
+import CasinoSystem from "@/components/CasinoSystem";
+import Marketplace from "@/components/Marketplace";
+import AdminDashboard from "@/components/AdminDashboard";
+import GamerSocialNetwork from "@/components/GamerSocialNetwork";
 import OfflineIndicator from "@/components/OfflineIndicator";
 import NotificationPermissionBanner from "@/components/NotificationPermissionBanner";
 import PendingPurchasesBadge from "@/components/PendingPurchasesBadge";
@@ -63,6 +75,20 @@ const App = () => {
               <Route path="/admin/enrich" element={<AdminEnrichment />} />
               <Route path="/privacy" element={<Privacy />} />
               <Route path="/terms" element={<Terms />} />
+              
+              <Route path="/battlepass" element={<BattlePass />} />
+              <Route path="/lootbox" element={<LootboxSystem />} />
+              <Route path="/achievements" element={<AchievementSystem />} />
+              <Route path="/stats" element={<PlayerStats />} />
+              <Route path="/rewards" element={<DailyRewardsSystem />} />
+              <Route path="/rooms" element={<GameRooms />} />
+              <Route path="/referral" element={<ReferralSystem />} />
+              <Route path="/crafting" element={<CraftingSystem />} />
+              <Route path="/casino" element={<CasinoSystem />} />
+              <Route path="/marketplace" element={<Marketplace listings={[]} onBuyItem={() => {}} onViewItem={() => {}} />} />
+              <Route path="/admin" element={<AdminDashboard />} />
+              <Route path="/social" element={<GamerSocialNetwork />} />
+              
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>

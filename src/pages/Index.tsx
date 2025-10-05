@@ -3,11 +3,9 @@ import { Button } from '@/components/ui/button';
 import Icon from '@/components/ui/icon';
 import { useIndexState } from '@/hooks/useIndexState';
 import Header from '@/components/Header';
-import Hero from '@/components/Hero';
-import MainTabs from '@/components/MainTabs';
+import MainDashboard from '@/components/MainDashboard';
 import GameDialog from '@/components/GameDialog';
 import Footer from '@/components/Footer';
-import { EnhancedCatalogSection } from '@/components/EnhancedCatalogSection';
 
 const UnifiedChat = lazy(() => import('@/components/UnifiedChat'));
 const TournamentsSection = lazy(() => import('@/components/TournamentsSection'));
@@ -129,15 +127,7 @@ export default function Index() {
         handleDeleteSubscription={handleDeleteSubscription}
       />
 
-      <Hero />
-
-      <EnhancedCatalogSection
-        games={games}
-        favorites={favorites}
-        onToggleFavorite={toggleFavorite}
-        onViewGame={handleViewGame}
-        onAddToCart={addToCart}
-      />
+      <MainDashboard />
 
       <Suspense fallback={<div className="h-20" />}>
         <TournamentReminder 
