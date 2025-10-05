@@ -23,6 +23,7 @@ const GamerSocialNetwork = lazy(() => import('@/components/GamerSocialNetwork'))
 const CurrencyRegionSelector = lazy(() => import('@/components/CurrencyRegionSelector'));
 const GameStreamsTrailers = lazy(() => import('@/components/GameStreamsTrailers'));
 const AchievementsShowcase = lazy(() => import('@/components/AchievementsShowcase'));
+const EnhancedAchievements = lazy(() => import('@/components/EnhancedAchievements'));
 const DiscordAuth = lazy(() => import('@/components/DiscordAuth'));
 const StatsSection = lazy(() => import('@/components/StatsSection'));
 const InfoSection = lazy(() => import('@/components/InfoSection'));
@@ -210,7 +211,7 @@ export default function Index() {
       </Suspense>
 
       <Suspense fallback={<div className="h-40" />}>
-        <AchievementsShowcase />
+        <EnhancedAchievements />
       </Suspense>
 
       <Suspense fallback={<div className="h-40" />}>

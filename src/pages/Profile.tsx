@@ -13,6 +13,7 @@ import { GamerProfileCard } from '@/components/GamerProfileCard';
 import { FriendsList } from '@/components/FriendsList';
 import { TeamCard } from '@/components/TeamCard';
 import PriceTrackerEnhanced from '@/components/PriceTrackerEnhanced';
+import GamerStats from '@/components/GamerStats';
 import { Currency, Transaction, DailyReward, CoinShop as CoinShopItem } from '@/types/economy';
 import { GamerProfile, Friend, FriendRequest, Team } from '@/types/social';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -217,6 +218,7 @@ export default function Profile() {
               isOwnProfile={true}
               onEditProfile={() => toast({ title: 'Редактирование профиля...' })}
             />
+            <GamerStats stats={mockProfile.stats} />
             <UserProfile />
           </TabsContent>
 
