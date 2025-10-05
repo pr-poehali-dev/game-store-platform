@@ -89,9 +89,9 @@ export default function ConsoleCatalog() {
       />
 
       <div className="container mx-auto px-4 py-8 space-y-6">
-        <div>
-          <h1 className="text-4xl font-bold mb-2">Console Games Catalog</h1>
-          <p className="text-muted-foreground">Discover exclusive titles for PlayStation and Xbox</p>
+        <div className="animate-fade-in-up">
+          <h1 className="text-4xl font-bold mb-2">🎮 Каталог консольных игр</h1>
+          <p className="text-muted-foreground">Откройте для себя эксклюзивные тайтлы для PlayStation и Xbox</p>
         </div>
 
         <div className="flex flex-col md:flex-row gap-4">
@@ -137,13 +137,17 @@ export default function ConsoleCatalog() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {filteredGames.map((game) => (
-            <Card key={game.id} className="overflow-hidden hover:shadow-lg transition-shadow">
-              <div className="relative h-64 overflow-hidden bg-muted">
+          {filteredGames.map((game, index) => (
+            <Card 
+              key={game.id} 
+              className="overflow-hidden hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 cursor-pointer animate-fade-in-up"
+              style={{ animationDelay: `${(index % 12) * 50}ms` }}
+            >
+              <div className="relative h-64 overflow-hidden bg-muted group">
                 <img
                   src={game.image}
                   alt={game.title}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                 />
                 {game.exclusive && (
                   <Badge className="absolute top-2 right-2 bg-primary">
