@@ -5,6 +5,7 @@ import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import Icon from '@/components/ui/icon';
+import Breadcrumbs from '@/components/Breadcrumbs';
 
 interface Stream {
   id: number;
@@ -101,6 +102,7 @@ export default function Streams() {
   return (
     <div className="min-h-screen bg-background p-6">
       <div className="max-w-7xl mx-auto">
+        <Breadcrumbs />
         <div className="mb-8">
           <div className="flex items-center gap-3 mb-2">
             <Button variant="ghost" size="icon" onClick={handleBack} className="mr-2">

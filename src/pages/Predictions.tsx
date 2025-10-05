@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import Icon from '@/components/ui/icon';
+import Breadcrumbs from '@/components/Breadcrumbs';
 
 interface Match {
   id: number;
@@ -65,6 +66,7 @@ export default function Predictions() {
   return (
     <div className="min-h-screen bg-background p-6">
       <div className="max-w-6xl mx-auto">
+        <Breadcrumbs />
         <div className="mb-8">
           <div className="flex items-center gap-3 mb-2">
             <Button variant="ghost" size="icon" onClick={() => window.history.back()} className="mr-2">

@@ -8,6 +8,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { MarketplaceListing, ItemRarity } from '@/types/marketplace';
 import Icon from '@/components/ui/icon';
+import Breadcrumbs from '@/components/Breadcrumbs';
 
 interface MarketplaceProps {
   listings: MarketplaceListing[];
@@ -70,6 +71,7 @@ export default function Marketplace({ listings, onBuyItem, onViewItem }: Marketp
 
   return (
     <div className="space-y-6">
+      <Breadcrumbs />
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
           <Button variant="ghost" size="icon" onClick={handleBack}>

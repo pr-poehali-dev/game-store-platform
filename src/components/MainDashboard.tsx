@@ -18,7 +18,7 @@ export default function MainDashboard() {
       icon: 'Gamepad2',
       title: 'Каталог игр',
       description: 'Найди свою игру среди тысяч вариантов',
-      link: '/catalog',
+      action: () => { const el = document.getElementById('games'); el?.scrollIntoView({ behavior: 'smooth' }); },
     },
     {
       icon: 'Users',
@@ -48,19 +48,19 @@ export default function MainDashboard() {
       icon: 'Package',
       title: 'Лутбоксы',
       description: 'Открывай кейсы и получай награды',
-      link: '/lootbox',
+      link: '/dashboard',
     },
     {
       icon: 'Target',
       title: 'Battle Pass',
       description: '100 уровней эксклюзивных наград',
-      link: '/battlepass',
+      link: '/dashboard',
     },
     {
       icon: 'Gift',
       title: 'Ежедневные награды',
       description: 'Заходи каждый день и получай бонусы',
-      link: '/rewards',
+      link: '/dashboard',
     },
     {
       icon: 'Dices',
@@ -72,13 +72,13 @@ export default function MainDashboard() {
       icon: 'Star',
       title: 'Достижения',
       description: 'Собирай трофеи и получай очки',
-      link: '/achievements',
+      link: '/dashboard',
     },
     {
       icon: 'BarChart3',
       title: 'Статистика',
       description: 'Отслеживай свой прогресс',
-      link: '/stats',
+      link: '/dashboard',
     },
     {
       icon: 'Shield',

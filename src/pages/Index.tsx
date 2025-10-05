@@ -111,20 +111,7 @@ export default function Index() {
         <UnifiedChat />
       </Suspense>
 
-      <Suspense fallback={<div className="h-40" />}>
-        <AIRecommendations games={games} />
-      </Suspense>
 
-      <Suspense fallback={<div className="h-40" />}>
-        <RecommendedGames
-          games={games}
-          favorites={favorites}
-          viewHistory={viewHistory}
-          onBuy={(game) => addToCart(game, 'game')}
-          onToggleFavorite={toggleFavorite}
-          onViewGame={handleViewGame}
-        />
-      </Suspense>
 
       <Suspense fallback={<div className="h-40" />}>
         <GameStreamsTrailers />
