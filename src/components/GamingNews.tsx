@@ -12,56 +12,117 @@ interface NewsItem {
   date: string;
   image?: string;
   source: string;
+  url: string;
 }
 
 const mockNews: NewsItem[] = [
   {
     id: 1,
-    title: 'GTA 6 — новый трейлер и дата релиза!',
-    summary: 'Rockstar Games представила новый геймплейный трейлер GTA 6. Выход игры запланирован на 2025 год.',
+    title: 'GTA 6 — новый трейлер и дата релиза 2025!',
+    summary: 'Rockstar Games официально подтвердила выход GTA VI осенью 2025 года. Игра выйдет на PlayStation 5 и Xbox Series X/S с революционной графикой и огромным открытым миром.',
     category: 'announcement',
-    date: '2024-10-03',
-    source: 'Rockstar Games'
+    date: '2025-10-03',
+    source: 'Rockstar Games',
+    url: 'https://www.rockstargames.com/gta-vi'
   },
   {
     id: 2,
-    title: 'PlayStation Plus — новые игры октября',
-    summary: 'В каталог PS Plus добавлены Cyberpunk 2077, Mortal Kombat 11 и еще 5 хитов.',
-    category: 'update',
-    date: '2024-10-02',
-    source: 'PlayStation Blog'
+    title: 'Elden Ring: Shadow of the Erdtree — DLC года',
+    summary: 'Масштабное дополнение для Elden Ring получило 95/100 на Metacritic. Новые боссы, локации и 40+ часов геймплея. FromSoftware снова устанавливает новые стандарты.',
+    category: 'release',
+    date: '2025-10-02',
+    source: 'FromSoftware',
+    url: 'https://www.eldenring.com/shadowoftheerdtree'
   },
   {
     id: 3,
-    title: 'Скидки до 80% на игры Ubisoft',
-    summary: 'Грандиозная распродажа Assassin\'s Creed, Far Cry и Watch Dogs. Акция до 15 октября.',
-    category: 'sale',
-    date: '2024-10-01',
-    source: 'Ubisoft Store'
+    title: 'The International 2025 по Dota 2 — призовой фонд $40 млн',
+    summary: 'Крупнейший турнир по Dota 2 стартует в Сиэтле. Team Spirit, Team Liquid и PSG.LGD поборются за титул чемпионов. Финал 12 октября в Climate Pledge Arena.',
+    category: 'esport',
+    date: '2025-10-01',
+    source: 'Valve',
+    url: 'https://www.dota2.com/international'
   },
   {
     id: 4,
-    title: 'The Game Awards 2024 — номинанты объявлены',
-    summary: 'Baldur\'s Gate 3, Starfield и Alan Wake 2 поборются за звание игры года.',
-    category: 'esport',
-    date: '2024-09-30',
-    source: 'The Game Awards'
+    title: 'Steam — осенняя распродажа! Скидки до 90%',
+    summary: 'Baldur\'s Gate 3 (-30%), Cyberpunk 2077 (-50%), Red Dead Redemption 2 (-67%). Более 15,000 игр по сниженным ценам. Акция до 15 октября!',
+    category: 'sale',
+    date: '2025-09-30',
+    source: 'Steam',
+    url: 'https://store.steampowered.com/'
   },
   {
     id: 5,
-    title: 'Call of Duty: Modern Warfare III — новый сезон',
-    summary: 'Вышел 6 сезон с новыми картами, оружием и режимом "Захват флага".',
+    title: 'Call of Duty: Black Ops 6 — бета побила рекорды',
+    summary: 'Открытая бета собрала 12 млн игроков за выходные. Новые карты Nuketown и Raid вернулись. Полный релиз 25 октября в Game Pass с первого дня.',
     category: 'update',
-    date: '2024-09-29',
-    source: 'Activision'
+    date: '2025-09-29',
+    source: 'Activision',
+    url: 'https://www.callofduty.com/blackops6'
   },
   {
     id: 6,
-    title: 'EA Sports FC 25 бьёт рекорды продаж',
-    summary: 'Новый футбольный симулятор от EA стал самым продаваемым за первую неделю.',
+    title: 'EA Sports FC 25 — режим Ultimate Team обновлён',
+    summary: 'Новые Иконы: Зидан, Роналдиньо, Бекхэм. Улучшенный ИИ, реалистичная физика мяча и режим Rush 5v5. HyperMotionV технология для PS5/Xbox Series.',
+    category: 'update',
+    date: '2025-09-28',
+    source: 'EA Sports',
+    url: 'https://www.ea.com/games/ea-sports-fc/fc-25'
+  },
+  {
+    id: 7,
+    title: 'Hollow Knight: Silksong — новый геймплей!',
+    summary: 'Team Cherry показала 10 минут нового геймплея. Релиз запланирован на начало 2026 года для всех платформ одновременно. Игра уже доступна для предзаказа.',
+    category: 'announcement',
+    date: '2025-09-27',
+    source: 'Team Cherry',
+    url: 'https://www.hollowknightsilksong.com/'
+  },
+  {
+    id: 8,
+    title: 'Counter-Strike 2 — Major в Копенгагене',
+    summary: 'PGL Copenhagen Major собрал 24 лучшие команды мира. Natus Vincere, FaZe Clan и G2 Esports в плей-офф. Призовой фонд $1,250,000. Финал 13 октября.',
+    category: 'esport',
+    date: '2025-09-26',
+    source: 'PGL Esports',
+    url: 'https://www.counter-strike.net/'
+  },
+  {
+    id: 9,
+    title: 'Xbox Game Pass — октябрьские игры объявлены',
+    summary: 'В подписку добавлены: Persona 5 Tactica, Payday 3, Jusant и еще 8 игр. Новый уровень Game Pass Ultimate с облачным геймингом 4K/60fps.',
+    category: 'update',
+    date: '2025-09-25',
+    source: 'Xbox',
+    url: 'https://www.xbox.com/xbox-game-pass'
+  },
+  {
+    id: 10,
+    title: 'Cyberpunk 2077: Phantom Liberty — миллион копий за неделю',
+    summary: 'Дополнение с Идрисом Эльбой стало самым быстропродаваемым DLC в истории CD Projekt RED. Средняя оценка 89/100. Поддержка игры продолжается до 2026 года.',
     category: 'release',
-    date: '2024-09-28',
-    source: 'Electronic Arts'
+    date: '2025-09-24',
+    source: 'CD Projekt RED',
+    url: 'https://www.cyberpunk.net/phantom-liberty'
+  },
+  {
+    id: 11,
+    title: 'Minecraft — обновление 1.21 "Tricky Trials"',
+    summary: 'Новые структуры Trial Chambers, мобы Breeze и Bogged, медные лампочки и автокрафтер. Самое большое техническое обновление за 3 года.',
+    category: 'update',
+    date: '2025-09-23',
+    source: 'Mojang Studios',
+    url: 'https://www.minecraft.net/'
+  },
+  {
+    id: 12,
+    title: 'PlayStation 5 Pro — предзаказы стартовали',
+    summary: 'Обновлённая консоль с GPU на 67% мощнее, рейтрейсингом в реальном времени и 2TB SSD. Цена $699. Релиз 7 ноября. Spider-Man 2 и GT7 с бесплатным апгрейдом.',
+    category: 'announcement',
+    date: '2025-09-22',
+    source: 'PlayStation',
+    url: 'https://www.playstation.com/ps5-pro'
   }
 ];
 
@@ -123,7 +184,10 @@ export default function GamingNews() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
             >
-              <Card className="group hover:scale-105 transition-all duration-300 hover:shadow-2xl border-2 hover:border-primary/50 bg-card/80 backdrop-blur-sm h-full">
+              <Card 
+                className="group hover:scale-105 transition-all duration-300 hover:shadow-2xl border-2 hover:border-primary/50 bg-card/80 backdrop-blur-sm h-full cursor-pointer"
+                onClick={() => window.open(news.url, '_blank')}
+              >
                 <CardHeader className="pb-3">
                   <div className="flex items-start justify-between gap-2 mb-2">
                     <Badge className={`${config.color} text-white`}>

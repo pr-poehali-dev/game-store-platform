@@ -11,6 +11,7 @@ const AIRecommendations = lazy(() => import('@/components/AIRecommendations'));
 const GamingNews = lazy(() => import('@/components/GamingNews'));
 const CurrencyRegionSelector = lazy(() => import('@/components/CurrencyRegionSelector'));
 const GameStreamsTrailers = lazy(() => import('@/components/GameStreamsTrailers'));
+const StreamEmbed = lazy(() => import('@/components/StreamEmbed'));
 const PriceTracker = lazy(() => import('@/components/PriceTracker'));
 const GameComparison = lazy(() => import('@/components/GameComparison'));
 const FortuneWheel = lazy(() => import('@/components/FortuneWheel'));
@@ -129,6 +130,10 @@ export default function Index() {
 
       <Suspense fallback={<div className="h-40" />}>
         <GamingNews />
+      </Suspense>
+
+      <Suspense fallback={<div className="h-40" />}>
+        <StreamEmbed />
       </Suspense>
 
       <Suspense fallback={<div className="h-40" />}>
