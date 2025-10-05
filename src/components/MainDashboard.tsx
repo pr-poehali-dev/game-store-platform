@@ -7,7 +7,6 @@ import Icon from '@/components/ui/icon';
 
 export default function MainDashboard() {
   const [showRequestForm, setShowRequestForm] = useState(false);
-  const [requestType, setRequestType] = useState<'game' | 'subscription' | null>(null);
   const [formData, setFormData] = useState({
     gameName: '',
     email: '',
@@ -96,7 +95,7 @@ export default function MainDashboard() {
   ];
 
   const handleSubmitRequest = () => {
-    alert(`Заявка на ${requestType === 'game' ? 'игру' : 'подписку'} "${formData.gameName}" отправлена!`);
+    alert(`Заявка на покупку "${formData.gameName}" успешно отправлена! Мы свяжемся с вами в ближайшее время.`);
     setShowRequestForm(false);
     setFormData({ gameName: '', email: '', message: '' });
   };
@@ -107,39 +106,27 @@ export default function MainDashboard() {
         <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAxMCAwIEwgMCAwIDAgMTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS1vcGFjaXR5PSIwLjA1IiBzdHJva2Utd2lkdGg9IjEiLz48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JpZCkiLz48L3N2Zz4=')] opacity-30"></div>
         
         <div className="max-w-6xl mx-auto text-center relative z-10">
-          <h1 className="text-5xl md:text-6xl font-bold mb-6 animate-fade-in-up">
-            🎮 Игровая платформа
+          <h1 className="text-6xl md:text-7xl font-bold mb-2 animate-fade-in-up">
+            GAMEHUB
           </h1>
-          <p className="text-xl md:text-2xl mb-8 opacity-90 animate-fade-in-up animation-delay-200">
-            Всё для геймеров в одном месте: игры, турниры, соцсеть, маркетплейс и многое другое!
+          <p className="text-xl md:text-2xl mb-4 opacity-80 animate-fade-in-up animation-delay-200">
+            Игровая платформа
+          </p>
+          <p className="text-lg md:text-xl mb-8 opacity-70 animate-fade-in-up animation-delay-400">
+            Откройте новый уровень игрового опыта. Тысячи игр, турниры, соцсеть и маркетплейс в одном месте.
           </p>
           
 
 
-          <div className="flex flex-wrap gap-3 justify-center animate-fade-in-up animation-delay-400">
+          <div className="flex justify-center animate-fade-in-up animation-delay-600">
             <Button 
               size="lg" 
               variant="secondary"
-              onClick={() => {
-                setRequestType('game');
-                setShowRequestForm(true);
-              }}
-              className="hover:scale-105 transition-transform"
+              onClick={() => setShowRequestForm(true)}
+              className="hover:scale-105 transition-transform text-lg px-8 py-6"
             >
-              <Icon name="Plus" size={20} className="mr-2" />
-              Заявка на игру
-            </Button>
-            <Button 
-              size="lg" 
-              variant="secondary"
-              onClick={() => {
-                setRequestType('subscription');
-                setShowRequestForm(true);
-              }}
-              className="hover:scale-105 transition-transform"
-            >
-              <Icon name="Sparkles" size={20} className="mr-2" />
-              Заявка на подписку
+              <Icon name="ShoppingBag" size={24} className="mr-3" />
+              Оставить заявку на покупку
             </Button>
           </div>
         </div>
@@ -174,7 +161,7 @@ export default function MainDashboard() {
           <Card className="w-full max-w-lg p-6 animate-scale-in">
             <div className="flex items-center justify-between mb-6">
               <h3 className="text-2xl font-bold">
-                {requestType === 'game' ? '🎮 Заявка на игру' : '✨ Заявка на подписку'}
+                🎮 Заявка на покупку
               </h3>
               <Button variant="ghost" size="icon" onClick={() => setShowRequestForm(false)}>
                 <Icon name="X" size={20} />
@@ -184,12 +171,12 @@ export default function MainDashboard() {
             <div className="space-y-4">
               <div>
                 <label className="text-sm font-medium mb-2 block">
-                  Название {requestType === 'game' ? 'игры' : 'подписки'}
+                  Что хотите приобрести?
                 </label>
                 <Input
                   value={formData.gameName}
                   onChange={(e) => setFormData({ ...formData, gameName: e.target.value })}
-                  placeholder={`Например: ${requestType === 'game' ? 'Minecraft' : 'Xbox Game Pass'}`}
+                  placeholder="Например: Cyberpunk 2077, Xbox Game Pass, PS Plus"
                 />
               </div>
 
@@ -208,7 +195,7 @@ export default function MainDashboard() {
                 <Textarea
                   value={formData.message}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  placeholder="Опишите почему вам нужна эта игра/подписка..."
+                  placeholder="Укажите дополнительные пожелания (необязательно)..."
                   rows={4}
                 />
               </div>

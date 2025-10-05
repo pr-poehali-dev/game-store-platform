@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { ConsoleGame, consoleGames } from '@/data/consoleGames';
+import { useState, Suspense } from 'react';
+import { ConsoleGame, consoleGamesRu } from '@/data/consoleGamesRu';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -42,7 +42,7 @@ export default function ConsoleCatalog() {
     handleDeleteSubscription
   } = useIndexState();
 
-  const filteredGames = consoleGames
+  const filteredGames = consoleGamesRu
     .filter(game => {
       const matchesSearch = game.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
         game.developer.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -52,8 +52,8 @@ export default function ConsoleCatalog() {
     })
     .sort((a, b) => {
       if (sortBy === 'title') return a.title.localeCompare(b.title);
-      if (sortBy === 'price-low') return a.price - b.price;
-      if (sortBy === 'price-high') return b.price - a.price;
+      if (sortBy === 'price-low') return a.priceRub - b.priceRub;
+      if (sortBy === 'price-high') return b.priceRub - a.priceRub;
       if (sortBy === 'rating') return b.rating - a.rating;
       if (sortBy === 'release') return new Date(b.releaseDate).getTime() - new Date(a.releaseDate).getTime();
       return 0;
@@ -90,8 +90,8 @@ export default function ConsoleCatalog() {
 
       <div className="container mx-auto px-4 py-8 space-y-6">
         <div className="animate-fade-in-up">
-          <h1 className="text-4xl font-bold mb-2">🎮 Каталог консольных игр</h1>
-          <p className="text-muted-foreground">Откройте для себя эксклюзивные тайтлы для PlayStation и Xbox</p>
+          <h1 className="text-5xl font-bold mb-3">🎮 Каталог консольных игр</h1>
+          <p className="text-xl text-muted-foreground">Откройте для себя эксклюзивные тайтлы для PlayStation и Xbox</p>
         </div>
 
         <div className="flex flex-col md:flex-row gap-4">
@@ -99,7 +99,7 @@ export default function ConsoleCatalog() {
             <div className="relative">
               <Icon name="Search" className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
               <Input
-                placeholder="Search games, developers, publishers..."
+                placeholder="Поиск игр, разработчиков, издателей..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="pl-10"
@@ -108,10 +108,10 @@ export default function ConsoleCatalog() {
           </div>
           <Select value={platformFilter} onValueChange={setPlatformFilter}>
             <SelectTrigger className="w-full md:w-[200px]">
-              <SelectValue placeholder="Platform" />
+              <SelectValue placeholder="Платформа" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="all">All Platforms</SelectItem>
+              <SelectItem value="all">Все платформы</SelectItem>
               <SelectItem value="PS5">PlayStation 5</SelectItem>
               <SelectItem value="PS4">PlayStation 4</SelectItem>
               <SelectItem value="Xbox Series X|S">Xbox Series X|S</SelectItem>
@@ -120,20 +120,20 @@ export default function ConsoleCatalog() {
           </Select>
           <Select value={sortBy} onValueChange={setSortBy}>
             <SelectTrigger className="w-full md:w-[200px]">
-              <SelectValue placeholder="Sort by" />
+              <SelectValue placeholder="Сортировка" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="title">Title (A-Z)</SelectItem>
-              <SelectItem value="price-low">Price (Low-High)</SelectItem>
-              <SelectItem value="price-high">Price (High-Low)</SelectItem>
-              <SelectItem value="rating">Rating</SelectItem>
-              <SelectItem value="release">Release Date</SelectItem>
+              <SelectItem value="title">Название (A-Z)</SelectItem>
+              <SelectItem value="price-low">Цена (по возр.)</SelectItem>
+              <SelectItem value="price-high">Цена (по убыв.)</SelectItem>
+              <SelectItem value="rating">Рейтинг</SelectItem>
+              <SelectItem value="release">Дата выхода</SelectItem>
             </SelectContent>
           </Select>
         </div>
 
         <div className="flex items-center justify-between text-sm text-muted-foreground">
-          <span>Showing {filteredGames.length} games</span>
+          <span>Найдено игр: {filteredGames.length}</span>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
@@ -151,7 +151,7 @@ export default function ConsoleCatalog() {
                 />
                 {game.exclusive && (
                   <Badge className="absolute top-2 right-2 bg-primary">
-                    Exclusive
+                    Эксклюзив
                   </Badge>
                 )}
                 {game.rating > 0 && (
@@ -193,10 +193,13 @@ export default function ConsoleCatalog() {
                   </div>
                 </div>
                 <div className="flex items-center justify-between pt-2">
-                  <span className="text-2xl font-bold">${game.price.toFixed(2)}</span>
-                  <Button size="sm">
+                  <div>
+                    <div className="text-xs text-muted-foreground">от</div>
+                    <span className="text-2xl font-bold">{game.priceRub.toLocaleString('ru-RU')} ₽</span>
+                  </div>
+                  <Button size="sm" className="hover:scale-105 transition-transform">
                     <Icon name="ShoppingCart" className="h-4 w-4 mr-2" />
-                    Add to Cart
+                    Купить
                   </Button>
                 </div>
               </CardContent>
