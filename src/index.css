@@ -110,7 +110,12 @@
   input,
   select,
   textarea {
-    transition: all 0.2s ease-in-out;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  button:active,
+  a:active {
+    transform: scale(0.97);
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -255,7 +260,7 @@
   @keyframes slide-in-up {
     0% {
       opacity: 0;
-      transform: translateY(30px);
+      transform: translateY(20px);
     }
     100% {
       opacity: 1;
@@ -264,7 +269,7 @@
   }
 
   .animate-slide-in-up {
-    animation: slide-in-up 0.6s ease-out forwards;
+    animation: slide-in-up 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
   }
 
   @keyframes glow-pulse {
@@ -318,23 +323,30 @@
   }
 
   .smooth-transition {
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform, opacity;
   }
 
   .smooth-hover {
     transition:
-      transform 0.2s ease,
-      box-shadow 0.2s ease;
+      transform 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+      box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform;
   }
 
   .smooth-hover:hover {
-    transform: translateY(-2px);
+    transform: translateY(-3px);
+  }
+
+  .smooth-hover:active {
+    transform: translateY(-1px);
+    transition-duration: 0.1s;
   }
 
   @keyframes fade-in {
     from {
       opacity: 0;
-      transform: translateY(10px);
+      transform: translateY(8px);
     }
     to {
       opacity: 1;
@@ -343,6 +355,21 @@
   }
 
   .animate-fade-in {
-    animation: fade-in 0.4s ease-out forwards;
+    animation: fade-in 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+
+  @keyframes scale-in {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  .animate-scale-in {
+    animation: scale-in 0.25s cubic-bezier(0.4, 0, 0.2, 1) forwards;
   }
 }

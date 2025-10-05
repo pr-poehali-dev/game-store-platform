@@ -59,12 +59,12 @@ export default function GameCard({ game, onBuy, isFavorite, onToggleFavorite, on
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      whileHover={{ y: -4, scale: 1.01, transition: { duration: 0.15, ease: "easeOut" } }}
-      whileTap={{ scale: 0.98 }}
+      whileHover={{ y: -4, scale: 1.01, transition: { duration: 0.2, ease: "easeOut" } }}
+      whileTap={{ scale: 0.98, transition: { duration: 0.1 } }}
       onClick={handleCardClick}
       onMouseEnter={handleMouseEnter}
       className="cursor-pointer touch-manipulation"
-      style={{ willChange: 'transform' }}
+      style={{ willChange: 'transform, opacity' }}
     >
       <Card className="h-full bg-gradient-to-br from-card/80 via-card/60 to-card/40 backdrop-blur-xl border-2 border-border/50 hover:border-primary/80 active:border-primary hover:shadow-2xl hover:shadow-primary/30 smooth-transition overflow-hidden group relative">
         <div className="relative overflow-hidden h-48">
